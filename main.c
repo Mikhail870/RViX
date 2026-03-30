@@ -2,6 +2,7 @@
 #include "kalloc.h"
 #include "vm.h"
 void  main() {
+  printf("kernel is booting ! \n");
   kinit();
   kvminit();
 
