@@ -25,5 +25,6 @@ int printf(char *fmt,...);
 void putchar(char ch);
 void puts(const char *str); 
 void *memset(void *dst,int c,uint n);
+void* memcpy(void* dst, const void *src, uint n);
 void* memmove(void *vdst, const void *vsrc, int n);
 void panic(char *s);

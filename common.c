@@ -131,7 +131,11 @@ void* memset(void *dst, int c, uint n)
   }
   return dst;
 }
-
+void* memcpy(void *dst, const void *src, uint n) {
+  char *d = dst; const char *s = src;
+  while(n--) *d++ = *s++;
+  return dst;
+}
 void* memmove(void *vdst, const void *vsrc, int n)
 {
   char *dst;
