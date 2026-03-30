@@ -1,7 +1,7 @@
              VMA              LMA     Size Align Out     In      Symbol
                0                0 80200000     1 . = 0x80200000
-        80200000         80200000     2000     2 .text
-        80200000         80200000        e     1         /tmp/entry-684428.o:(.text.boot)
+        80200000         80200000     3000    16 .text
+        80200000         80200000        e     1         /tmp/entry-c6dc91.o:(.text.boot)
         80200000         80200000        0     1                 
         80200000         80200000        0     1                 .Lpcrel_hi0
         80200000         80200000        0     1                 $x.0
@@ -12,7 +12,7 @@
         8020000c         8020000c        0     1                 
         8020000c         8020000c        0     1                 
         8020000e         8020000e        0     1                 
-        8020000e         8020000e        e     2         /tmp/main-0654e1.o:(.text)
+        8020000e         8020000e        e     2         /tmp/main-af6374.o:(.text)
         8020000e         8020000e        0     1                 
         8020000e         8020000e        0     1                 
         8020000e         8020000e        0     1                 $x.0
@@ -26,7 +26,7 @@
         8020001a         8020001a        0     1                 
         8020001c         8020001c        0     1                 
         8020001c         8020001c        0     1                 
-        8020001c         8020001c      914     2         /tmp/common-36830b.o:(.text)
+        8020001c         8020001c      914     2         /tmp/common-4c86c8.o:(.text)
         8020001c         8020001c        0     1                 
         8020001c         8020001c        0     1                 
         8020001c         8020001c        0     1                 $x.0
@@ -640,7 +640,7 @@
         8020092e         8020092e        0     1                 
         80200930         80200930        0     1                 
         80200930         80200930        0     1                 
-        80200930         80200930        6     2         /tmp/HAL-098bce.o:(.text)
+        80200930         80200930        6     2         /tmp/HAL-0aea16.o:(.text)
         80200930         80200930        0     1                 
         80200930         80200930        0     1                 
         80200930         80200930        0     1                 $x.0
@@ -648,7 +648,7 @@
         80200930         80200930        6     1                 sbi_call
         80200934         80200934        0     1                 
         80200936         80200936        0     1                 
-        80200936         80200936      1b4     2         /tmp/kalloc-7066e0.o:(.text)
+        80200936         80200936      1b4     2         /tmp/kalloc-0f71e5.o:(.text)
         80200936         80200936        0     1                 
         80200936         80200936        0     1                 
         80200936         80200936        0     1                 $x.0
@@ -783,7 +783,7 @@
         80200ae6         80200ae6        0     1                 
         80200aea         80200aea        0     1                 
         80200aea         80200aea        0     1                 
-        80200aea         80200aea      c08     2         /tmp/vm-5f7760.o:(.text)
+        80200aea         80200aea      c08     2         /tmp/vm-cb97ea.o:(.text)
         80200aea         80200aea        0     1                 
         80200aea         80200aea        0     1                 
         80200aea         80200aea        0     1                 $x.0
@@ -1975,52 +1975,57 @@
         802016f2         802016f2        0     1                 
         802016f2         802016f2        0     1                 
         802016f2         802016f2        0     1                 
-        802016f2         802016f2        0     2         /tmp/entry-684428.o:(.text)
+        802016f2         802016f2        0     2         /tmp/entry-c6dc91.o:(.text)
+        802016f2         802016f2        0     2         /tmp/trampoline-fd086c.o:(.text)
         802016f2         802016f2      90e     1         . = ALIGN ( 0x1000 )
-        80202000         80202000        0     1         _trampoline = .
-        80202000         80202000        0     1         . = ALIGN ( 0x1000 )
-        80202000         80202000        0     1         
-        80202000         80202000        0     1         PROVIDE ( etext = . )
-        80202000         80202000       c6     4 .rodata
-        80202000         80202000       c6     1         <internal>:(.rodata.str1.1)
-        802020c8         802020c8       10     8 .bss
-        802020c8         802020c8        0     1         __bss = .
-        802020c8         802020c8        8     8         /tmp/kalloc-7066e0.o:(.sbss)
-        802020c8         802020c8        0     1                 $d.2
-        802020c8         802020c8        8     1                 kmem
-        802020d0         802020d0        8     8         /tmp/vm-5f7760.o:(.sbss)
-        802020d0         802020d0        0     1                 $d.2
-        802020d0         802020d0        8     1                 kernel_pagetable
-        802020d8         802020d8        0     1         __bss_end = .
-        802020d8         802020d8        0     1 . = ALIGN ( 4 )
-        802020d8         802020d8    20000     1 . += 128 * 1024
-        802220d8         802220d8        0     1 __stack_top = .
+        80202000         80202000        0     1         trampoline = .
+        80202000         80202000      120    16         /tmp/trampoline-fd086c.o:(trampsec)
+        80202000         80202000        0     1                 $x.0
+        80202000         80202000        0     1                 uservec
+        8020209c         8020209c        0     1                 userret
+        80202120         80202120      ee0     1         . = ALIGN ( 0x1000 )
+        80203000         80203000        0     1         
+        80203000         80203000        0     1         PROVIDE ( etext = . )
+        80203000         80203000       c6     4 .rodata
+        80203000         80203000       c6     1         <internal>:(.rodata.str1.1)
+        802030c8         802030c8       10     8 .bss
+        802030c8         802030c8        0     1         __bss = .
+        802030c8         802030c8        8     8         /tmp/kalloc-0f71e5.o:(.sbss)
+        802030c8         802030c8        0     1                 $d.2
+        802030c8         802030c8        8     1                 kmem
+        802030d0         802030d0        8     8         /tmp/vm-cb97ea.o:(.sbss)
+        802030d0         802030d0        0     1                 $d.2
+        802030d0         802030d0        8     1                 kernel_pagetable
+        802030d8         802030d8        0     1         __bss_end = .
+        802030d8         802030d8        0     1 . = ALIGN ( 4 )
+        802030d8         802030d8    20000     1 . += 128 * 1024
+        802230d8         802230d8        0     1 __stack_top = .
                0                0      795     1 .debug_abbrev
-               0                0       46     1         /tmp/main-0654e1.o:(.debug_abbrev)
+               0                0       46     1         /tmp/main-af6374.o:(.debug_abbrev)
                0                0        0     1                 $d.1
-              46               46      213     1         /tmp/common-36830b.o:(.debug_abbrev)
+              46               46      213     1         /tmp/common-4c86c8.o:(.debug_abbrev)
               46               46        0     1                 $d.3
-             259              259       82     1         /tmp/HAL-098bce.o:(.debug_abbrev)
+             259              259       82     1         /tmp/HAL-0aea16.o:(.debug_abbrev)
              259              259        0     1                 $d.2
-             2db              2db      15f     1         /tmp/kalloc-7066e0.o:(.debug_abbrev)
+             2db              2db      15f     1         /tmp/kalloc-0f71e5.o:(.debug_abbrev)
              2db              2db        0     1                 $d.4
-             43a              43a      33a     1         /tmp/vm-5f7760.o:(.debug_abbrev)
+             43a              43a      33a     1         /tmp/vm-cb97ea.o:(.debug_abbrev)
              43a              43a        0     1                 $d.4
-             774              774       21     1         /tmp/entry-684428.o:(.debug_abbrev)
+             774              774       21     1         /tmp/entry-c6dc91.o:(.debug_abbrev)
              774              774        0     1                 
              774              774        0     1                 $d.3
                0                0     2906     1 .debug_info
-               0                0       69     1         /tmp/main-0654e1.o:(.debug_info)
+               0                0       69     1         /tmp/main-af6374.o:(.debug_info)
                0                0        0     1                 $d.2
-              69               69      875     1         /tmp/common-36830b.o:(.debug_info)
+              69               69      875     1         /tmp/common-4c86c8.o:(.debug_info)
               69               69        0     1                 $d.4
-             8de              8de      141     1         /tmp/HAL-098bce.o:(.debug_info)
+             8de              8de      141     1         /tmp/HAL-0aea16.o:(.debug_info)
              8de              8de        0     1                 $d.3
-             a1f              a1f      2af     1         /tmp/kalloc-7066e0.o:(.debug_info)
+             a1f              a1f      2af     1         /tmp/kalloc-0f71e5.o:(.debug_info)
              a1f              a1f        0     1                 $d.5
-             cce              cce     1b9b     1         /tmp/vm-5f7760.o:(.debug_info)
+             cce              cce     1b9b     1         /tmp/vm-cb97ea.o:(.debug_info)
              cce              cce        0     1                 $d.5
-            2869             2869       9d     1         /tmp/entry-684428.o:(.debug_info)
+            2869             2869       9d     1         /tmp/entry-c6dc91.o:(.debug_info)
             2869             2869        0     1                 
             2869             2869        0     1                 $d.4
                0                0      4d3     1 .debug_str
@@ -2030,42 +2035,44 @@
                0                0       2b     1 .riscv.attributes
                0                0       2b     1         <internal>:(.riscv.attributes)
                0                0      548     8 .debug_frame
-               0                0       38     8         /tmp/main-0654e1.o:(.debug_frame)
+               0                0       38     8         /tmp/main-af6374.o:(.debug_frame)
                0                0        0     1                 
                0                0        0     1                 $d.6
-              38               38      110     8         /tmp/common-36830b.o:(.debug_frame)
+              38               38      110     8         /tmp/common-4c86c8.o:(.debug_frame)
               38               38        0     1                 
               38               38        0     1                 $d.9
-             148              148       30     8         /tmp/HAL-098bce.o:(.debug_frame)
+             148              148       30     8         /tmp/HAL-0aea16.o:(.debug_frame)
              148              148        0     1                 
              148              148        0     1                 $d.7
-             178              178       b8     8         /tmp/kalloc-7066e0.o:(.debug_frame)
+             178              178       b8     8         /tmp/kalloc-0f71e5.o:(.debug_frame)
              178              178        0     1                 
              178              178        0     1                 $d.10
-             230              230      318     8         /tmp/vm-5f7760.o:(.debug_frame)
+             230              230      318     8         /tmp/vm-cb97ea.o:(.debug_frame)
              230              230        0     1                 
              230              230        0     1                 $d.10
-               0                0     1fd0     1 .debug_line
-               0                0       67     1         /tmp/main-0654e1.o:(.debug_line)
+               0                0     1ffe     1 .debug_line
+               0                0       67     1         /tmp/main-af6374.o:(.debug_line)
                0                0        0     1                 .Lline_table_start0
                0                0        0     1                 $d.7
-              67               67      9e9     1         /tmp/common-36830b.o:(.debug_line)
+              67               67      9e9     1         /tmp/common-4c86c8.o:(.debug_line)
               67               67        0     1                 .Lline_table_start0
               67               67        0     1                 $d.10
-             a50              a50       51     1         /tmp/HAL-098bce.o:(.debug_line)
+             a50              a50       51     1         /tmp/HAL-0aea16.o:(.debug_line)
              a50              a50        0     1                 .Lline_table_start0
              a50              a50        0     1                 $d.8
-             aa1              aa1      209     1         /tmp/kalloc-7066e0.o:(.debug_line)
+             aa1              aa1      209     1         /tmp/kalloc-0f71e5.o:(.debug_line)
              aa1              aa1        0     1                 .Lline_table_start0
              aa1              aa1        0     1                 $d.11
-             caa              caa     12dd     1         /tmp/vm-5f7760.o:(.debug_line)
+             caa              caa     12dd     1         /tmp/vm-cb97ea.o:(.debug_line)
              caa              caa        0     1                 .Lline_table_start0
              caa              caa        0     1                 $d.11
-            1f87             1f87       49     1         /tmp/entry-684428.o:(.debug_line)
+            1f87             1f87       49     1         /tmp/entry-c6dc91.o:(.debug_line)
             1f87             1f87        0     1                 .Lline_table_start0
             1f87             1f87        0     1                 $d.5
+            1fd0             1fd0       2e     1         /tmp/trampoline-fd086c.o:(.debug_line)
+            1fd0             1fd0        0     1                 $d.2
                0                0     483d     1 .debug_loc
-               0                0      cfc     1         /tmp/common-36830b.o:(.debug_loc)
+               0                0      cfc     1         /tmp/common-4c86c8.o:(.debug_loc)
                0                0        0     1                 
                0                0        0     1                 $d.2
               36               36        0     1                 
@@ -2113,11 +2120,11 @@
              bea              bea        0     1                 
              c6b              c6b        0     1                 
              cc6              cc6        0     1                 
-             cfc              cfc       46     1         /tmp/HAL-098bce.o:(.debug_loc)
+             cfc              cfc       46     1         /tmp/HAL-0aea16.o:(.debug_loc)
              cfc              cfc        0     1                 
              cfc              cfc        0     1                 $d.1
              d1f              d1f        0     1                 
-             d42              d42      27e     1         /tmp/kalloc-7066e0.o:(.debug_loc)
+             d42              d42      27e     1         /tmp/kalloc-0f71e5.o:(.debug_loc)
              d42              d42        0     1                 
              d42              d42        0     1                 $d.3
              d84              d84        0     1                 
@@ -2132,7 +2139,7 @@
              f44              f44        0     1                 
              f7a              f7a        0     1                 
              f9d              f9d        0     1                 
-             fc0              fc0     387d     1         /tmp/vm-5f7760.o:(.debug_loc)
+             fc0              fc0     387d     1         /tmp/vm-cb97ea.o:(.debug_loc)
              fc0              fc0        0     1                 
              fc0              fc0        0     1                 $d.3
              ff6              ff6        0     1                 
@@ -2368,7 +2375,7 @@
             47c4             47c4        0     1                 
             47fa             47fa        0     1                 
                0                0      910     1 .debug_ranges
-               0                0      270     1         /tmp/common-36830b.o:(.debug_ranges)
+               0                0      270     1         /tmp/common-4c86c8.o:(.debug_ranges)
                0                0        0     1                 
                0                0        0     1                 $d.5
               30               30        0     1                 
@@ -2383,12 +2390,12 @@
              1e0              1e0        0     1                 
              210              210        0     1                 
              240              240        0     1                 
-             270              270       b0     1         /tmp/kalloc-7066e0.o:(.debug_ranges)
+             270              270       b0     1         /tmp/kalloc-0f71e5.o:(.debug_ranges)
              270              270        0     1                 
              270              270        0     1                 $d.6
              2a0              2a0        0     1                 
              2e0              2e0        0     1                 
-             320              320      5f0     1         /tmp/vm-5f7760.o:(.debug_ranges)
+             320              320      5f0     1         /tmp/vm-cb97ea.o:(.debug_ranges)
              320              320        0     1                 
              320              320        0     1                 $d.6
              350              350        0     1                 
@@ -2421,11 +2428,11 @@
              890              890        0     1                 
              8d0              8d0        0     1                 
                0                0       30     1 .debug_aranges
-               0                0       30     1         /tmp/entry-684428.o:(.debug_aranges)
+               0                0       30     1         /tmp/entry-c6dc91.o:(.debug_aranges)
                0                0        0     1                 $d.2
-               0                0     dfe0     8 .symtab
-               0                0     dfe0     8         <internal>:(.symtab)
+               0                0     e058     8 .symtab
+               0                0     e058     8         <internal>:(.symtab)
                0                0       af     1 .shstrtab
                0                0       af     1         <internal>:(.shstrtab)
-               0                0      2cc     1 .strtab
-               0                0      2cc     1         <internal>:(.strtab)
+               0                0      2e8     1 .strtab
+               0                0      2e8     1         <internal>:(.strtab)
