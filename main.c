@@ -5,6 +5,7 @@
 #include "vm.h"
 #include "defs.h"
 #include "kalloc.h"
+#include "timer.h"
 extern pagetable_t kernel_pagetable;
 
 void  main() {
@@ -14,6 +15,9 @@ kvminit(); // создание таблицы страниц ядра (треб�
 kvminithart(); // включаем таблиццу страниц
 printf("main adrr %p\n",main);
 printf("IPC adrr %p\n",IPC);
+for(int i=0;i<10;i++){
+uint64 time = get_time();
+printf("%d\n",time);}
 for(;;){;}
  __asm__ __volatile__("wfi");
 }

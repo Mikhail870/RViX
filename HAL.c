@@ -17,4 +17,15 @@ struct sbiret sbi_call(long arg0, long arg1, long arg2, long arg3, long arg4,
                          : "memory");
 return (struct sbiret){.error = a0, .value = a1};
 }
+struct sbiret sbi_set_timer(uint64 stime_value) {
+    register  long a0 __asm__("a0") = (long)stime_value;
+    register  long a1 __asm__("a1");
+    register  long a6 __asm__("a6") = 0;          // FID для set_timer
+    register  long a7 __asm__("a7") = 0x54494D45; // EID "TIME"
 
+    asm volatile ("ecall"
+                  : "+r" (a0),"=r"(a1)
+                  : "r" (a6), "r" (a7)
+                  : "memory");
+return (struct sbiret){.error = a0, .value = a1};
+}
