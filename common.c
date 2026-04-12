@@ -136,7 +136,7 @@ void* memcpy(void *dst, const void *src, uint n) {
   while(n--) *d++ = *s++;
   return dst;
 }
-void* memmove(void *vdst, const void *vsrc, int n)
+void* memmove(void *vdst, const void *vsrc, uint n)
 {
   char *dst;
   const char *src;

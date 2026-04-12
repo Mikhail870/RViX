@@ -1,6 +1,8 @@
 // Physical memory allocator, for user processes,
 // kernel stacks, page-table pages,
 // and pipe buffers. Allocates whole 4096-byte pages.
+
+#include "types.h"
 #include "kalloc.h"
 #include "common.h"
 #define end __stack_top

@@ -42,7 +42,7 @@ kvmmake(void)
   kvmmap(kpgtbl, TRAMPOLINE, (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
 
   // allocate and map a kernel stack for each process.
-  proc_mapstacks(kpgtbl);
+  //proc_mapstacks(kpgtbl);
   
   return kpgtbl;
 }
@@ -335,7 +335,9 @@ uvmclear(pagetable_t pagetable, uint64 va)
 // Copy from kernel to user.
 // Copy len bytes from src to virtual address dstva in a given page table.
 // Return 0 on success, -1 on error.
-int
+
+/*
+ int
 copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
 {
   uint64 n, va0, pa0;
@@ -445,6 +447,7 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
 // that was lazily allocated in sys_sbrk().
 // returns 0 if va is invalid or already mapped, or if
 // out of physical memory, and physical address if successful.
+/*
 uint64
 vmfault(pagetable_t pagetable, uint64 va, int read)
 {
@@ -467,7 +470,7 @@ vmfault(pagetable_t pagetable, uint64 va, int read)
   }
   return mem;
 }
-
+*/ //связано с процессами, не место в менлдере виртуальной памяти
 int
 ismapped(pagetable_t pagetable, uint64 va)
 {
