@@ -1,7 +1,7 @@
              VMA              LMA     Size Align Out     In      Symbol
                0                0 80200000     1 . = 0x80200000
         80200000         80200000     3000    16 .text
-        80200000         80200000        e     1         /tmp/entry-6890ee.o:(.text.boot)
+        80200000         80200000        e     1         /tmp/entry-14d367.o:(.text.boot)
         80200000         80200000        0     1                 
         80200000         80200000        0     1                 .Lpcrel_hi0
         80200000         80200000        0     1                 $x.0
@@ -12,7 +12,7 @@
         8020000c         8020000c        0     1                 
         8020000c         8020000c        0     1                 
         8020000e         8020000e        0     1                 
-        8020000e         8020000e       90     2         /tmp/main-f3996d.o:(.text)
+        8020000e         8020000e       90     2         /tmp/main-56563a.o:(.text)
         8020000e         8020000e        0     1                 
         8020000e         8020000e        0     1                 
         8020000e         8020000e        0     1                 $x.0
@@ -60,7 +60,7 @@
         8020009e         8020009e        0     1                 
         8020009e         8020009e        0     1                 
         8020009e         8020009e        0     1                 
-        8020009e         8020009e      93c     2         /tmp/common-ec30bd.o:(.text)
+        8020009e         8020009e      93c     2         /tmp/common-27bbe1.o:(.text)
         8020009e         8020009e        0     1                 
         8020009e         8020009e        0     1                 
         8020009e         8020009e        0     1                 $x.0
@@ -696,7 +696,7 @@
         802009d8         802009d8        0     1                 
         802009da         802009da        0     1                 
         802009da         802009da        0     1                 
-        802009da         802009da        6     2         /tmp/HAL-b66480.o:(.text)
+        802009da         802009da        6     2         /tmp/HAL-24e45b.o:(.text)
         802009da         802009da        0     1                 
         802009da         802009da        0     1                 
         802009da         802009da        0     1                 $x.0
@@ -704,7 +704,7 @@
         802009da         802009da        6     1                 sbi_call
         802009de         802009de        0     1                 
         802009e0         802009e0        0     1                 
-        802009e0         802009e0      1b4     2         /tmp/kalloc-3045d6.o:(.text)
+        802009e0         802009e0      1b4     2         /tmp/kalloc-f5cf9a.o:(.text)
         802009e0         802009e0        0     1                 
         802009e0         802009e0        0     1                 
         802009e0         802009e0        0     1                 $x.0
@@ -839,7 +839,7 @@
         80200b90         80200b90        0     1                 
         80200b94         80200b94        0     1                 
         80200b94         80200b94        0     1                 
-        80200b94         80200b94      8bc     2         /tmp/vm-891534.o:(.text)
+        80200b94         80200b94      8bc     2         /tmp/vm-782ad5.o:(.text)
         80200b94         80200b94        0     1                 
         80200b94         80200b94        0     1                 
         80200b94         80200b94        0     1                 $x.0
@@ -1699,7 +1699,7 @@
         80201450         80201450        0     1                 
         80201450         80201450        0     1                 
         80201450         80201450        0     1                 
-        80201450         80201450       2a     2         /tmp/stubs-f67bfd.o:(.text)
+        80201450         80201450       2a     2         /tmp/stubs-d84ee5.o:(.text)
         80201450         80201450        0     1                 
         80201450         80201450        0     1                 
         80201450         80201450        0     1                 $x.0
@@ -1774,11 +1774,11 @@
         80201478         80201478        0     1                 
         80201478         80201478        2     1                 prepare_return
         8020147a         8020147a        0     1                 
-        8020147a         8020147a        0     2         /tmp/entry-6890ee.o:(.text)
-        8020147a         8020147a        0     2         /tmp/trampoline-6bf299.o:(.text)
+        8020147a         8020147a        0     2         /tmp/entry-14d367.o:(.text)
+        8020147a         8020147a        0     2         /tmp/trampoline-072cb8.o:(.text)
         8020147a         8020147a      b86     1         . = ALIGN ( 0x1000 )
         80202000         80202000        0     1         trampoline = .
-        80202000         80202000      120    16         /tmp/trampoline-6bf299.o:(trampsec)
+        80202000         80202000      120    16         /tmp/trampoline-072cb8.o:(trampsec)
         80202000         80202000        0     1                 $x.0
         80202000         80202000        0     1                 uservec
         8020209c         8020209c        0     1                 userret
@@ -1789,10 +1789,10 @@
         80203000         80203000      14d     1         <internal>:(.rodata.str1.1)
         80203150         80203150       10     8 .bss
         80203150         80203150        0     1         __bss = .
-        80203150         80203150        8     8         /tmp/kalloc-3045d6.o:(.sbss)
+        80203150         80203150        8     8         /tmp/kalloc-f5cf9a.o:(.sbss)
         80203150         80203150        0     1                 $d.2
         80203150         80203150        8     1                 kmem
-        80203158         80203158        8     8         /tmp/vm-891534.o:(.sbss)
+        80203158         80203158        8     8         /tmp/vm-782ad5.o:(.sbss)
         80203158         80203158        0     1                 $d.2
         80203158         80203158        8     1                 kernel_pagetable
         80203160         80203160        0     1         __bss_end = .
@@ -1800,12 +1800,12 @@
         80203160         80203160    20000     1 . += 128 * 1024
         80223160         80223160        0     1 __stack_top = .
                0                0     3b45     1 .debug_loc
-               0                0       9b     1         /tmp/main-f3996d.o:(.debug_loc)
+               0                0       9b     1         /tmp/main-56563a.o:(.debug_loc)
                0                0        0     1                 
                0                0        0     1                 $d.2
               49               49        0     1                 
               72               72        0     1                 
-              9b               9b      dcc     1         /tmp/common-ec30bd.o:(.debug_loc)
+              9b               9b      dcc     1         /tmp/common-27bbe1.o:(.debug_loc)
               9b               9b        0     1                 
               9b               9b        0     1                 $d.2
               d1               d1        0     1                 
@@ -1856,11 +1856,11 @@
              d29              d29        0     1                 
              dc0              dc0        0     1                 
              e31              e31        0     1                 
-             e67              e67       46     1         /tmp/HAL-b66480.o:(.debug_loc)
+             e67              e67       46     1         /tmp/HAL-24e45b.o:(.debug_loc)
              e67              e67        0     1                 
              e67              e67        0     1                 $d.1
              e8a              e8a        0     1                 
-             ead              ead      27e     1         /tmp/kalloc-3045d6.o:(.debug_loc)
+             ead              ead      27e     1         /tmp/kalloc-f5cf9a.o:(.debug_loc)
              ead              ead        0     1                 
              ead              ead        0     1                 $d.3
              eef              eef        0     1                 
@@ -1875,7 +1875,7 @@
             10af             10af        0     1                 
             10e5             10e5        0     1                 
             1108             1108        0     1                 
-            112b             112b     29b1     1         /tmp/vm-891534.o:(.debug_loc)
+            112b             112b     29b1     1         /tmp/vm-782ad5.o:(.debug_loc)
             112b             112b        0     1                 
             112b             112b        0     1                 $d.3
             1161             1161        0     1                 
@@ -2046,41 +2046,41 @@
             39ff             39ff        0     1                 
             3a63             3a63        0     1                 
             3a99             3a99        0     1                 
-            3adc             3adc       69     1         /tmp/stubs-f67bfd.o:(.debug_loc)
+            3adc             3adc       69     1         /tmp/stubs-d84ee5.o:(.debug_loc)
             3adc             3adc        0     1                 
             3adc             3adc        0     1                 $d.1
             3aff             3aff        0     1                 
             3b22             3b22        0     1                 
                0                0      867     1 .debug_abbrev
-               0                0       e4     1         /tmp/main-f3996d.o:(.debug_abbrev)
+               0                0       e4     1         /tmp/main-56563a.o:(.debug_abbrev)
                0                0        0     1                 $d.3
-              e4               e4      213     1         /tmp/common-ec30bd.o:(.debug_abbrev)
+              e4               e4      213     1         /tmp/common-27bbe1.o:(.debug_abbrev)
               e4               e4        0     1                 $d.3
-             2f7              2f7       82     1         /tmp/HAL-b66480.o:(.debug_abbrev)
+             2f7              2f7       82     1         /tmp/HAL-24e45b.o:(.debug_abbrev)
              2f7              2f7        0     1                 $d.2
-             379              379      15f     1         /tmp/kalloc-3045d6.o:(.debug_abbrev)
+             379              379      15f     1         /tmp/kalloc-f5cf9a.o:(.debug_abbrev)
              379              379        0     1                 $d.4
-             4d8              4d8      2b4     1         /tmp/vm-891534.o:(.debug_abbrev)
+             4d8              4d8      2b4     1         /tmp/vm-782ad5.o:(.debug_abbrev)
              4d8              4d8        0     1                 $d.4
-             78c              78c       ba     1         /tmp/stubs-f67bfd.o:(.debug_abbrev)
+             78c              78c       ba     1         /tmp/stubs-d84ee5.o:(.debug_abbrev)
              78c              78c        0     1                 $d.2
-             846              846       21     1         /tmp/entry-6890ee.o:(.debug_abbrev)
+             846              846       21     1         /tmp/entry-14d367.o:(.debug_abbrev)
              846              846        0     1                 
              846              846        0     1                 $d.3
                0                0     24d0     1 .debug_info
-               0                0      21e     1         /tmp/main-f3996d.o:(.debug_info)
+               0                0      21e     1         /tmp/main-56563a.o:(.debug_info)
                0                0        0     1                 $d.4
-             21e              21e      8dd     1         /tmp/common-ec30bd.o:(.debug_info)
+             21e              21e      8dd     1         /tmp/common-27bbe1.o:(.debug_info)
              21e              21e        0     1                 $d.4
-             afb              afb      141     1         /tmp/HAL-b66480.o:(.debug_info)
+             afb              afb      141     1         /tmp/HAL-24e45b.o:(.debug_info)
              afb              afb        0     1                 $d.3
-             c3c              c3c      2af     1         /tmp/kalloc-3045d6.o:(.debug_info)
+             c3c              c3c      2af     1         /tmp/kalloc-f5cf9a.o:(.debug_info)
              c3c              c3c        0     1                 $d.5
-             eeb              eeb     1228     1         /tmp/vm-891534.o:(.debug_info)
+             eeb              eeb     1228     1         /tmp/vm-782ad5.o:(.debug_info)
              eeb              eeb        0     1                 $d.5
-            2113             2113      320     1         /tmp/stubs-f67bfd.o:(.debug_info)
+            2113             2113      320     1         /tmp/stubs-d84ee5.o:(.debug_info)
             2113             2113        0     1                 $d.3
-            2433             2433       9d     1         /tmp/entry-6890ee.o:(.debug_info)
+            2433             2433       9d     1         /tmp/entry-14d367.o:(.debug_info)
             2433             2433        0     1                 
             2433             2433        0     1                 $d.4
                0                0      442     1 .debug_str
@@ -2090,50 +2090,50 @@
                0                0       2b     1 .riscv.attributes
                0                0       2b     1         <internal>:(.riscv.attributes)
                0                0      688     8 .debug_frame
-               0                0       40     8         /tmp/main-f3996d.o:(.debug_frame)
+               0                0       40     8         /tmp/main-56563a.o:(.debug_frame)
                0                0        0     1                 
                0                0        0     1                 $d.8
-              40               40      128     8         /tmp/common-ec30bd.o:(.debug_frame)
+              40               40      128     8         /tmp/common-27bbe1.o:(.debug_frame)
               40               40        0     1                 
               40               40        0     1                 $d.9
-             168              168       30     8         /tmp/HAL-b66480.o:(.debug_frame)
+             168              168       30     8         /tmp/HAL-24e45b.o:(.debug_frame)
              168              168        0     1                 
              168              168        0     1                 $d.7
-             198              198       b8     8         /tmp/kalloc-3045d6.o:(.debug_frame)
+             198              198       b8     8         /tmp/kalloc-f5cf9a.o:(.debug_frame)
              198              198        0     1                 
              198              198        0     1                 $d.10
-             250              250      270     8         /tmp/vm-891534.o:(.debug_frame)
+             250              250      270     8         /tmp/vm-782ad5.o:(.debug_frame)
              250              250        0     1                 
              250              250        0     1                 $d.10
-             4c0              4c0      1c8     8         /tmp/stubs-f67bfd.o:(.debug_frame)
+             4c0              4c0      1c8     8         /tmp/stubs-d84ee5.o:(.debug_frame)
              4c0              4c0        0     1                 
              4c0              4c0        0     1                 $d.7
                0                0     1c33     1 .debug_line
-               0                0       ec     1         /tmp/main-f3996d.o:(.debug_line)
+               0                0       ec     1         /tmp/main-56563a.o:(.debug_line)
                0                0        0     1                 .Lline_table_start0
                0                0        0     1                 $d.9
-              ec               ec      a37     1         /tmp/common-ec30bd.o:(.debug_line)
+              ec               ec      a37     1         /tmp/common-27bbe1.o:(.debug_line)
               ec               ec        0     1                 .Lline_table_start0
               ec               ec        0     1                 $d.10
-             b23              b23       51     1         /tmp/HAL-b66480.o:(.debug_line)
+             b23              b23       51     1         /tmp/HAL-24e45b.o:(.debug_line)
              b23              b23        0     1                 .Lline_table_start0
              b23              b23        0     1                 $d.8
-             b74              b74      214     1         /tmp/kalloc-3045d6.o:(.debug_line)
+             b74              b74      214     1         /tmp/kalloc-f5cf9a.o:(.debug_line)
              b74              b74        0     1                 .Lline_table_start0
              b74              b74        0     1                 $d.11
-             d88              d88      d55     1         /tmp/vm-891534.o:(.debug_line)
+             d88              d88      d55     1         /tmp/vm-782ad5.o:(.debug_line)
              d88              d88        0     1                 .Lline_table_start0
              d88              d88        0     1                 $d.11
-            1add             1add       df     1         /tmp/stubs-f67bfd.o:(.debug_line)
+            1add             1add       df     1         /tmp/stubs-d84ee5.o:(.debug_line)
             1add             1add        0     1                 .Lline_table_start0
             1add             1add        0     1                 $d.8
-            1bbc             1bbc       49     1         /tmp/entry-6890ee.o:(.debug_line)
+            1bbc             1bbc       49     1         /tmp/entry-14d367.o:(.debug_line)
             1bbc             1bbc        0     1                 .Lline_table_start0
             1bbc             1bbc        0     1                 $d.5
-            1c05             1c05       2e     1         /tmp/trampoline-6bf299.o:(.debug_line)
+            1c05             1c05       2e     1         /tmp/trampoline-072cb8.o:(.debug_line)
             1c05             1c05        0     1                 $d.2
                0                0      750     1 .debug_ranges
-               0                0      270     1         /tmp/common-ec30bd.o:(.debug_ranges)
+               0                0      270     1         /tmp/common-27bbe1.o:(.debug_ranges)
                0                0        0     1                 
                0                0        0     1                 $d.5
               30               30        0     1                 
@@ -2148,12 +2148,12 @@
              1e0              1e0        0     1                 
              210              210        0     1                 
              240              240        0     1                 
-             270              270       b0     1         /tmp/kalloc-3045d6.o:(.debug_ranges)
+             270              270       b0     1         /tmp/kalloc-f5cf9a.o:(.debug_ranges)
              270              270        0     1                 
              270              270        0     1                 $d.6
              2a0              2a0        0     1                 
              2e0              2e0        0     1                 
-             320              320      430     1         /tmp/vm-891534.o:(.debug_ranges)
+             320              320      430     1         /tmp/vm-782ad5.o:(.debug_ranges)
              320              320        0     1                 
              320              320        0     1                 $d.6
              350              350        0     1                 
@@ -2177,7 +2177,7 @@
              6d0              6d0        0     1                 
              710              710        0     1                 
                0                0       30     1 .debug_aranges
-               0                0       30     1         /tmp/entry-6890ee.o:(.debug_aranges)
+               0                0       30     1         /tmp/entry-14d367.o:(.debug_aranges)
                0                0        0     1                 $d.2
                0                0     c828     8 .symtab
                0                0     c828     8         <internal>:(.symtab)
