@@ -34,7 +34,7 @@ kvmmake(void)
   kvmmap(kpgtbl, KERNBASE, KERNBASE, (uint64)etext-KERNBASE, PTE_R | PTE_X);
 
   // map kernel data and the physical RAM we'll make use of.
-  kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W);
+  kvmmap(kpgtbl, (uint64)etext, (uint64)etext, PHYSTOP-(uint64)etext, PTE_R | PTE_W );
 
   // map the trampoline for trap entry/exit to
   // the highest virtual address in the kernel.
@@ -42,7 +42,8 @@ kvmmake(void)
 
   // allocate and map a kernel stack for each process.
   //proc_mapstacks(kpgtbl);
-  
+ //маппинг IPC страницы 
+  kvmmap(kpgtbl, IPC , (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
   return kpgtbl;
 }
 
@@ -446,7 +447,6 @@ copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max)
 // that was lazily allocated in sys_sbrk().
 // returns 0 if va is invalid or already mapped, or if
 // out of physical memory, and physical address if successful.
-/*
 uint64
 vmfault(pagetable_t pagetable, uint64 va, int read)
 {
