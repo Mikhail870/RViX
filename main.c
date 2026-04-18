@@ -7,7 +7,7 @@
 #include "kalloc.h"
 #include "timer.h"
 extern pagetable_t kernel_pagetable;
-extern void test(void);
+extern char kernelvec[];
 
 
 void  main() {
@@ -22,7 +22,7 @@ uint64 time = get_time();
 printf("%d\n",time);}
 
 
-asm volatile("csrw stvec, %0" : : "r"(test));
+asm volatile("csrw stvec, %0" : : "r"(kernelvec));
 asm volatile("csrs sie, %0" : : "r"(1 << 5));
 asm volatile("csrs sie, %0" : : "r"(1 << 7));
 asm volatile("csrs sstatus, %0" : : "r"(1 << 1));
