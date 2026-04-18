@@ -3,6 +3,8 @@
 // and pipe buffers. Allocates whole 4096-byte pages.
 
 #include "types.h"
+#include "riscv.h"
+#include "memlayout.h"
 #include "kalloc.h"
 #include "common.h"
 #define end __stack_top

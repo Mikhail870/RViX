@@ -21,3 +21,7 @@ void set_timer(uint64 delta_time){
   uint64 next_time=current_time+delta_time;
   sbi_set_timer(next_time);
 }
+
+void auto_timer(){
+  
+}
