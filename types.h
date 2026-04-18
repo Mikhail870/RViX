@@ -10,4 +10,5 @@ typedef uint64 *pagetable_t;
 
 typedef uint64 pde_t;
 typedef uint64 pte_t;
+#define NULL ((void*)0)
 
