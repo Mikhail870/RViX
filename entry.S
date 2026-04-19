@@ -10,6 +10,7 @@ boot:
         # with a 4096-byte stack per CPU.
         # sp = stack0 + ((hartid + 1) * 4096)
         la sp, __stack_top
+        andi sp, sp, -16
         # jump to main() in main.c
         call main
 spin:
