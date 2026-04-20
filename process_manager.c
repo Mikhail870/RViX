@@ -21,6 +21,7 @@ struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;
 struct process *current;
 
+
 // Функция, создающая процесс
 // принимает адрес кода и создает из него процесс. 
 // если успешно, то вернет 1
@@ -42,7 +43,7 @@ struct process *proc_born(uint64 prc){
 
   uint64 *sp = (uint64*)( (char*)pc->stack+sizeof(pc->stack));
   sp = (uint64*)((uint64)sp & ~0xFULL);
-
+  
   for (int i=0; i<13; i++)
     *--sp=0;
 
@@ -57,8 +58,10 @@ struct process *proc_born(uint64 prc){
 
 // Создание процессов серверов, когда все заняты, то крутится как IDLE
 void idle(void){
-  while(1)
+  while(1){
+    printf("idle");
     asm volatile("wfi");
+  }
 }
 struct process *init_process(int param){
   // param=0 создать базовые процессы
@@ -105,8 +108,8 @@ void yield(void){
   current=next;
   prev->state=RUNABBLE;
   next->state=RUN;
+  asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
   switch_context(&prev->sp,&current->sp);// меняем контекст выполнения. При запуске current всегда IDLE процесс
-  asm volatile("csrs sstatus, %0" : : "r"((1 << 1) | (1 << 5)));
 }
 
 

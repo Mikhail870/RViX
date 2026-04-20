@@ -14,10 +14,11 @@
   uint64 scause=0; // номер причины прерывания
   asm volatile ("csrr %0, scause ":"=r"(scause));
   scause= scause & 0xFF;
-  //printf("scause of kerneltrap =%d\n",scause);
+
+
   switch (scause) {
     case 5:
-    set_timer(100000000);
+    set_timer(1000000);
     yield();// Сделать вызов через IPC
     break;
     default: 

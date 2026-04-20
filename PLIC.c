@@ -7,8 +7,7 @@
 
 void init_interrupt_enable(void){
   asm volatile("csrs sstatus, %0" : : "r"(1 << 1));// Разрешить прерывания глобально
-  asm volatile("csrs sie, %0" : : "r"(1 << 5));// Сохранять значение SIE до ловушки прерывания
-  asm volatile("csrs sie, %0" : : "r"(1 << 7));// Разрешить прерывания таймера
+  asm volatile("csrs sie, %0" : : "r"(1 << 5));// Разрешить прерывания таймера
 
 }
 void set_stvec(void *stvec){
