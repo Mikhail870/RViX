@@ -42,11 +42,10 @@ kvminithart(); // включаем таблиццу страниц
 set_stvec(kernelvec);// Записать адрес обработчика в stvec
 init_interrupt_enable();// Разрешить голобальные прерывания
   
-struct process *pA=proc_born((uint64)proc_A);
-struct process *pC=proc_born((uint64)proc_C);
-struct process *pB=proc_born((uint64)proc_B);
-struct process *pI=init_process(1); // idle процесс 
-current=pI;
+init_process(1); // idle процесс 
+proc_born((uint64)proc_A);
+proc_born((uint64)proc_C);
+proc_born((uint64)proc_B);
 set_timer(1000000);
 while(1){
   asm volatile("wfi");}
