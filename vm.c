@@ -43,7 +43,7 @@ kvmmake(void)
   // allocate and map a kernel stack for each process.
   //proc_mapstacks(kpgtbl);
  //маппинг IPC страницы 
-  kvmmap(kpgtbl, IPC , (uint64)trampoline, PGSIZE, PTE_R | PTE_X);
+  kvmmap(kpgtbl, IPC , (uint64)IPC, PGSIZE, PTE_R | PTE_X);
   return kpgtbl;
 }
 
