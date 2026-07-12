@@ -1,7 +1,7 @@
              VMA              LMA     Size Align Out     In      Symbol
                0                0 80200000     1 . = 0x80200000
         80200000         80200000     3000    16 .text
-        80200000         80200000       12     1         /tmp/entry-a4ff1a.o:(.text.boot)
+        80200000         80200000       12     1         /tmp/entry-681893.o:(.text.boot)
         80200000         80200000        0     1                 
         80200000         80200000        0     1                 .Lpcrel_hi0
         80200000         80200000        0     1                 $x.0
@@ -13,7 +13,7 @@
         80200010         80200010        0     1                 
         80200010         80200010        0     1                 
         80200012         80200012        0     1                 
-        80200012         80200012       aa     2         /tmp/main-893761.o:(.text)
+        80200012         80200012       aa     2         /tmp/main-2bcc3e.o:(.text)
         80200012         80200012        0     1                 
         80200012         80200012        0     1                 
         80200012         80200012        0     1                 $x.0
@@ -85,7 +85,7 @@
         802000ba         802000ba        0     1                 
         802000bc         802000bc        0     1                 
         802000bc         802000bc        0     1                 
-        802000bc         802000bc      93c     2         /tmp/common-e0112a.o:(.text)
+        802000bc         802000bc      93c     2         /tmp/common-604f72.o:(.text)
         802000bc         802000bc        0     1                 
         802000bc         802000bc        0     1                 
         802000bc         802000bc        0     1                 $x.0
@@ -721,7 +721,7 @@
         802009f6         802009f6        0     1                 
         802009f8         802009f8        0     1                 
         802009f8         802009f8        0     1                 
-        802009f8         802009f8       16     2         /tmp/HAL-35b5db.o:(.text)
+        802009f8         802009f8       16     2         /tmp/HAL-1868da.o:(.text)
         802009f8         802009f8        0     1                 
         802009f8         802009f8        0     1                 
         802009f8         802009f8        0     1                 $x.0
@@ -735,7 +735,7 @@
         80200a06         80200a06        0     1                 
         80200a0c         80200a0c        0     1                 
         80200a0e         80200a0e        0     1                 
-        80200a0e         80200a0e      1b4     2         /tmp/kalloc-742201.o:(.text)
+        80200a0e         80200a0e      1b4     2         /tmp/kalloc-d1a0ab.o:(.text)
         80200a0e         80200a0e        0     1                 
         80200a0e         80200a0e        0     1                 
         80200a0e         80200a0e        0     1                 $x.0
@@ -870,7 +870,7 @@
         80200bbe         80200bbe        0     1                 
         80200bc2         80200bc2        0     1                 
         80200bc2         80200bc2        0     1                 
-        80200bc2         80200bc2      81a     2         /tmp/vm-dc7b70.o:(.text)
+        80200bc2         80200bc2      81a     2         /tmp/vm-18df1d.o:(.text)
         80200bc2         80200bc2        0     1                 
         80200bc2         80200bc2        0     1                 
         80200bc2         80200bc2        0     1                 $x.0
@@ -1686,7 +1686,7 @@
         802013dc         802013dc        0     1                 
         802013dc         802013dc        0     1                 
         802013dc         802013dc        0     1                 
-        802013dc         802013dc       12     2         /tmp/timer-136b32.o:(.text)
+        802013dc         802013dc       12     2         /tmp/timer-23c2a5.o:(.text)
         802013dc         802013dc        0     1                 
         802013dc         802013dc        0     1                 
         802013dc         802013dc        0     1                 $x.0
@@ -1707,8 +1707,8 @@
         802013ec         802013ec        0     1                 
         802013ec         802013ec        2     1                 auto_timer
         802013ee         802013ee        0     1                 
-        802013ee         802013ee        0     2         /tmp/entry-a4ff1a.o:(.text)
-        802013ee         802013ee       3c     2         /tmp/trap_handle-85c027.o:(.text)
+        802013ee         802013ee        0     2         /tmp/entry-681893.o:(.text)
+        802013ee         802013ee       3c     2         /tmp/trap_handle-244742.o:(.text)
         802013ee         802013ee        0     1                 
         802013ee         802013ee        0     1                 
         802013ee         802013ee        0     1                 $x.0
@@ -1734,7 +1734,7 @@
         80201428         80201428        0     1                 .LBB0_3
         8020142a         8020142a        0     1                 
         8020142a         8020142a        0     1                 
-        8020142a         8020142a       16     2         /tmp/PLIC-53d864.o:(.text)
+        8020142a         8020142a       16     2         /tmp/PLIC-26b7b2.o:(.text)
         8020142a         8020142a        0     1                 
         8020142a         8020142a        0     1                 
         8020142a         8020142a        0     1                 $x.0
@@ -1749,7 +1749,7 @@
         8020143a         8020143a        6     1                 set_stvec
         8020143e         8020143e        0     1                 
         80201440         80201440        0     1                 
-        80201440         80201440      354     2         /tmp/process_manager-321c0f.o:(.text)
+        80201440         80201440      354     2         /tmp/process_manager-41fadb.o:(.text)
         80201440         80201440        0     1                 
         80201440         80201440        0     1                 
         80201440         80201440        0     1                 .Lpcrel_hi0
@@ -2005,8 +2005,8 @@
         80201794         80201794        0     1                 
         80201794         80201794        0     1                 
         80201794         80201794        0     1                 
-        80201794         80201794        0     2         /tmp/trampoline-1252bd.o:(.text)
-        802017a0         802017a0       54    16         /tmp/kernelvec-02a811.o:(.text)
+        80201794         80201794        0     2         /tmp/trampoline-042e06.o:(.text)
+        802017a0         802017a0       54    16         /tmp/kernelvec-a5f3a5.o:(.text)
         802017a0         802017a0        0     1                 
         802017a0         802017a0        0     1                 $x.0
         802017a0         802017a0        0     1                 
@@ -2051,7 +2051,7 @@
         802017ee         802017ee        0     1                 
         802017f0         802017f0        0     1                 
         802017f4         802017f4        0     1                 
-        802017f4         802017f4       42     2         /tmp/switch_context-d479af.o:(.text)
+        802017f4         802017f4       42     2         /tmp/switch_context-c137de.o:(.text)
         802017f4         802017f4        0     1                 
         802017f4         802017f4        0     1                 $x.0
         802017f4         802017f4        0     1                 
@@ -2089,7 +2089,7 @@
         80201836         80201836        0     1                 
         80201836         80201836      7ca     1         . = ALIGN ( 0x1000 )
         80202000         80202000        0     1         trampoline = .
-        80202000         80202000      120    16         /tmp/trampoline-1252bd.o:(trampsec)
+        80202000         80202000      120    16         /tmp/trampoline-042e06.o:(trampsec)
         80202000         80202000        0     1                 $x.0
         80202000         80202000        0     1                 uservec
         8020209c         8020209c        0     1                 userret
@@ -2100,16 +2100,16 @@
         80203000         80203000      19f     1         <internal>:(.rodata.str1.1)
         802031a0         802031a0    100a8    16 .bss
         802031a0         802031a0        0     1         __bss = .
-        802031a0         802031a0        8     8         /tmp/kalloc-742201.o:(.sbss)
+        802031a0         802031a0        8     8         /tmp/kalloc-d1a0ab.o:(.sbss)
         802031a0         802031a0        0     1                 $d.2
         802031a0         802031a0        8     1                 kmem
-        802031a8         802031a8        8     8         /tmp/vm-dc7b70.o:(.sbss)
+        802031a8         802031a8        8     8         /tmp/vm-18df1d.o:(.sbss)
         802031a8         802031a8        0     1                 $d.2
         802031a8         802031a8        8     1                 kernel_pagetable
-        802031b0         802031b0    10080    16         /tmp/process_manager-321c0f.o:(.bss)
+        802031b0         802031b0    10080    16         /tmp/process_manager-41fadb.o:(.bss)
         802031b0         802031b0        0     1                 $d.1
         802031b0         802031b0    10080     1                 proc
-        80213230         80213230       18     8         /tmp/process_manager-321c0f.o:(.sbss)
+        80213230         80213230       18     8         /tmp/process_manager-41fadb.o:(.sbss)
         80213230         80213230        0     1                 $d.3
         80213230         80213230        8     1                 current
         80213238         80213238        4     1                 sheduller.idx
@@ -2119,59 +2119,59 @@
         80213248         80213248    20000     1 . += 128 * 1024
         80233248         80233248        0     1 __stack_top = .
                0                0      bdc     1 .debug_abbrev
-               0                0      111     1         /tmp/main-893761.o:(.debug_abbrev)
+               0                0      111     1         /tmp/main-2bcc3e.o:(.debug_abbrev)
                0                0        0     1                 $d.2
-             111              111      213     1         /tmp/common-e0112a.o:(.debug_abbrev)
+             111              111      213     1         /tmp/common-604f72.o:(.debug_abbrev)
              111              111        0     1                 $d.3
-             324              324       ad     1         /tmp/HAL-35b5db.o:(.debug_abbrev)
+             324              324       ad     1         /tmp/HAL-1868da.o:(.debug_abbrev)
              324              324        0     1                 $d.2
-             3d1              3d1      15f     1         /tmp/kalloc-742201.o:(.debug_abbrev)
+             3d1              3d1      15f     1         /tmp/kalloc-d1a0ab.o:(.debug_abbrev)
              3d1              3d1        0     1                 $d.4
-             530              530      2b4     1         /tmp/vm-dc7b70.o:(.debug_abbrev)
+             530              530      2b4     1         /tmp/vm-18df1d.o:(.debug_abbrev)
              530              530        0     1                 $d.4
-             7e4              7e4      106     1         /tmp/timer-136b32.o:(.debug_abbrev)
+             7e4              7e4      106     1         /tmp/timer-23c2a5.o:(.debug_abbrev)
              7e4              7e4        0     1                 $d.2
-             8ea              8ea       21     1         /tmp/entry-a4ff1a.o:(.debug_abbrev)
+             8ea              8ea       21     1         /tmp/entry-681893.o:(.debug_abbrev)
              8ea              8ea        0     1                 
              8ea              8ea        0     1                 $d.3
-             90b              90b       dc     1         /tmp/trap_handle-85c027.o:(.debug_abbrev)
+             90b              90b       dc     1         /tmp/trap_handle-244742.o:(.debug_abbrev)
              90b              90b        0     1                 $d.3
-             9e7              9e7       58     1         /tmp/PLIC-53d864.o:(.debug_abbrev)
+             9e7              9e7       58     1         /tmp/PLIC-26b7b2.o:(.debug_abbrev)
              9e7              9e7        0     1                 $d.1
-             a3f              a3f      15b     1         /tmp/process_manager-321c0f.o:(.debug_abbrev)
+             a3f              a3f      15b     1         /tmp/process_manager-41fadb.o:(.debug_abbrev)
              a3f              a3f        0     1                 $d.5
-             b9a              b9a       21     1         /tmp/kernelvec-02a811.o:(.debug_abbrev)
+             b9a              b9a       21     1         /tmp/kernelvec-a5f3a5.o:(.debug_abbrev)
              b9a              b9a        0     1                 
              b9a              b9a        0     1                 $d.3
-             bbb              bbb       21     1         /tmp/switch_context-d479af.o:(.debug_abbrev)
+             bbb              bbb       21     1         /tmp/switch_context-c137de.o:(.debug_abbrev)
              bbb              bbb        0     1                 
              bbb              bbb        0     1                 $d.3
                0                0     282b     1 .debug_info
-               0                0      28b     1         /tmp/main-893761.o:(.debug_info)
+               0                0      28b     1         /tmp/main-2bcc3e.o:(.debug_info)
                0                0        0     1                 $d.3
-             28b              28b      8dd     1         /tmp/common-e0112a.o:(.debug_info)
+             28b              28b      8dd     1         /tmp/common-604f72.o:(.debug_info)
              28b              28b        0     1                 $d.4
-             b68              b68      1b4     1         /tmp/HAL-35b5db.o:(.debug_info)
+             b68              b68      1b4     1         /tmp/HAL-1868da.o:(.debug_info)
              b68              b68        0     1                 $d.3
-             d1c              d1c      2af     1         /tmp/kalloc-742201.o:(.debug_info)
+             d1c              d1c      2af     1         /tmp/kalloc-d1a0ab.o:(.debug_info)
              d1c              d1c        0     1                 $d.5
-             fcb              fcb     10af     1         /tmp/vm-dc7b70.o:(.debug_info)
+             fcb              fcb     10af     1         /tmp/vm-18df1d.o:(.debug_info)
              fcb              fcb        0     1                 $d.5
-            207a             207a      115     1         /tmp/timer-136b32.o:(.debug_info)
+            207a             207a      115     1         /tmp/timer-23c2a5.o:(.debug_info)
             207a             207a        0     1                 $d.3
-            218f             218f       9d     1         /tmp/entry-a4ff1a.o:(.debug_info)
+            218f             218f       9d     1         /tmp/entry-681893.o:(.debug_info)
             218f             218f        0     1                 
             218f             218f        0     1                 $d.4
-            222c             222c      103     1         /tmp/trap_handle-85c027.o:(.debug_info)
+            222c             222c      103     1         /tmp/trap_handle-244742.o:(.debug_info)
             222c             222c        0     1                 $d.4
-            232f             232f       64     1         /tmp/PLIC-53d864.o:(.debug_info)
+            232f             232f       64     1         /tmp/PLIC-26b7b2.o:(.debug_info)
             232f             232f        0     1                 $d.2
-            2393             2393      36e     1         /tmp/process_manager-321c0f.o:(.debug_info)
+            2393             2393      36e     1         /tmp/process_manager-41fadb.o:(.debug_info)
             2393             2393        0     1                 $d.6
-            2701             2701       90     1         /tmp/kernelvec-02a811.o:(.debug_info)
+            2701             2701       90     1         /tmp/kernelvec-a5f3a5.o:(.debug_info)
             2701             2701        0     1                 
             2701             2701        0     1                 $d.4
-            2791             2791       9a     1         /tmp/switch_context-d479af.o:(.debug_info)
+            2791             2791       9a     1         /tmp/switch_context-c137de.o:(.debug_info)
             2791             2791        0     1                 
             2791             2791        0     1                 $d.4
                0                0      4b6     1 .debug_str
@@ -2181,74 +2181,74 @@
                0                0       2b     1 .riscv.attributes
                0                0       2b     1         <internal>:(.riscv.attributes)
                0                0      6c8     8 .debug_frame
-               0                0       98     8         /tmp/main-893761.o:(.debug_frame)
+               0                0       98     8         /tmp/main-2bcc3e.o:(.debug_frame)
                0                0        0     1                 
                0                0        0     1                 $d.7
-              98               98      128     8         /tmp/common-e0112a.o:(.debug_frame)
+              98               98      128     8         /tmp/common-604f72.o:(.debug_frame)
               98               98        0     1                 
               98               98        0     1                 $d.9
-             1c0              1c0       48     8         /tmp/HAL-35b5db.o:(.debug_frame)
+             1c0              1c0       48     8         /tmp/HAL-1868da.o:(.debug_frame)
              1c0              1c0        0     1                 
              1c0              1c0        0     1                 $d.7
-             208              208       b8     8         /tmp/kalloc-742201.o:(.debug_frame)
+             208              208       b8     8         /tmp/kalloc-d1a0ab.o:(.debug_frame)
              208              208        0     1                 
              208              208        0     1                 $d.10
-             2c0              2c0      270     8         /tmp/vm-dc7b70.o:(.debug_frame)
+             2c0              2c0      270     8         /tmp/vm-18df1d.o:(.debug_frame)
              2c0              2c0        0     1                 
              2c0              2c0        0     1                 $d.10
-             530              530       60     8         /tmp/timer-136b32.o:(.debug_frame)
+             530              530       60     8         /tmp/timer-23c2a5.o:(.debug_frame)
              530              530        0     1                 
              530              530        0     1                 $d.7
-             590              590       38     8         /tmp/trap_handle-85c027.o:(.debug_frame)
+             590              590       38     8         /tmp/trap_handle-244742.o:(.debug_frame)
              590              590        0     1                 
              590              590        0     1                 $d.8
-             5c8              5c8       48     8         /tmp/PLIC-53d864.o:(.debug_frame)
+             5c8              5c8       48     8         /tmp/PLIC-26b7b2.o:(.debug_frame)
              5c8              5c8        0     1                 
              5c8              5c8        0     1                 $d.6
-             610              610       b8     8         /tmp/process_manager-321c0f.o:(.debug_frame)
+             610              610       b8     8         /tmp/process_manager-41fadb.o:(.debug_frame)
              610              610        0     1                 
              610              610        0     1                 $d.11
                0                0     2339     1 .debug_line
-               0                0      12b     1         /tmp/main-893761.o:(.debug_line)
+               0                0      12b     1         /tmp/main-2bcc3e.o:(.debug_line)
                0                0        0     1                 .Lline_table_start0
                0                0        0     1                 $d.8
-             12b              12b      a37     1         /tmp/common-e0112a.o:(.debug_line)
+             12b              12b      a37     1         /tmp/common-604f72.o:(.debug_line)
              12b              12b        0     1                 .Lline_table_start0
              12b              12b        0     1                 $d.10
-             b62              b62       75     1         /tmp/HAL-35b5db.o:(.debug_line)
+             b62              b62       75     1         /tmp/HAL-1868da.o:(.debug_line)
              b62              b62        0     1                 .Lline_table_start0
              b62              b62        0     1                 $d.8
-             bd7              bd7      214     1         /tmp/kalloc-742201.o:(.debug_line)
+             bd7              bd7      214     1         /tmp/kalloc-d1a0ab.o:(.debug_line)
              bd7              bd7        0     1                 .Lline_table_start0
              bd7              bd7        0     1                 $d.11
-             deb              deb      cb5     1         /tmp/vm-dc7b70.o:(.debug_line)
+             deb              deb      cb5     1         /tmp/vm-18df1d.o:(.debug_line)
              deb              deb        0     1                 .Lline_table_start0
              deb              deb        0     1                 $d.11
-            1aa0             1aa0       7c     1         /tmp/timer-136b32.o:(.debug_line)
+            1aa0             1aa0       7c     1         /tmp/timer-23c2a5.o:(.debug_line)
             1aa0             1aa0        0     1                 .Lline_table_start0
             1aa0             1aa0        0     1                 $d.8
-            1b1c             1b1c       4f     1         /tmp/entry-a4ff1a.o:(.debug_line)
+            1b1c             1b1c       4f     1         /tmp/entry-681893.o:(.debug_line)
             1b1c             1b1c        0     1                 .Lline_table_start0
             1b1c             1b1c        0     1                 $d.5
-            1b6b             1b6b       c2     1         /tmp/trap_handle-85c027.o:(.debug_line)
+            1b6b             1b6b       c2     1         /tmp/trap_handle-244742.o:(.debug_line)
             1b6b             1b6b        0     1                 .Lline_table_start0
             1b6b             1b6b        0     1                 $d.9
-            1c2d             1c2d       62     1         /tmp/PLIC-53d864.o:(.debug_line)
+            1c2d             1c2d       62     1         /tmp/PLIC-26b7b2.o:(.debug_line)
             1c2d             1c2d        0     1                 .Lline_table_start0
             1c2d             1c2d        0     1                 $d.7
-            1c8f             1c8f      45b     1         /tmp/process_manager-321c0f.o:(.debug_line)
+            1c8f             1c8f      45b     1         /tmp/process_manager-41fadb.o:(.debug_line)
             1c8f             1c8f        0     1                 .Lline_table_start0
             1c8f             1c8f        0     1                 $d.12
-            20ea             20ea       2e     1         /tmp/trampoline-1252bd.o:(.debug_line)
+            20ea             20ea       2e     1         /tmp/trampoline-042e06.o:(.debug_line)
             20ea             20ea        0     1                 $d.2
-            2118             2118      129     1         /tmp/kernelvec-02a811.o:(.debug_line)
+            2118             2118      129     1         /tmp/kernelvec-a5f3a5.o:(.debug_line)
             2118             2118        0     1                 .Lline_table_start0
             2118             2118        0     1                 $d.5
-            2241             2241       f8     1         /tmp/switch_context-d479af.o:(.debug_line)
+            2241             2241       f8     1         /tmp/switch_context-c137de.o:(.debug_line)
             2241             2241        0     1                 .Lline_table_start0
             2241             2241        0     1                 $d.5
                0                0     38c5     1 .debug_loc
-               0                0      dcc     1         /tmp/common-e0112a.o:(.debug_loc)
+               0                0      dcc     1         /tmp/common-604f72.o:(.debug_loc)
                0                0        0     1                 
                0                0        0     1                 $d.2
               36               36        0     1                 
@@ -2299,13 +2299,13 @@
              c8e              c8e        0     1                 
              d25              d25        0     1                 
              d96              d96        0     1                 
-             dcc              dcc       8c     1         /tmp/HAL-35b5db.o:(.debug_loc)
+             dcc              dcc       8c     1         /tmp/HAL-1868da.o:(.debug_loc)
              dcc              dcc        0     1                 
              dcc              dcc        0     1                 $d.1
              def              def        0     1                 
              e12              e12        0     1                 
              e35              e35        0     1                 
-             e58              e58      27e     1         /tmp/kalloc-742201.o:(.debug_loc)
+             e58              e58      27e     1         /tmp/kalloc-d1a0ab.o:(.debug_loc)
              e58              e58        0     1                 
              e58              e58        0     1                 $d.3
              e9a              e9a        0     1                 
@@ -2320,7 +2320,7 @@
             105a             105a        0     1                 
             1090             1090        0     1                 
             10b3             10b3        0     1                 
-            10d6             10d6     22ae     1         /tmp/vm-dc7b70.o:(.debug_loc)
+            10d6             10d6     22ae     1         /tmp/vm-18df1d.o:(.debug_loc)
             10d6             10d6        0     1                 
             10d6             10d6        0     1                 $d.3
             110c             110c        0     1                 
@@ -2465,15 +2465,15 @@
             32a7             32a7        0     1                 
             330b             330b        0     1                 
             3341             3341        0     1                 
-            3384             3384       69     1         /tmp/timer-136b32.o:(.debug_loc)
+            3384             3384       69     1         /tmp/timer-23c2a5.o:(.debug_loc)
             3384             3384        0     1                 
             3384             3384        0     1                 $d.1
             33a7             33a7        0     1                 
             33ca             33ca        0     1                 
-            33ed             33ed       4a     1         /tmp/trap_handle-85c027.o:(.debug_loc)
+            33ed             33ed       4a     1         /tmp/trap_handle-244742.o:(.debug_loc)
             33ed             33ed        0     1                 
             33ed             33ed        0     1                 $d.2
-            3437             3437      48e     1         /tmp/process_manager-321c0f.o:(.debug_loc)
+            3437             3437      48e     1         /tmp/process_manager-41fadb.o:(.debug_loc)
             3437             3437        0     1                 
             3437             3437        0     1                 $d.4
             346d             346d        0     1                 
@@ -2487,7 +2487,7 @@
             37ea             37ea        0     1                 
             38a2             38a2        0     1                 
                0                0      6f0     1 .debug_ranges
-               0                0      270     1         /tmp/common-e0112a.o:(.debug_ranges)
+               0                0      270     1         /tmp/common-604f72.o:(.debug_ranges)
                0                0        0     1                 
                0                0        0     1                 $d.5
               30               30        0     1                 
@@ -2502,12 +2502,12 @@
              1e0              1e0        0     1                 
              210              210        0     1                 
              240              240        0     1                 
-             270              270       b0     1         /tmp/kalloc-742201.o:(.debug_ranges)
+             270              270       b0     1         /tmp/kalloc-d1a0ab.o:(.debug_ranges)
              270              270        0     1                 
              270              270        0     1                 $d.6
              2a0              2a0        0     1                 
              2e0              2e0        0     1                 
-             320              320      370     1         /tmp/vm-dc7b70.o:(.debug_ranges)
+             320              320      370     1         /tmp/vm-18df1d.o:(.debug_ranges)
              320              320        0     1                 
              320              320        0     1                 $d.6
              350              350        0     1                 
@@ -2526,16 +2526,16 @@
              5c0              5c0        0     1                 
              610              610        0     1                 
              650              650        0     1                 
-             690              690       60     1         /tmp/process_manager-321c0f.o:(.debug_ranges)
+             690              690       60     1         /tmp/process_manager-41fadb.o:(.debug_ranges)
              690              690        0     1                 
              690              690        0     1                 $d.7
              6c0              6c0        0     1                 
                0                0       90     1 .debug_aranges
-               0                0       30     1         /tmp/entry-a4ff1a.o:(.debug_aranges)
+               0                0       30     1         /tmp/entry-681893.o:(.debug_aranges)
                0                0        0     1                 $d.2
-              30               30       30     1         /tmp/kernelvec-02a811.o:(.debug_aranges)
+              30               30       30     1         /tmp/kernelvec-a5f3a5.o:(.debug_aranges)
               30               30        0     1                 $d.2
-              60               60       30     1         /tmp/switch_context-d479af.o:(.debug_aranges)
+              60               60       30     1         /tmp/switch_context-c137de.o:(.debug_aranges)
               60               60        0     1                 $d.2
                0                0     e820     8 .symtab
                0                0     e820     8         <internal>:(.symtab)

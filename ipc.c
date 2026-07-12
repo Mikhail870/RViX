@@ -12,6 +12,11 @@
 #include "common.h"
 #include "ipc.h"
 
+int send(){
+  
+}
 
+int recieve(){
 
+}
 
