@@ -32,10 +32,10 @@ struct process *current;
   w_stvec(trampoline_uservec);
   // set up trapframe values that uservec will need when
   // the process next traps into the kernel.
-  p->trapframe->kernel_satp = r_satp();         // kernel page table
-  p->trapframe->kernel_sp = p->kstack + PGSIZE; // process's kernel stack
-  p->trapframe->kernel_trap = (uint64)usertrap;
-  p->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
+  current->trapframe->kernel_satp = r_satp();         // kernel page table
+  current->trapframe->kernel_sp = current->kstack + PGSIZE; // process's kernel stack
+  current->trapframe->kernel_trap = (uint64)usertrap;
+  current->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
   // set up the registers that trampoline.S's sret will use
   // to get to user space.
   // set S Previous Privilege mode to User.
@@ -44,8 +44,8 @@ struct process *current;
   x |= SSTATUS_SPIE; // enable interrupts in user mode
   w_sstatus(x);
   // set S Exception Program Counter to the saved user pc.
-  w_sepc(p->trapframe->epc);
-  uint64 satp = MAKE_SATP(p->pagetable);
+  w_sepc(current->trapframe->epc);
+  uint64 satp = MAKE_SATP(current->pagetable);
   uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);
   ((void (*)(uint64))trampoline_userret)(satp);
 
@@ -79,7 +79,7 @@ struct process *current;
  
   // формируем таблицу страниц пользователського процесса
   pagetable_t npagetable;
-  pagetable=uvmcreate()
+  pagetable=uvmcreate();
   if (npagetable==0)
     PANIC("pagetable dont create");
   // маппинг trampoline на вирткальну. память
@@ -88,7 +88,7 @@ struct process *current;
     uvmfree(npagetable, 0);
   }
   // маппинг trapframe на виртуальную память 
-  if (mappages(npagetable, TRAPFRAME, PGSIZE, (uint64)(p->trapframe),
+  if (mappages(npagetable, TRAPFRAME, PGSIZE, (uint64)(pc->trapframe),
                PTE_R | PTE_W) < 0) {
     uvmunmap(npagetable, TRAMPOLINE, 1, 0);
     uvmfree(npagetable, 0);
@@ -99,7 +99,7 @@ struct process *current;
   memset(&pc->context,0,sizeof(pc->context));
   pc->trapframe->epc=0;
   //стек ядра
-  pc->context.sp=pc->context.sp+PAGESIZE;
+  pc->context.sp=pc->kstack+PAGESIZE;
 
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
@@ -108,11 +108,11 @@ struct process *current;
   if ((memphys=(uint64*)kalloc())==0)
     PANIC("dont get phys page for process !");
   memset(memphys,0,PAGESIZE);
-  memmove(memphys,binprc,PAGESIZE);
-  mappages(pc->pagetable, 0, PAGESIZE, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
-
+  memmove(memphys,binprc,size);
+  mappages(pc->pagetable, 0, size, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
+  current=pc; //делаем процесс глобальным
   // прыжок в userret
-  pc->context.ra=(uint64)prepare_uret
+  pc->context.ra=(uint64)prepare_uret;
   pc->state=RUNABBLE;
 }
 
