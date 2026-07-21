@@ -89,7 +89,8 @@ struct trapframe {
 extern struct process proc[MAX_PROS]; // структуры под процессы глобально для всех
 extern struct process *next;
 extern struct process *current;
-struct process *proc_born(uint64 prc);
+void prepare_uret(void);
+void proc_born(uint64 *prc,uint64 size);
 struct process *init_process(int param);
 void sheduller(void);
 void switch_context(uint64 **oldsp, uint64 **newsp);

@@ -14,6 +14,8 @@ swtch и то что требует S mode в дальнейшем будет р
 
 #include "types.h"
 #include "common.h"
+#include "memlayot.h"
+#include "vm.h"
 #include "process_manager.h"
 #include "timer.h"
 
@@ -21,12 +23,40 @@ struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;
 struct process *current;
 
+// функция подготавливающая регистры и таблицу страниц к переходу 
+// в U modeи и осущесвтляет прыжок в uservec, вызывается в proc_born() вместо
+// forkret, адрес кладется в ra, взята частично из xv6
+  void prepare_uret(void){
+  //взято из xv6:
+  uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);
+  w_stvec(trampoline_uservec);
+  // set up trapframe values that uservec will need when
+  // the process next traps into the kernel.
+  p->trapframe->kernel_satp = r_satp();         // kernel page table
+  p->trapframe->kernel_sp = p->kstack + PGSIZE; // process's kernel stack
+  p->trapframe->kernel_trap = (uint64)usertrap;
+  p->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
+  // set up the registers that trampoline.S's sret will use
+  // to get to user space.
+  // set S Previous Privilege mode to User.
+  unsigned long x = r_sstatus();
+  x &= ~SSTATUS_SPP; // clear SPP to 0 for user mode
+  x |= SSTATUS_SPIE; // enable interrupts in user mode
+  w_sstatus(x);
+  // set S Exception Program Counter to the saved user pc.
+  w_sepc(p->trapframe->epc);
+  uint64 satp = MAKE_SATP(p->pagetable);
+  uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);
+  ((void (*)(uint64))trampoline_userret)(satp);
+
+}
+
 
 // Функция, создающая процесс
 // принимает адрес кода и создает из него процесс. 
 // если успешно, то вернет 1
 // иначе вернет код ошибки 0
-struct process *proc_born(uint64 prc){
+ void proc_born(uint64 *binprc,uint64 size){
 
   struct process *pc = NULL;
   int i;
@@ -37,23 +67,53 @@ struct process *proc_born(uint64 prc){
       break;
     }
   }
-    
+  pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
   if(!pc)
     PANIC("NOT FREE SLOTS FOR PROCESS");
 
-  uint64 *sp = (uint64*)( (char*)pc->stack+sizeof(pc->stack));
-  sp = (uint64*)((uint64)sp & ~0xFULL);
+// выделяем страницу под trapframe
+  if((pc->trapframe=(struct trapframe*)kalloc())==0){
+    PANIC("page for trapframe dont allocation")
+    // тут добавиь освобождние процессами
+  }
+ 
+  // формируем таблицу страниц пользователського процесса
+  pagetable_t npagetable;
+  pagetable=uvmcreate()
+  if (npagetable==0)
+    PANIC("pagetable dont create");
+  // маппинг trampoline на вирткальну. память
+  if (mappages(npagetable, TRAMPOLINE, PGSIZE, (uint64)trampoline,
+               PTE_R | PTE_X) < 0) {
+    uvmfree(npagetable, 0);
+  }
+  // маппинг trapframe на виртуальную память 
+  if (mappages(npagetable, TRAPFRAME, PGSIZE, (uint64)(p->trapframe),
+               PTE_R | PTE_W) < 0) {
+    uvmunmap(npagetable, TRAMPOLINE, 1, 0);
+    uvmfree(npagetable, 0);
+  }
+  pc->pagetable=npagetable;
   
-  for (int i=0; i<13; i++)
-    *--sp=0;
+  // обнуляем контекст
+  memset(&pc->context,0,sizeof(pc->context));
+  pc->trapframe->epc=0;
+  //стек ядра
+  pc->context.sp=pc->context.sp+PAGESIZE;
 
-  *--sp=(uint64) prc; // Адрес возврата, функция передаваемая в proc_born
-   
-  pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
-  pc->sp = sp;
+  // Запись бинарника по адресу 0x0 в виртуальную память
+  uint64 *memphys;
+  if (size>PAGESIZE)
+    PANIC(size of bin process too large !);
+  if ((memphys=(uint64*)kalloc())==0)
+    PANIC("dont get phys page for process !");
+  memset(memphys,0,PAGESIZE);
+  memmove(memphys,binprc,PAGESIZE);
+  mappages(pc->pagetable, 0, PAGESIZE, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
+
+  // прыжок в userret
+  pc->context.ra=(uint64)prepare_uret
   pc->state=RUNABBLE;
-
-  return pc;
 }
 
 // Создание процессов серверов, когда все заняты, то крутится как IDLE
