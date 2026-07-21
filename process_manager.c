@@ -79,7 +79,7 @@ struct process *current;
  
   // формируем таблицу страниц пользователського процесса
   pagetable_t npagetable;
-  pagetable=uvmcreate();
+  npagetable=uvmcreate();
   if (npagetable==0)
     PANIC("pagetable dont create");
   // маппинг trampoline на вирткальну. память
@@ -104,7 +104,7 @@ struct process *current;
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
   if (size>PAGESIZE)
-    PANIC(size of bin process too large !);
+    PANIC("size of bin process too large !");
   if ((memphys=(uint64*)kalloc())==0)
     PANIC("dont get phys page for process !");
   memset(memphys,0,PAGESIZE);
@@ -116,29 +116,9 @@ struct process *current;
   pc->state=RUNABBLE;
 }
 
-// Создание процессов серверов, когда все заняты, то крутится как IDLE
-void idle(void){
-  while(1){
-    printf("idle");
-    asm volatile("wfi");
-  }
-}
 struct process *init_process(int param){
-  // param=0 создать базовые процессы
-  // param=1 создать IDLE процесс 
-  if (param==0){
-    // пока что ничего
-  } else if (param==1) {
+  int prm=param; // зарезеривровано !
   
-    struct process *idle_prc=proc_born((uint64)idle) ;  
-    idle_prc->pid=-1;
-   // Запускаем IDLE как первый процесс заглушку
-    current=idle_prc;
-  // первый процесс пишется в структуру процессов как будто он уже работал
-    return idle_prc;
-  } else {
-    PANIC("UNCORRECT PARAM IN init_process");
-  }
  }
 
 // Реализация планировщика, выбираем процессов готовый к работе и PID>0
