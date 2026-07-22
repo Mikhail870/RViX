@@ -159,7 +159,7 @@ void yield(void){
     struct context dummy_main;
     current=next; // теперь current не NULL
     current->state=RUN;
-    switch_context(&dummy_main->context,&current->context);
+    switch_context(&dummy_main,&current->context);
     return; // больше не вернемся в эту точку
   }
   current=next;
