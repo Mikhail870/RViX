@@ -67,13 +67,12 @@ struct process *current;
       break;
     }
   }
-  pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
   if(!pc)
     PANIC("NOT FREE SLOTS FOR PROCESS");
-
+  pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
 // выделяем страницу под trapframe
   if((pc->trapframe=(struct trapframe*)kalloc())==0){
-    PANIC("page for trapframe dont allocation")
+    PANIC("page for trapframe dont allocation");
     // тут добавиь освобождние процессами
   }
  
@@ -102,7 +101,7 @@ struct process *current;
   uint64 *kstck;
   if ((kstck=(uint64*kalloc()))==0)
     PANIC("kernel stack dont create");
-  pc->context.sp=kstck;
+  pc->context.sp=(uint64*)((uint64)kstck+PAGESIZE);
 
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
@@ -152,7 +151,7 @@ void yield(void){
   prev->state=RUNABBLE;
   next->state=RUN;
   asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
-  switch_context(&prev->context,&current->conext);// меняем контекст выполнения. При запуске current всегда IDLE процесс
+  switch_context(&prev->context,&current->context);// меняем контекст выполнения. При запуске current всегда IDLE процесс
   //switch_context(struct context old,struct context new);
 }
 
