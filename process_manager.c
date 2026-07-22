@@ -26,16 +26,16 @@ struct process *current;
 // функция подготавливающая регистры и таблицу страниц к переходу 
 // в U modeи и осущесвтляет прыжок в uservec, вызывается в proc_born() вместо
 // forkret, адрес кладется в ra, взята частично из xv6
-  void prepare_uret(void){
+  void prepare_uret(struct process prc){
   //взято из xv6:
   uint64 trampoline_uservec = TRAMPOLINE + (uservec - trampoline);
   w_stvec(trampoline_uservec);
   // set up trapframe values that uservec will need when
   // the process next traps into the kernel.
-  current->trapframe->kernel_satp = r_satp();         // kernel page table
-  current->trapframe->kernel_sp = current->kstack + PGSIZE; // process's kernel stack
-  current->trapframe->kernel_trap = (uint64)usertrap;
-  current->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
+  prc->trapframe->kernel_satp = r_satp();         // kernel page table
+  prc->trapframe->kernel_sp = prc->kstack + PGSIZE; // process's kernel stack
+  prc->trapframe->kernel_trap = (uint64)usertrap;
+  prc->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
   // set up the registers that trampoline.S's sret will use
   // to get to user space.
   // set S Previous Privilege mode to User.
@@ -44,8 +44,8 @@ struct process *current;
   x |= SSTATUS_SPIE; // enable interrupts in user mode
   w_sstatus(x);
   // set S Exception Program Counter to the saved user pc.
-  w_sepc(current->trapframe->epc);
-  uint64 satp = MAKE_SATP(current->pagetable);
+  w_sepc(prc->trapframe->epc);
+  uint64 satp = MAKE_SATP(prc->pagetable);
   uint64 trampoline_userret = TRAMPOLINE + (userret - trampoline);
   ((void (*)(uint64))trampoline_userret)(satp);
 
@@ -99,10 +99,10 @@ struct process *current;
   pc->trapframe->epc=0;
   //стек ядра
   uint64 *kstck;
-  if ((kstck=(uint64)*kalloc())==0)
+  if ((kstck=(uint64*)kalloc())==0)
     PANIC("kernel stack dont create");
   pc->context.sp=(uint64*)((uint64)kstck+PAGESIZE);
-  pc->kstack=(uint64*)kstck;
+  pc->kstack=(uint64)kstck;
   pc->trapframe->sp=PAGESIZE;
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
@@ -113,9 +113,8 @@ struct process *current;
   memset(memphys,0,PAGESIZE);
   memmove(memphys,binprc,size);
   mappages(pc->pagetable, 0, size, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
-  current=pc; //делаем процесс глобальным
   // прыжок в userret
-  pc->context.ra=(uint64)prepare_uret;
+  pc->context.ra=(uint64)prepare_uret(pc);
   pc->state=RUNABBLE;
 }
 
