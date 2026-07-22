@@ -93,5 +93,5 @@ void prepare_uret(void);
 void proc_born(uint64 *prc,uint64 size);
 struct process *init_process(int param);
 void sheduller(void);
-void switch_context(uint64 **oldsp, uint64 **newsp);
+void switch_context(struct context*,struct context* );
 void yield(void);
