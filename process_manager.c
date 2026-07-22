@@ -21,7 +21,7 @@ swtch и то что требует S mode в дальнейшем будет р
 
 struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;
-struct process *current;
+struct process volatile *current;
 
 // функция подготавливающая регистры и таблицу страниц к переходу 
 // в U modeи и осущесвтляет прыжок в uservec, вызывается в proc_born() вместо
@@ -159,7 +159,7 @@ void yield(void){
     struct context dummy_main;
     current=next; // теперь current не NULL
     current->state=RUN;
-    switch_context(&dummy->context,&current->context);
+    switch_context(&dummy_main->context,&current->context);
     return; // больше не вернемся в эту точку
   }
   current=next;
