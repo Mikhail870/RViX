@@ -103,6 +103,7 @@ struct process *current;
     PANIC("kernel stack dont create");
   pc->context.sp=(uint64*)((uint64)kstck+PAGESIZE);
   pc->kstack=(uint64*)kstck;
+  pc->trapframe->sp=PAGESIZE;
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
   if (size>PAGESIZE)
