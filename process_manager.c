@@ -165,7 +165,7 @@ void yield(void){
   }
   current=next;
   prev->state=RUNABBLE;
-  next->state=RUN;
+  current->state=RUN;
   asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
   switch_context(&prev->context,&current->context);// меняем контекст выполнения. При запуске current всегда IDLE процесс
   //switch_context(struct context old,struct context new);
