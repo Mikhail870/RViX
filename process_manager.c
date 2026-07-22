@@ -114,9 +114,7 @@ struct process *current;
   memmove(memphys,binprc,size);
   mappages(pc->pagetable, 0, size, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
   // прыжок в userret
-  current=pc; // структура процесса в глобальную переменную для prepare_uret
   pc->context.ra=(uint64)prepare_uret;
-  current=NULL; // очищаем current
   pc->state=RUNABBLE;
 }
 
@@ -158,8 +156,9 @@ void yield(void){
   struct process *prev=current;
   if (prev==NULL){
     // выполнится если yield() вызвана впервые и сохранит регистры main в dummy
-    struct process *dummy=init_process();
+    struct context dummy_main;
     current=next; // теперь current не NULL
+    current->state=RUN;
     switch_context(&dummy->context,&current->context);
     return; // больше не вернемся в эту точку
   }
