@@ -116,12 +116,20 @@ struct process *current;
   // прыжок в userret
   current=pc; // структура процесса в глобальную переменную для prepare_uret
   pc->context.ra=(uint64)prepare_uret;
+  current=NULL; // очищаем current
   pc->state=RUNABBLE;
 }
 
+
+// формирует структуру проесса заглушку для записи в нее регистров при
+// самом первом вызове yield(). В нее зааписываются регистры main()
+// В дальнейшем proc[0] будет освобождаться для других процессов
 struct process *init_process(int param){
   int prm=param; // зарезеривровано !
-  
+  struct process *idle_prc=&proc[0];
+  idle_prc->pid=-1;
+  idle_prc->state=RUN;
+  return idle_prc;
  }
 
 // Реализация планировщика, выбираем процессов готовый к работе и PID>0
@@ -148,6 +156,13 @@ for(int i=0; i< MAX_PROS; i++){
 void yield(void){
   sheduller(); // Выбираем следующий процесс 
   struct process *prev=current;
+  if (prev==NULL){
+    // выполнится если yield() вызвана впервые и сохранит регистры main в dummy
+    struct process *dummy=init_process();
+    current=next; // теперь current не NULL
+    switch_context(&dummy->context,&current->context);
+    return; // больше не вернемся в эту точку
+  }
   current=next;
   prev->state=RUNABBLE;
   next->state=RUN;
