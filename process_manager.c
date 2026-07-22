@@ -99,10 +99,10 @@ struct process *current;
   pc->trapframe->epc=0;
   //стек ядра
   uint64 *kstck;
-  if ((kstck=(uint64*kalloc()))==0)
+  if ((kstck=(uint64)*kalloc())==0)
     PANIC("kernel stack dont create");
   pc->context.sp=(uint64*)((uint64)kstck+PAGESIZE);
-
+  pc->kstack=(uint64*)kstck;
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
   if (size>PAGESIZE)
