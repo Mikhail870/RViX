@@ -13,8 +13,9 @@ swtch и то что требует S mode в дальнейшем будет р
 // TODO добавить swtch.S и yield()
 
 #include "types.h"
+#include "riscv.h"
 #include "common.h"
-#include "memlayot.h"
+#include "memlayout.h"
 #include "vm.h"
 #include "process_manager.h"
 #include "timer.h"
@@ -24,6 +25,10 @@ swtch и то что требует S mode в дальнейшем будет р
 struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;
 struct process  * volatile current;
+
+
+extern char trampoline[],uservec[],userret[];
+
 
 // функция подготавливающая регистры и таблицу страниц к переходу 
 // в U modeи и осущесвтляет прыжок в uservec, вызывается в proc_born() вместо
@@ -103,16 +108,16 @@ struct process  * volatile current;
   uint64 *kstck;
   if ((kstck=(uint64*)kalloc())==0)
     PANIC("kernel stack dont create");
-  pc->context.sp=(uint64*)((uint64)kstck+PAGESIZE);
+  pc->context.sp=(uint64)((uint64)kstck+PGSIZE);
   pc->kstack=(uint64)kstck;
-  pc->trapframe->sp=PAGESIZE; // стек юзера
+  pc->trapframe->sp=PGSIZE; // стек юзера
   // Запись бинарника по адресу 0x0 в виртуальную память
   uint64 *memphys;
-  if (size>PAGESIZE)
+  if (size>PGSIZE)
     PANIC("size of bin process too large !");
   if ((memphys=(uint64*)kalloc())==0)
     PANIC("dont get phys page for process !");
-  memset(memphys,0,PAGESIZE);
+  memset(memphys,0,PGSIZE);
   memmove(memphys,binprc,size);
   mappages(pc->pagetable, 0, size, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
   // прыжок в userret

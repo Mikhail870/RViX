@@ -19,7 +19,7 @@ kvminithart(); // включаем таблиццу страниц
 
 intr_off(); 
 //born_process(); создание процесса из бинарника
-intr_in();
+intr_on();
 
 set_timer(1000000);
 while(1){
