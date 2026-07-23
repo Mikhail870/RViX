@@ -25,4 +25,6 @@
     PANIC("UNKNOW INTERUPTION");
   }
 }
+uint64 usertrap(void){
 
+}

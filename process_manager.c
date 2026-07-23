@@ -18,6 +18,8 @@ swtch и то что требует S mode в дальнейшем будет р
 #include "vm.h"
 #include "process_manager.h"
 #include "timer.h"
+#include "trap_handle.h"
+
 
 struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;

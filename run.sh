@@ -10,7 +10,8 @@ CFLAGS="-std=gnu11 -O2 -g3 -Wall -Wextra --target=riscv64 -ffreestanding -nostdl
 # Сборка ядра
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
-  PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S
+  PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S \
+  trampoline.S
 
 # Запуск QEMU
 $QEMU -machine virt -bios default -nographic \
