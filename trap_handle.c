@@ -1,8 +1,12 @@
+#include "types.h"
+#include "memlayout.h"
 #include "common.h"
 #include "timer.h" // потом убоать, будет вызываться через IPC
 #include "process_manager.h"
 #include "riscv.h"
 
+extern char trampoline[], uservec[];
+/*
 Менеджер процессов и таймер используется тут, чтобы при обработке прерывания таймера
 прыгнуть в yield() и сменить контекст выполнения. Затем этот хидер будет убран
 и обращение к yield() будет через IPC
@@ -28,10 +32,10 @@
   }
 }
 uint64 usertrap(void){
-  if ((r_sstatus()=SSTATUS_SSP) =! 0)
+  if ((r_sstatus() & SSTATUS_SPP) != 0)
     PANIC("dont from U mode");
   w_stvec((uint64)kerneltrap);
-  p->trapframe->epc=r_sepc();
+  current->trapframe->epc=r_sepc();
 
 
   // сделать обработку прервыний и исключений через case
@@ -48,10 +52,10 @@ uint64 usertrap(void){
   w_stvec(trampoline_uservec);
   // set up trapframe values that uservec will need when
   // the process next traps into the kernel.
-  p->trapframe->kernel_satp = r_satp();         // kernel page table
-  p->trapframe->kernel_sp = p->kstack + PGSIZE; // process's kernel stack
-  p->trapframe->kernel_trap = (uint64)usertrap;
-  p->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
+  current->trapframe->kernel_satp = r_satp();         // kernel page table
+  current->trapframe->kernel_sp = current->kstack + PGSIZE; // process's kernel stack
+  current->trapframe->kernel_trap = (uint64)usertrap;
+  current->trapframe->kernel_hartid = r_tp(); // hartid for cpuid()
   // set up the registers that trampoline.S's sret will use
   // to get to user space.
   // set S Previous Privilege mode to User.
@@ -60,8 +64,8 @@ uint64 usertrap(void){
   x |= SSTATUS_SPIE; // enable interrupts in user mode
   w_sstatus(x);
   // set S Exception Program Counter to the saved user pc.
-  w_sepc(p->trapframe->epc);
-    uint64 satp MAKE_SATP(p->pagetable);
+  w_sepc(current->trapframe->epc);
+  uint64 satp= MAKE_SATP(current->pagetable);
     return satp;
   
 }
