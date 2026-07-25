@@ -2,3 +2,5 @@
 *.map
 *.elf
 *.swp
+*.bin
+*bin.o
