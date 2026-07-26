@@ -25,6 +25,7 @@ extern char trampoline[], uservec[];
   switch (scause) {
     case 5:
     set_timer(1000000);
+    printf("timer from s mode\n");
     yield();// Сделать вызов через IPC
     break;
     default: 
@@ -40,8 +41,12 @@ uint64 usertrap(void){
 
   // сделать обработку прервыний и исключений через case
   if (r_scause()==0x8000000000000005L){
-    //таймер 
+    //таймер
+    printf("from user !\n");
+    set_timer(1000000);
     yield();
+  } else {
+    PANIC("UNKNOW scause");
   }
 
 

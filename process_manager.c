@@ -24,7 +24,7 @@ swtch и то что требует S mode в дальнейшем будет р
 
 struct process proc[MAX_PROS]; // структуры под процессы
 struct process *next;
-struct process  * volatile current;
+struct process  * volatile current = NULL;
 
 
 extern char trampoline[],uservec[],userret[];
@@ -119,7 +119,7 @@ extern char trampoline[],uservec[],userret[];
     PANIC("dont get phys page for process !");
   memset(memphys,0,PGSIZE);
   memmove(memphys,binprc,size);
-  mappages(pc->pagetable, 0, size, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
+  mappages(pc->pagetable, 0, PGSIZE, (uint64)memphys, PTE_U|PTE_X|PTE_R|PTE_W);
   // прыжок в userret
   pc->context.ra=(uint64)prepare_uret;
   pc->state=RUNABBLE;
@@ -163,12 +163,15 @@ void yield(void){
   struct process *prev=current;
   if (prev==NULL){
     // выполнится если yield() вызвана впервые и сохранит регистры main в dummy
-    struct context dummy_main;
+   static struct context dummy_main; // костыль со static
     current=next; // теперь current не NULL
     current->state=RUN;
     switch_context(&dummy_main,&current->context);
     return; // больше не вернемся в эту точку
   }
+  if (prev==next){
+    return;
+} 
   current=next;
   prev->state=RUNABBLE;
   current->state=RUN;
