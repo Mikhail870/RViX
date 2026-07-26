@@ -40,15 +40,30 @@ uint64 usertrap(void){
 
 
   // сделать обработку прервыний и исключений через case
-  if (r_scause()==0x8000000000000005L){
+  // Добавить обработку системных вызовов !
+  uint64 scause=r_scause() & 0xFF; 
+  switch (scause){
+    case 2:
+    PANIC("ILLEGAL INSTRUCTION IN U MODE");
+   // убить процесс
+    break;
+    case 5:
     //таймер
     printf("from user !\n");
     set_timer(1000000);
     yield();
-  } else {
-    PANIC("UNKNOW scause");
+    break;
+    case 8:
+    //syscall();
+    break;
+    case 12:
+    PANIC("PAGEFAULT IN U MODE");
+    // убить процесс
+    break;
+    default:
+    PANIC("UNKNOW INTERUPTION FROM USER MODE");
   }
-
+  
 
     // Логика prepare_return() из xv6 (хардкод)
   intr_off();

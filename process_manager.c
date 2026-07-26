@@ -180,4 +180,5 @@ void yield(void){
   //switch_context(struct context old,struct context new);
 }
 
-
+// TODO если запущен только один процесс, то система падает, думая, что
+// свободных процессов нет, так как единственный процесс всегда RUN
