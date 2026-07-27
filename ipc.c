@@ -12,16 +12,26 @@
 #include "common.h"
 #include "ipc.h"
 
-int send(uint ID_dest,long arg0,long arg1,long arg2,long arg3,long arg7){
-  register long a0 __asm__("a0")=arg0;
-  register long a1 __asm__("a1")=arg1;
-  register long a2 __asm__("a2")=arg2;
-  register long a3 __asm__("a3")=arg3;
-  register long a7 __asm__("a7")=arg7;
-  
+
+IPC_call(){
+struct IPC_reg IPC_data;
+IPC_data.a0=current->a0;
+IPC_data.a1=current->a1;
+IPC_data.a2=current->a2;
+IPC_data.a3=current->a3;
+IPC_data.a4=current->a4;
+IPC_data.a5=current->a5;
+IPC_data.a6=current->a6;
+
+ switch(current->a7){
+    case 0:
+    send();// реализовать
+    break;
+    case 1:
+    recv()// реализовать
+    default:
+    PANIC("UNKNOW IPC CALL");
+  }
+    
+
 }
-
-int recieve(){
-
-}
-

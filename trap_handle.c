@@ -55,6 +55,7 @@ uint64 usertrap(void){
     break;
     case 8:
     //syscall();
+    
     break;
     case 12:
     PANIC("PAGEFAULT IN U MODE");
