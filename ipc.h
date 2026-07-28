@@ -8,3 +8,5 @@ struct IPC_reg {
   uint64 a6;
   uint64 a7;
 };
+
+void IPC_call(void);

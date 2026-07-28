@@ -4,6 +4,8 @@
 #include "timer.h" // потом убоать, будет вызываться через IPC
 #include "process_manager.h"
 #include "riscv.h"
+#include "ipc.h"
+
 
 extern char trampoline[], uservec[];
 /*
@@ -25,7 +27,6 @@ extern char trampoline[], uservec[];
   switch (scause) {
     case 5:
     set_timer(1000000);
-    printf("timer from s mode\n");
     yield();// Сделать вызов через IPC
     break;
     default: 
@@ -49,13 +50,13 @@ uint64 usertrap(void){
     break;
     case 5:
     //таймер
-    printf("from user !\n");
     set_timer(1000000);
     yield();
     break;
     case 8:
-    //syscall();
-    
+    IPC_call();
+    current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
+    // пользователя после ecall во избежании закливания
     break;
     case 12:
     PANIC("PAGEFAULT IN U MODE");
