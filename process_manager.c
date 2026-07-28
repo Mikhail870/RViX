@@ -152,8 +152,9 @@ for(int i=0; i< MAX_PROS; i++){
   }
   
   if(!next)
-    //в случает отсутсвия свободных процессов вызывается swtch.S и IDLE
-    PANIC("NOT RUNABBLE PROCESS");
+    //в случает отсутсвия свободных процессов выполянется поседний процесс
+    next=current;
+    //PANIC("NOT RUNABBLE PROCESS");
 
 }
 
@@ -169,9 +170,6 @@ void yield(void){
     switch_context(&dummy_main,&current->context);
     return; // больше не вернемся в эту точку
   }
-  if (prev==next){
-    return;
-} 
   current=next;
   prev->state=RUNABBLE;
   current->state=RUN;

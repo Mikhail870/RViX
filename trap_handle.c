@@ -50,10 +50,12 @@ uint64 usertrap(void){
     break;
     case 5:
     //таймер
-    set_timer(1000000);
+    set_timer(10000);
+    printf("timer !\n");
     yield();
     break;
     case 8:
+    printf("syscall !\n");
     IPC_call();
     current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
     // пользователя после ecall во избежании закливания
