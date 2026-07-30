@@ -56,3 +56,10 @@ for (int i=0;i<MAX_PROS;i++){
   }
   return NULL;
 }
+// усыпляет процесс
+void sleep(struct process *prc){
+  prc->state=SLEEP;
+}
+void runable(struct process* prc){
+  prc->state=RUNABBLE;
+}

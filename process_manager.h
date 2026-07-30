@@ -1,4 +1,5 @@
 #define MAX_PROS 8
+#define SLEEP 3
 #define RUN 2
 #define RUNABBLE 1
 #define UNUSED 0
@@ -31,7 +32,7 @@ struct context {
 // тут добавлен модуль для работы ipc
 struct ipc {
   uint64 name; // имя процесса, назанчается ОС
-
+  uint64 que[MAX_PROS]; // очеред в ipc из отправителей
 };
 
 // тут добавден trapframe, струткура для сохранения регистров прри переходи U mode <-> S mode
