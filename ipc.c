@@ -27,14 +27,17 @@ IPC_data.a6=current->trapframe->a6;
  switch(current->trapframe->a7){
     case 0:
     //send();// реализовать
-    printf("%d\n",IPC_data.a0);
+    printf("%d\n",IPC_data.a0);// котсыль для отладки
     break;
     case 1:
     //recv()// реализовать
-    printf("call num 1");
+    printf("call num 1"); // котсыль для отладки
+    break;
     default:
     PANIC("UNKNOW IPC CALL");
   }
-    
+}
+
+int send(uint64 arg1,uint64 arg7){
 
 }

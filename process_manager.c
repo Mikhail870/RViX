@@ -173,10 +173,8 @@ void yield(void){
   current=next;
   prev->state=RUNABBLE;
   current->state=RUN;
-  asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
+ // asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
   switch_context(&prev->context,&current->context);// меняем контекст выполнения. При запуске current всегда IDLE процесс
   //switch_context(struct context old,struct context new);
 }
 
-// TODO если запущен только один процесс, то система падает, думая, что
-// свободных процессов нет, так как единственный процесс всегда RUN

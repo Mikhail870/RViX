@@ -24,7 +24,7 @@ proc_born((uint64*)user_prg1_bin,(uint64)user_prg1_bin_len);// создание 
 proc_born((uint64*)user_prg2_bin,(uint64)user_prg2_bin_len);// создание процесса из бинарника
 w_sie(SIE_STIE);
 intr_on();
-set_timer(100000);
+set_timer(10000);
 
 while(1){
   asm volatile("wfi");}
