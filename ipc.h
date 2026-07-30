@@ -14,3 +14,4 @@ void copy_reg(struct process *src,struct process *dst);
 struct process *find_name_process(uint64 name);
 void sleep(struct process *prc);
 void add_que(struct process *prc,uint64 name);
+uint64 extract_que(struct process *prc);

@@ -76,4 +76,18 @@ void add_que(struct process *prc, uint64 name){
     }
   PANIC("ipc que is overflow");
   }
-
+// функция берет первое имя из очереди и возвращает имя ожидающего процесса
+// если учередь пуста возвращет 0
+// найденное имя передается в findness_proc(), если 0, то уводим процесс в SLEEP
+// extract_que(у кого проверяем очередь);
+uint64 extract_que(struct process *prc){
+  uint64 tmp_name;
+  for(int i=0;i<MAX_PROS;i++){
+    if(prc->ipc_data->que[i]!=0){
+      tmp_name=prc->ipc_data->que[i];
+      prc->ipc_data->que[i]=0;
+      return tmp_name;
+    }
+  }
+  return 0;
+}
