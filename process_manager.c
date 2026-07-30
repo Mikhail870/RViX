@@ -103,7 +103,15 @@ extern char trampoline[],uservec[],userret[];
   
   // обнуляем контекст
   memset(&pc->context,0,sizeof(pc->context));
+  // ставим счетчик команд юзера на виртуальный адрес 0x0
   pc->trapframe->epc=0;
+
+  // подготавливаем страницу для блока ipc
+  if((pc->ipc_data=(struct ipc_data*)kalloc())==0)
+    PANIC("page for ipc dont allocation");// освободить процесс
+  // обнуляем очередь que для ipc
+  memset(pc->ipc_data->que,0,sizeof(pc->ipc_data->que));
+
   //стек ядра
   uint64 *kstck;
   if ((kstck=(uint64*)kalloc())==0)
