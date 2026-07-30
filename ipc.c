@@ -10,8 +10,8 @@
 */
 #include "types.h"
 #include "common.h"
-#include "ipc.h"
 #include "process_manager.h" // для видимости current
+#include "ipc.h"
 
 
 void IPC_call(void){
@@ -35,11 +35,24 @@ int send(uint64 arg1,uint64 arg7){
 }
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
-src->a0=current->trapframe->a0;
-src->a1=current->trapframe->a1;
-src->a2=current->trapframe->a2;
-src->a3=current->trapframe->a3;
-src->a4=current->trapframe->a4;
-src->a5=current->trapframe->a5;
-src->a6=current->trapframe->a6;
+src->trapframe->a0=dst->trapframe->a0;
+src->trapframe->a1=dst->trapframe->a1;
+src->trapframe->a2=dst->trapframe->a2;
+src->trapframe->a3=dst->trapframe->a3;
+src->trapframe->a4=dst->trapframe->a4;
+src->trapframe->a5=dst->trapframe->a5;
+src->trapframe->a6=dst->trapframe->a6;
+}
+
+// ищет процесс по имени кому отправляем сообщение
+// возвращает указатель на структуру этого процесса, если процесса нет
+// то возвращает NULL
+struct process* find_name_process(uint64 name){
+struct process *findness_proc;
+for (int i=0;i<MAX_PROS;i++){
+    findness_proc=&proc[i];
+    if (findness_proc->ipc_data->name==name)
+      return findness_proc;
+  }
+  return NULL;
 }

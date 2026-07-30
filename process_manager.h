@@ -28,7 +28,11 @@ struct context {
   uint64 s11;
 };
 
+// тут добавлен модуль для работы ipc
+struct ipc {
+  uint64 name; // имя процесса, назанчается ОС
 
+};
 
 // тут добавден trapframe, струткура для сохранения регистров прри переходи U mode <-> S mode
 // Структура trapframe взята из xv6
@@ -80,6 +84,7 @@ struct trapframe {
   //uint64 kstack[PAGE/8]; // ядерный стек процесса
   uint64 stack[PAGE/8] __attribute__((aligned(16))); // пользовательский стек процесса
 
+  struct ipc *ipc_data; // блок ipc 
   struct trapframe *trapframe;
   struct context context;
   pagetable_t pagetable; // таблица странц
