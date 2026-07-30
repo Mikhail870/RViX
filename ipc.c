@@ -66,6 +66,14 @@ void runable(struct process* prc){
 }
 // функция добавляет в очередь процесса получателя процесс отправитель
 // add_que(кому ставим в очеред, кого ставим в очеред);
+// если очередь переполнена, вызываем панику, в идеале вохвращать код ошибки
 void add_que(struct process *prc, uint64 name){
+  for(int i=0;i<MAX_PROS;i++){
+    if (prc->ipc_data->que[i]==0){
+      prc->ipc_data->que[i]=name;
+      return;
+      }
+    }
+  PANIC("ipc que is overflow");
+  }
 
-}
