@@ -11,6 +11,7 @@ struct IPC_reg {
 
 void IPC_call(void);
 void send(uint64 name, struct process prc);
+void recv(void);
 void copy_reg(struct process *src,struct process *dst);
 struct process *find_name_process(uint64 name);
 void sleep(struct process *prc);

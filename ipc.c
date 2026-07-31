@@ -19,11 +19,10 @@ struct IPC_reg IPC_data;
 
  switch(current->trapframe->a7){
     case 0:
-    //send();// реализовать
-    printf("%d\n",IPC_data.a0);// котсыль для отладки
+    //send();
     break;
     case 1:
-    //recv()// реализовать
+    //recv();
     printf("call num 1"); // котсыль для отладки
     break;
     default:
@@ -42,9 +41,22 @@ void send(uint64 name, struct process prc){
     sleep(current);
     return;
   }
-
-
 }
+
+void recv(void){
+  uint64 name;
+  struct process *src;
+  if ((name=extract_que(current))!=0){
+    src=find_name_process(name);
+    copy_reg(src,current);
+    runable(src);
+    return;
+  } else {
+    sleep(current);
+    return;
+  }
+}
+
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
 dst->trapframe->a0=src->trapframe->a0;
