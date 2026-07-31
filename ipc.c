@@ -19,10 +19,10 @@ struct IPC_reg IPC_data;
 
  switch(current->trapframe->a7){
     case 0:
-    //send();
+    send();
     break;
     case 1:
-    //recv();
+    recv();
     printf("call num 1"); // котсыль для отладки
     break;
     default:
@@ -30,7 +30,8 @@ struct IPC_reg IPC_data;
   }
 }
 
-void send(uint64 name, struct process prc){
+void send(void){
+  uint64 name=get_dst_name();
   struct process *dst=find_name_process(name);
   if (dst->state==SLEEP){
     copy_reg(current,dst);
@@ -115,4 +116,12 @@ uint64 extract_que(struct process *prc){
   }
   return 0;
 }
+
+// функция возвращает имя кому предназначено сообщение 
+// имя читает из регистра a6
+uint64 get_dst_name(void){
+  uint64 name_dst=current->trapframe->a6;
+  return name_dst;
+}
+
 
