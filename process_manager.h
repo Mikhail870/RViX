@@ -96,7 +96,7 @@ extern struct process proc[MAX_PROS]; // структуры под процес�
 extern struct process *next;
 extern struct process * volatile current;
 void prepare_uret(void);
-void proc_born(uint64 *prc,uint64 size);
+void proc_born(uint64 *prc,uint64 size,uint64 name);
 struct process *init_process(int param);
 void sheduller(void);
 void switch_context(struct context*,struct context* );

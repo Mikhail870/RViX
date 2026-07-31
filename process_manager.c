@@ -63,7 +63,7 @@ extern char trampoline[],uservec[],userret[];
 // принимает адрес кода и создает из него процесс. 
 // если успешно, то вернет 1
 // иначе вернет код ошибки 0
- void proc_born(uint64 *binprc,uint64 size){
+ void proc_born(uint64 *binprc,uint64 size, uint64 name){
 
   struct process *pc = NULL;
   int i;
@@ -111,6 +111,7 @@ extern char trampoline[],uservec[],userret[];
     PANIC("page for ipc dont allocation");// освободить процесс
   // обнуляем очередь que для ipc
   memset(pc->ipc_data->que,0,sizeof(pc->ipc_data->que));
+  pc->ipc_data->name=name;
 
   //стек ядра
   uint64 *kstck;
