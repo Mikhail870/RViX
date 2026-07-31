@@ -30,6 +30,7 @@ extern char trampoline[], uservec[];
     yield();// Сделать вызов через IPC
     break;
     default: 
+    printf("%d\n", scause);
     PANIC("UNKNOW INTERUPTION");
   }
 }

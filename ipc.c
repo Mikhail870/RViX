@@ -33,6 +33,9 @@ struct IPC_reg IPC_data;
 void send(void){
   uint64 name=get_dst_name();
   struct process *dst=find_name_process(name);
+  if (dst==NULL){
+    PANIC("name dst not found");
+  }
   if (dst->state==SLEEP){
     copy_reg(current,dst);
     runable(dst);
@@ -49,6 +52,9 @@ void recv(void){
   struct process *src;
   if ((name=extract_que(current))!=0){
     src=find_name_process(name);
+    if (src==NULL){
+      PANIC("name source not found");
+    }
     copy_reg(src,current);
     runable(src);
     return;
