@@ -1,4 +1,6 @@
 #include "lib.h"
 void main(void){
-recv();
+struct msg mess;
+mess=recv();
+printk(mess.a2);
 }
