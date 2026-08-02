@@ -25,6 +25,9 @@ struct IPC_reg IPC_data;
     recv();
     printf("call num 1"); // котсыль для отладки
     break;
+    case 3:
+    printf("%d",current->trapframe->a0);
+    break;
     default:
     PANIC("UNKNOW IPC CALL");
   }

@@ -53,3 +53,13 @@ struct msg recv(){
 
   return ipc_msg;
 }
+
+void printk(long x){
+  register long a0 __asm__("a0")=x;
+  register long a7 __asm__("a7")=3;
+
+  __asm__ __volatile__ ("ecall"
+  :
+  :"r"(a0),"r"(a7)
+  : "memory");
+}

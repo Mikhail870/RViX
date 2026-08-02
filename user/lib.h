@@ -14,3 +14,4 @@ int send(long arg0,long arg1,long arg2,
 
 
 struct msg recv(void);
+void printk(long x);
