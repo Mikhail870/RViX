@@ -1,5 +1,5 @@
 #include "lib.h"
 void main(void){
-ipc_call(10,0,0,0,0,0,2,0);
+send(0,0,0,0,0,0,3,1);
 unsigned long long x;
 }
