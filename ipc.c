@@ -42,6 +42,7 @@ void send(void){
   if (dst->state==SLEEP){
     copy_reg(current,dst);
     runable(dst);
+    yield();
     return;
   } else {
     add_que(dst,name);
