@@ -14,13 +14,15 @@
 #include "ipc.h"
 
 
-void IPC_call(void){
+struct IPC_reg IPC_call(void){ // возвращет структуру для сохранения a0-a7
 struct IPC_reg IPC_data;
 
  switch(current->trapframe->a7){
     case 0:
     send();
     printf("call num 0\n"); // котсыль для отладки
+    struct IPC_reg sendret = {0};
+    return sendret;
     break;
     case 1:
     recv();
@@ -44,15 +46,13 @@ void send(void){
     copy_reg(current,dst);
     runable(dst);
     yield();
-    return;
   } else {
     add_que(dst,name);
     sleep(current);
-    return;
   }
 }
 
-void recv(void){
+struct IPC_reg recv(void){
   uint64 name;
   struct process *src;
   if ((name=extract_que(current))!=0){
@@ -62,12 +62,25 @@ void recv(void){
     }
     copy_reg(src,current);
     runable(src);
-    return;
+    
+    return retgegisters(src);
   } else {
     sleep(current);
     yield();
     return;
   }
+}
+
+// функция копирует регистры a0-a7 и возвращает их
+struct IPC_reg retgegisters(struct *prc){
+  struct IPC_reg retreg;
+  retreg.a0=prc->trapframe->a0;
+  retreg.a1=prc->trapframe->a1;
+  retreg.a2=prc->trapframe->a2;
+  retreg.a3=prc->trapframe->a3;
+  retreg.a4=prc->trapframe->a4;
+  retreg.a5=prc->trapframe->a5;
+  return retreg;
 }
 
 // копирует регистры a0-a7 из src в dst
