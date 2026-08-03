@@ -31,12 +31,12 @@ int send(long arg0,long arg1,long arg2,
 struct msg recv(){
   struct msg ipc_msg;
 
-  register long a0 __asm__("a0");
-  register long a1 __asm__("a1");
-  register long a2 __asm__("a2");
-  register long a3 __asm__("a3");
-  register long a4 __asm__("a4");
-  register long a5 __asm__("a5");
+  register long a0 __asm__("a0")=0;
+  register long a1 __asm__("a1")=0;
+  register long a2 __asm__("a2")=0;
+  register long a3 __asm__("a3")=0;
+  register long a4 __asm__("a4")=0;
+  register long a5 __asm__("a5")=0;
   register long a7 __asm__("a7")=1; // код recv()
 
   __asm__ __volatile__ ("ecall"

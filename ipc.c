@@ -20,10 +20,11 @@ struct IPC_reg IPC_data;
  switch(current->trapframe->a7){
     case 0:
     send();
+    printf("call num 0\n"); // котсыль для отладки
     break;
     case 1:
     recv();
-    printf("call num 1"); // котсыль для отладки
+    printf("call num 1\n"); // котсыль для отладки
     break;
     case 3:
     printf("%d\n",current->trapframe->a0);
