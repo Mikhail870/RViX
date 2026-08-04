@@ -45,12 +45,18 @@ struct IPC_reg send(void){
     PANIC("name dst not found");
   }
   if (dst->state==SLEEP){
+    printf("is sleep: OK\n");
     copy_reg(current,dst);
+    printf("is copy_reg: OK\n");
     runable(dst);
-    yield();
+    printf("is runable dst: OK\n");
+    struct IPC_reg empty={0};
+    return empty;
   } else {
     add_que(dst,name);
     sleep(current);
+    struct IPC_reg empty={0};
+    return empty;
   }
 }
 
@@ -67,6 +73,7 @@ struct IPC_reg recv(void){
     return retregisters(src);
   } else {
     sleep(current);
+    current->ipc_data->is_wait_msg=1;
     printf("name of recv process is %d\n",current->ipc_data->name);
     printf("state of recv process is %d\n",current->state);
     printf("state sleep is %d\n",SLEEP);

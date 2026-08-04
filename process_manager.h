@@ -33,6 +33,8 @@ struct context {
 struct ipc {
   uint64 name; // имя процесса, назанчается ОС
   uint64 que[MAX_PROS]; // очеред в ipc из имен отправителей
+  uint64 is_wait_msg; // флаг ожидания собщения recv(), не дающий менять статус в yield() 
+
 };
 
 // тут добавден trapframe, струткура для сохранения регистров прри переходи U mode <-> S mode

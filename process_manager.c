@@ -179,9 +179,15 @@ void yield(void){
     switch_context(&dummy_main,&current->context);
     return; // больше не вернемся в эту точку
   }
+  if (current->ipc_data->is_wait_msg==1){
+  current=next;
+  prev->state=SLEEP;
+  current->state=RUN;
+  } else {
   current=next;
   prev->state=RUNABBLE;
   current->state=RUN;
+  }
  // asm volatile("csrrs zero, sstatus, %0"::"r"(1<<1));
   switch_context(&prev->context,&current->context);// меняем контекст выполнения. При запуске current всегда IDLE процесс
   //switch_context(struct context old,struct context new);
