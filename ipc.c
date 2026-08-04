@@ -25,7 +25,7 @@ struct IPC_reg IPC_data;
     return sendret;
     break;
     case 1:
-    recv();
+    return recv();
     printf("call num 1\n"); // котсыль для отладки
     break;
     case 3:
@@ -36,9 +36,11 @@ struct IPC_reg IPC_data;
   }
 }
 
-void send(void){
+struct IPC_reg send(void){
   uint64 name=get_dst_name();
   struct process *dst=find_name_process(name);
+  printf("name process find in send %d\n",name);
+  printf("state process find in send %d\n",dst->state);
   if (dst==NULL){
     PANIC("name dst not found");
   }
@@ -60,19 +62,20 @@ struct IPC_reg recv(void){
     if (src==NULL){
       PANIC("name source not found");
     }
-    copy_reg(src,current);
+   // copy_reg(src,current);
     runable(src);
-    
-    return retgegisters(src);
+    return retregisters(src);
   } else {
     sleep(current);
+    printf("name of recv process is %d\n",current->ipc_data->name);
+    printf("state of recv process is %d\n",current->state);
+    printf("state sleep is %d\n",SLEEP);
     yield();
-    return;
   }
 }
 
 // функция копирует регистры a0-a7 и возвращает их
-struct IPC_reg retgegisters(struct *prc){
+struct IPC_reg retregisters(struct process *prc){
   struct IPC_reg retreg;
   retreg.a0=prc->trapframe->a0;
   retreg.a1=prc->trapframe->a1;

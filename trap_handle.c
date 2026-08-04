@@ -59,7 +59,9 @@ uint64 usertrap(void){
     printf("syscall !\n");
     current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
     intr_on();
-    IPC_call();
+    struct IPC_reg ret; // возвращаем структуру
+    ret=IPC_call();
+    current->trapframe->a2=ret.a2;
     // пользователя после ecall во избежании закливания
     break;
     case 12:

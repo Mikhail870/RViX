@@ -12,7 +12,7 @@ struct IPC_reg {
 struct IPC_reg IPC_call(void);
 struct IPC_reg send(void);
 struct IPC_reg recv(void);
-struct IPC_reg retregisters(struct *prc);
+struct IPC_reg retregisters(struct process *prc);
 void copy_reg(struct process *src,struct process *dst);
 struct process *find_name_process(uint64 name);
 void sleep(struct process *prc);
