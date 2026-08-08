@@ -27,6 +27,15 @@ $CC $CFLAGS $USER_CFLAGS \
 $OBJCOPY -O binary user/prg2.elf user/prg2.bin
 xxd -i user/prg2.bin >user/prg2_data.h
 
+# Сборка приложения prg3
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser \
+  -o user/prg3.elf \
+  user/prg3.c user/lib.c user/start.c
+$OBJCOPY -O binary user/prg3.elf user/prg3.bin
+xxd -i user/prg3.bin >user/prg3_data.h
+
 # Сборка ядра
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
