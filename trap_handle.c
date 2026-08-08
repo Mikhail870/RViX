@@ -23,11 +23,15 @@ extern char trampoline[], uservec[];
   asm volatile ("csrr %0, scause ":"=r"(scause));
   scause= scause & 0xFF;
 
-
+  uint64 sepc = r_sepc();
+  uint64 sstatus = r_sstatus();
   switch (scause) {
     case 5:
+    printf("kernel timer\n");
     set_timer(1000000);
     yield();// Сделать вызов через IPC
+    w_sepc(sepc);
+    w_sstatus(sstatus);
     break;
     default: 
     printf("%d\n", scause);
@@ -44,6 +48,7 @@ uint64 usertrap(void){
   // сделать обработку прервыний и исключений через case
   // Добавить обработку системных вызовов !
   uint64 scause=r_scause() & 0xFF; 
+  printf("scause= %d\n",scause);
   switch (scause){
     case 2:
     PANIC("ILLEGAL INSTRUCTION IN U MODE");
@@ -53,10 +58,11 @@ uint64 usertrap(void){
     //таймер
     set_timer(10000);
     printf("timer !\n");
+    printf("%d PID\n",current->pid);
     yield();
     break;
     case 8:
-    printf("syscall !\n");
+    printf("syscall from process name %d !\n", current->ipc_data->name);
     current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
     intr_on();
     struct IPC_reg ret; // возвращаем структуру
@@ -72,7 +78,9 @@ uint64 usertrap(void){
     PANIC("UNKNOW INTERUPTION FROM USER MODE");
   }
   
-
+  if(current->state==SLEEP){
+    yield();
+  }
     // Логика prepare_return() из xv6 (хардкод)
   intr_off();
   // send syscalls, interrupts, and exceptions to uservec in trampoline.S
@@ -88,13 +96,12 @@ uint64 usertrap(void){
   // to get to user space.
   // set S Previous Privilege mode to User.
   unsigned long x = r_sstatus();
-  x &= ~SSTATUS_SPP; // clear SPP to 0 for user mode
+  x &= ~SSTATUS_SPP; // clear spp to 0 for user mode
   x |= SSTATUS_SPIE; // enable interrupts in user mode
   w_sstatus(x);
-  // set S Exception Program Counter to the saved user pc.
+  // set s exception program counter to the saved user pc.
   w_sepc(current->trapframe->epc);
   uint64 satp= MAKE_SATP(current->pagetable);
   set_timer(1000000);
     return satp;
-  
 }

@@ -47,6 +47,7 @@ struct IPC_reg send(void){
   if (dst->state==SLEEP){
     printf("is sleep: OK\n");
     copy_reg(current,dst);
+    dst->ipc_data->is_wait_msg=0;
     printf("is copy_reg: OK\n");
     runable(dst);
     printf("is runable dst: OK\n");
@@ -54,6 +55,7 @@ struct IPC_reg send(void){
     return empty;
   } else {
     add_que(dst,name);
+    current->ipc_data->is_wait_msg=1;
     sleep(current);
     struct IPC_reg empty={0};
     return empty;
@@ -70,6 +72,7 @@ struct IPC_reg recv(void){
     }
    // copy_reg(src,current);
     runable(src);
+    src->ipc_data->is_wait_msg=0;
     return retregisters(src);
   } else {
     sleep(current);
@@ -78,6 +81,8 @@ struct IPC_reg recv(void){
     printf("state of recv process is %d\n",current->state);
     printf("state sleep is %d\n",SLEEP);
     yield();
+    struct IPC_reg empty={0};
+    return empty;
   }
 }
 
@@ -101,7 +106,7 @@ dst->trapframe->a2=src->trapframe->a2;
 dst->trapframe->a3=src->trapframe->a3;
 dst->trapframe->a4=src->trapframe->a4;
 dst->trapframe->a5=src->trapframe->a5;
-dst->trapframe->a6=src->trapframe->a6;
+//dst->trapframe->a6=src->trapframe->a6;
 }
 
 // ищет процесс по имени кому отправляем сообщение
