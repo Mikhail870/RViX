@@ -10,5 +10,5 @@ printk(mess.a3);
 printk(mess.a4);
 printk(mess.a5);
 printk(mess.a6);
-printk(1233445);
+send(777,0,0,0,0,0,1);
 }
