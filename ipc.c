@@ -80,7 +80,6 @@ struct IPC_reg recv(void){
     printf("name of recv process is %d\n",current->ipc_data->name);
     printf("state of recv process is %d\n",current->state);
     printf("state sleep is %d\n",SLEEP);
-    yield();
     struct IPC_reg empty={0};
     return empty;
   }
