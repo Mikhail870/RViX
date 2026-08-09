@@ -84,9 +84,10 @@ struct IPC_reg recv(void){
     if (src==NULL){
       PANIC("name source not found");
     }
-   // copy_reg(src,current);
+    copy_reg(src,current);
     runable(src);
     src->ipc_data->is_wait_msg=0;
+    printf("status send is %d\n",src->state);
     return retregisters(src);
   } else {
     sleep(current);

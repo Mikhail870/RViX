@@ -19,6 +19,8 @@ extern char trampoline[], uservec[];
 // При возникновении прерывания регистры сохранятся и мы прыгнем в kerneltrap
 // Тут будет решатся что за прерывание и что с ним делать
    void kerneltrap(void){
+  if (current==NULL)
+    PANIC("current is NULL from kerneltrap");
   uint64 scause=0; // номер причины прерывания
   asm volatile ("csrr %0, scause ":"=r"(scause));
   scause= scause & 0xFF;
@@ -58,7 +60,7 @@ uint64 usertrap(void){
     //таймер
     set_timer(10000);
     printf("timer !\n");
-    printf("%d PID\n",current->pid);
+    printf("%d name\n",current->ipc_data->name);
     yield();
     break;
     case 8:
