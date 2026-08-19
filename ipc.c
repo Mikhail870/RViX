@@ -25,7 +25,7 @@ struct IPC_reg IPC_data;
     return sendret;
     break;
     case 1:
-    return recv();
+    recv();
     printf("call num 1\n"); // котсыль для отладки
     break;
     case 3:
@@ -76,7 +76,7 @@ struct IPC_reg send(void){
 // находим структуру отправителя find_name_process()
 // проверяем существет ли процесс отправитель
 // переводим отправителя в RUNABBLE выходим из трапа
-struct IPC_reg recv(void){
+void recv(void){
   uint64 name;
   struct process *src;
   if ((name=extract_que(current))!=0){
@@ -88,15 +88,12 @@ struct IPC_reg recv(void){
     runable(src);
     src->ipc_data->is_wait_msg=0;
     printf("status send is %d\n",src->state);
-    return retregisters(src);
   } else {
     sleep(current);
     current->ipc_data->is_wait_msg=1;
     printf("name of recv process is %d\n",current->ipc_data->name);
     printf("state of recv process is %d\n",current->state);
     printf("state sleep is %d\n",SLEEP);
-    struct IPC_reg empty={0};
-    return empty;
   }
 }
 
