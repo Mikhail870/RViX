@@ -21,8 +21,6 @@ struct IPC_reg IPC_data;
     case 0:
     send();
     printf("call num 0\n"); // котсыль для отладки
-    struct IPC_reg sendret = {0};
-    return sendret;
     break;
     case 1:
     recv();
@@ -44,7 +42,7 @@ struct IPC_reg IPC_data;
 // если получаетль не SLEEP, то добавляем отправителя в очередь получателя add_que()
 // переводим отправителя в состояние SLEEP и указываем флаг is_wait_msg=1, чтобы планировщик не менял статус
 // выходим в трап 
-struct IPC_reg send(void){
+void send(void){
   uint64 name=get_dst_name();
   struct process *dst=find_name_process(name);
   printf("name process find in send %d\n",name);
@@ -59,14 +57,10 @@ struct IPC_reg send(void){
     printf("is copy_reg: OK\n");
     runable(dst);
     printf("is runable dst: OK\n");
-    struct IPC_reg empty={0};
-    return empty;
   } else {
     add_que(dst,name);
     current->ipc_data->is_wait_msg=1;
     sleep(current);
-    struct IPC_reg empty={0};
-    return empty;
   }
 }
 // функция не принимает аргументов, возвращает структуру сообщения
