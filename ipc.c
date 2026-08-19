@@ -97,17 +97,7 @@ void recv(void){
   }
 }
 
-// функция копирует регистры a0-a7 и возвращает их
-struct IPC_reg retregisters(struct process *prc){
-  struct IPC_reg retreg;
-  retreg.a0=prc->trapframe->a0;
-  retreg.a1=prc->trapframe->a1;
-  retreg.a2=prc->trapframe->a2;
-  retreg.a3=prc->trapframe->a3;
-  retreg.a4=prc->trapframe->a4;
-  retreg.a5=prc->trapframe->a5;
-  return retreg;
-}
+
 
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
