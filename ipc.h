@@ -9,7 +9,7 @@ struct IPC_reg {
   uint64 a7;
 };
 
-struct IPC_reg IPC_call(void);
+void IPC_call(void);
 void send(void);
 void recv(void);
 void copy_reg(struct process *src,struct process *dst);

@@ -68,9 +68,8 @@ uint64 usertrap(void){
     current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
     intr_on();
     struct IPC_reg ret; // возвращаем структуру
-    ret=IPC_call();
-    current->trapframe->a2=ret.a2;
     // пользователя после ecall во избежании закливания
+    IPC_call();
     break;
     case 12:
     PANIC("PAGEFAULT IN U MODE");

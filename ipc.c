@@ -14,8 +14,7 @@
 #include "ipc.h"
 
 
-struct IPC_reg IPC_call(void){ // возвращет структуру для сохранения a0-a7
-struct IPC_reg IPC_data;
+void IPC_call(void){ // возвращет структуру для сохранения a0-a7
 
  switch(current->trapframe->a7){
     case 0:
