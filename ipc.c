@@ -57,7 +57,7 @@ void send(void){
     runable(dst);
     printf("is runable dst: OK\n");
   } else {
-    add_que(dst,name);
+    add_que(dst,get_current_name());
     current->ipc_data->is_wait_msg=1;
     sleep(current);
   }
@@ -156,6 +156,13 @@ uint64 extract_que(struct process *prc){
 uint64 get_dst_name(void){
   uint64 name_dst=current->trapframe->a6;
   return name_dst;
+}
+
+// функция возвращает имя текущего процесса 
+// имя читает из current->ipc_data->name
+uint64 get_current_name(void){
+  uint64 name_current=current->ipc_data->name;
+  return name_current;
 }
 
 

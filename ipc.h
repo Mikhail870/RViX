@@ -19,3 +19,4 @@ void runable(struct process* prc);
 void add_que(struct process *prc,uint64 name);
 uint64 extract_que(struct process *prc);
 uint64 get_dst_name(void);
+uint64 get_current_name(void);
