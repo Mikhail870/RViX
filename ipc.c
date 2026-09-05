@@ -57,7 +57,7 @@ void send(void){
     runable(dst);
     printf("is runable dst: OK\n");
   } else {
-    add_que(dst,get_current_name());
+    add_que(dst,current->ipc_data->name);
     current->ipc_data->is_wait_msg=1;
     sleep(current);
   }
