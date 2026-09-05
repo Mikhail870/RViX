@@ -1,5 +1,4 @@
 #include "lib.h"
-#include "types.h"
 // функция делает ipc вызов, отправляющий
 // a0-a5 полезное сообщение
 // a6 - имя получаетеля
@@ -65,9 +64,18 @@ void printk(long x){
   : "memory");
 }
 
-
+// системные вызовы
 ssize_t write(int fd, const void *buf, size_t count){
   // проверка дескриптора
   // вызов send для VFS->terminal
-  //
+  // в ядре маппинг ipc страницы отправителя на ipc страницу получаетеля
+  // получение серврером (получателем)
+  if (fd != 2 && fd != 1){
+    return -1;  
+  }
+  // придумать аадресацию к VFS
+  //send(fd,buf,count,0,0,0,VFS);
+  return count;
 }
+
+
