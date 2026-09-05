@@ -7,7 +7,12 @@ struct msg ipc_send;
 void main(void){
   while (1) {
   ipc_send=recv();
+   // проверка номера вызова
+  switch (ipc_send.a3){
+    case 1: 
+    //проврека дескриптора
   switch (ipc_send.a0) {
+    //write
     case 1:
   // перенаправление в консоль
   break;
@@ -17,6 +22,9 @@ void main(void){
   case 3:
   // работа с файлом (перенаправление к фс)
   break;
-  }
+        }
+  break;
+  case 2:
+  // open
   }
 }
