@@ -12,7 +12,7 @@ OBJCOPY=llvm-objcopy
 # Сборка приложения prg1
 $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
-  -Iuser \
+  -Iuser -I. \
   -o user/prg1.elf \
   user/prg1.c user/lib.c user/start.c
 $OBJCOPY -O binary user/prg1.elf user/prg1.bin
@@ -21,7 +21,7 @@ xxd -i user/prg1.bin >user/prg1_data.h
 # Сборка приложения prg2
 $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
-  -Iuser \
+  -Iuser -I. \
   -o user/prg2.elf \
   user/prg2.c user/lib.c user/start.c
 $OBJCOPY -O binary user/prg2.elf user/prg2.bin
@@ -30,7 +30,7 @@ xxd -i user/prg2.bin >user/prg2_data.h
 # Сборка приложения prg3
 $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
-  -Iuser \
+  -Iuser -I. \
   -o user/prg3.elf \
   user/prg3.c user/lib.c user/start.c
 $OBJCOPY -O binary user/prg3.elf user/prg3.bin

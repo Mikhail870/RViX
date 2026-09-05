@@ -1,4 +1,5 @@
 #include "lib.h"
+#include "types.h"
 // функция делает ipc вызов, отправляющий
 // a0-a5 полезное сообщение
 // a6 - имя получаетеля
@@ -62,4 +63,11 @@ void printk(long x){
   :
   :"r"(a0),"r"(a7)
   : "memory");
+}
+
+
+ssize_t write(int fd, const void *buf, size_t count){
+  // проверка дескриптора
+  // вызов send для VFS->terminal
+  //
 }
