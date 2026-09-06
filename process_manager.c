@@ -108,7 +108,7 @@ extern char trampoline[],uservec[],userret[];
   // маппинг буфера IPC на виртуальную память
   if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
                PTE_R | PTE_W | PTE_U) < 0) {
-    uvmunmap(npagetable, TRAMPOLINE, 1, 0);
+    uvmunmap(npagetable, IPC, 1, 0);
     uvmfree(npagetable, 0);
   }
   // если это севрер ввода вывода, то мапим регистры юарт
@@ -117,11 +117,11 @@ extern char trampoline[],uservec[],userret[];
   if((pc->io_page=(uint64*)kalloc())==0)
     PANIC("page for trapframe dont allocation");
   
-  if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
+  if (mappages(npagetable, VUART, PGSIZE, (uint64)(pc->io_page),
                PTE_R | PTE_W | PTE_U) < 0) {
-    uvmunmap(npagetable, TRAMPOLINE, 1, 0);
+    uvmunmap(npagetable, VUART, 1, 0);
     uvmfree(npagetable, 0);
-  }
+  }}
   pc->pagetable=npagetable;
 
   // выделяем физическую страницу и мапим на 
