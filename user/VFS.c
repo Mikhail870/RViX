@@ -15,6 +15,7 @@ void main(void){
           //write
           case 1:
             // перенаправление в консоль
+            printk(12345678);
             break;
           case 2:
             // поток ошибок
