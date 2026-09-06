@@ -85,7 +85,7 @@ extern char trampoline[],uservec[],userret[];
   }
 // выделяем страницу под ipc
   if((pc->ipc_page=(uint64*)kalloc())==0){
-    PANIC("page for trapframe dont allocation");
+    PANIC("page for ipc dont allocation");
     // тут добавиь освобождние процессами
   }
  
@@ -115,7 +115,7 @@ extern char trampoline[],uservec[],userret[];
   if (is_io_server==1){
 
   if((pc->io_page=(uint64*)kalloc())==0)
-    PANIC("page for trapframe dont allocation");
+    PANIC("page for uart dont allocation");
   
   if (mappages(npagetable, VUART, PGSIZE, (uint64)(pc->io_page),
                PTE_R | PTE_W | PTE_U) < 0) {
