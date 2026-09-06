@@ -88,6 +88,7 @@ struct trapframe {
   uint64 stack[PAGE/8] __attribute__((aligned(16))); // пользовательский стек процесса
 
   struct ipc *ipc_data; // блок ipc 
+  uint64 *ipc_page;
   struct trapframe *trapframe;
   struct context context;
   pagetable_t pagetable; // таблица странц
