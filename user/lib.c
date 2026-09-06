@@ -80,4 +80,15 @@ ssize_t write(int fd, const void *buf, size_t count){
   return count;
 }
 
+// функции Си
 
+void putchar(char ch){
+  // придумать
+}
+
+void puts(const char *str){
+  uint64* strmem=(uint64*)IPC_BUFF;
+  while(*str)
+    *strmem++=*str++;
+    
+}
