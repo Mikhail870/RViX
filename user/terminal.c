@@ -8,9 +8,9 @@
 struct msg ipc_send;
 void main(){
   volatile char *uart=(char*)UART;
-  *uart='c';
   while(1){
     ipc_send=recv();
+    *uart=ipc_send.a1;
 
   }
   
