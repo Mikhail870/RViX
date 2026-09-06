@@ -77,8 +77,14 @@ extern char trampoline[],uservec[],userret[];
   if(!pc)
     PANIC("NOT FREE SLOTS FOR PROCESS");
   pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
+
 // выделяем страницу под trapframe
   if((pc->trapframe=(struct trapframe*)kalloc())==0){
+    PANIC("page for trapframe dont allocation");
+    // тут добавиь освобождние процессами
+  }
+// выделяем страницу под ipc
+  if((pc->ipc_page=(uint64*)kalloc())==0){
     PANIC("page for trapframe dont allocation");
     // тут добавиь освобождние процессами
   }
@@ -100,7 +106,11 @@ extern char trampoline[],uservec[],userret[];
     uvmfree(npagetable, 0);
   }
   pc->pagetable=npagetable;
-  
+
+  // выделяем физическую страницу и мапим на 
+
+
+
   // обнуляем контекст
   memset(&pc->context,0,sizeof(pc->context));
   // ставим счетчик команд юзера на виртуальный адрес 0x0
