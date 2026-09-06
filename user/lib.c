@@ -87,8 +87,9 @@ void putchar(char ch){
 }
 
 void puts(const char *str){
-  uint64* strmem=(uint64*)IPC_BUFF;
+  char* strmem=(char*)IPC_BUFF;
   while(*str)
     *strmem++=*str++;
-    
+  // вызов write с дескриптором 1 и вывод в консоль
+  write(1,(const void*)IPC_BUFF,PGSIZE); 
 }

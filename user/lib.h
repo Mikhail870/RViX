@@ -1,6 +1,7 @@
 #include "types.h"
 
 #define IPC_BUFF 0x3fffffd000
+#define PGSIZE 4096
 
 struct msg {
     long a0;
