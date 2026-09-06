@@ -18,5 +18,4 @@ void main(){
     *uart=ipc_send.a1;
     }
   }
-  
 }
