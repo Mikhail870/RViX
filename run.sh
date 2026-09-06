@@ -45,6 +45,15 @@ $CC $CFLAGS $USER_CFLAGS \
 $OBJCOPY -O binary user/VFS.elf user/VFS.bin
 xxd -i user/VFS.bin >user/VFS_data.h
 
+# Сборка сервреа терминала
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser -I. \
+  -o user/terminal.elf \
+  user/terminal.c user/lib.c user/start.c
+$OBJCOPY -O binary user/terminal.elf user/terminal.bin
+xxd -i user/terminal.bin >user/terminal_data.h
+
 # Сборка ядра
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
