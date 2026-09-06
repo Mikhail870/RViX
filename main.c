@@ -14,7 +14,7 @@
 #include "user/prg2_data.h"
 #include "user/prg3_data.h"
 #include "user/VFS_data.h"
-#include "user/terminal.h"
+#include "user/terminal_data.h"
 
 void  main() {
 printf("RViX booted !\n");
