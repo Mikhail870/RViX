@@ -4,3 +4,8 @@
 *.swp
 *.bin
 *bin.o
+user/VFS_data.h
+user/prg1_data.h
+user/prg2_data.h
+user/prg3_data.h
+
