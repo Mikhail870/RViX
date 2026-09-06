@@ -90,6 +90,7 @@ struct trapframe {
   struct ipc *ipc_data; // блок ipc 
   uint64 *ipc_page;
   struct trapframe *trapframe;
+  uint64 *io_page; // выделяется старница только серверу
   struct context context;
   pagetable_t pagetable; // таблица странц
   uint64 kstack;

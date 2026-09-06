@@ -114,6 +114,8 @@ extern char trampoline[],uservec[],userret[];
   // если это севрер ввода вывода, то мапим регистры юарт
   if (is_io_server==1){
 
+  if((pc->io_page=(uint64*)kalloc())==0)
+    PANIC("page for trapframe dont allocation");
   
   if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
                PTE_R | PTE_W | PTE_U) < 0) {
