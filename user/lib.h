@@ -1,4 +1,7 @@
 #include "types.h"
+
+#define IPC_BUFF 0x3fffffd000
+
 struct msg {
     long a0;
     long a1;
