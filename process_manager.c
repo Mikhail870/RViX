@@ -63,7 +63,7 @@ extern char trampoline[],uservec[],userret[];
 // принимает адрес кода и создает из него процесс. 
 // если успешно, то вернет 1
 // иначе вернет код ошибки 0
- void proc_born(uint64 *binprc,uint64 size, uint64 name){
+ void proc_born(uint64 *binprc,uint64 size, uint64 name,int is_io_server){
 
   struct process *pc = NULL;
   int i;
