@@ -29,14 +29,12 @@ extern char trampoline[], uservec[];
   uint64 sstatus = r_sstatus();
   switch (scause) {
     case 5:
-    printf("kernel timer\n");
     set_timer(1000000);
     yield();// Сделать вызов через IPC
     w_sepc(sepc);
     w_sstatus(sstatus);
     break;
     default: 
-    printf("%d\n", scause);
     PANIC("UNKNOW INTERUPTION");
   }
 }
@@ -50,7 +48,6 @@ uint64 usertrap(void){
   // сделать обработку прервыний и исключений через case
   // Добавить обработку системных вызовов !
   uint64 scause=r_scause() & 0xFF; 
-  printf("scause= %d\n",scause);
   switch (scause){
     case 2:
     PANIC("ILLEGAL INSTRUCTION IN U MODE");
@@ -59,12 +56,9 @@ uint64 usertrap(void){
     case 5:
     //таймер
     set_timer(10000);
-    printf("timer !\n");
-    printf("%d name\n",current->ipc_data->name);
     yield();
     break;
     case 8:
-    printf("syscall from process name %d !\n", current->ipc_data->name);
     current->trapframe->epc+=4; // классический костыль, переводит счетчик комманд
     intr_on();
     struct IPC_reg ret; // возвращаем структуру
