@@ -3,6 +3,7 @@
 #define IPC_BUFF 0x3fffffd000
 #define PGSIZE 4096
 #define VFS 10
+#define terminal 11
 #define UART 0x3fffffc000
 
 struct msg {

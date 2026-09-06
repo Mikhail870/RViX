@@ -83,7 +83,7 @@ ssize_t write(int fd, const void *buf, size_t count){
 // функции Си
 
 void putchar(char ch){
-  // придумать
+  write(1,(long*)ch,1);
 }
 
 void puts(const char *str){
