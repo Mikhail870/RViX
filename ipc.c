@@ -19,14 +19,11 @@ void IPC_call(void){ // возвращет структуру для сохра�
  switch(current->trapframe->a7){
     case 0:
     send();
-    printf("call num 0\n"); // котсыль для отладки
     break;
     case 1:
     recv();
-    printf("call num 1\n"); // котсыль для отладки
     break;
     case 3:
-    printf("%d\n",current->trapframe->a0);
     break;
     default:
     PANIC("UNKNOW IPC CALL");
@@ -44,18 +41,13 @@ void IPC_call(void){ // возвращет структуру для сохра�
 void send(void){
   uint64 name=get_dst_name();
   struct process *dst=find_name_process(name);
-  printf("name process find in send %d\n",name);
-  printf("state process find in send %d\n",dst->state);
   if (dst==NULL){
     PANIC("name dst not found");
   }
   if (dst->state==SLEEP){
-    printf("is sleep: OK\n");
     copy_reg(current,dst);
     dst->ipc_data->is_wait_msg=0;
-    printf("is copy_reg: OK\n");
     runable(dst);
-    printf("is runable dst: OK\n");
   } else {
     add_que(dst,current->ipc_data->name);
     current->ipc_data->is_wait_msg=1;
@@ -80,13 +72,9 @@ void recv(void){
     copy_reg(src,current);
     runable(src);
     src->ipc_data->is_wait_msg=0;
-    printf("status send is %d\n",src->state);
   } else {
     sleep(current);
     current->ipc_data->is_wait_msg=1;
-    printf("name of recv process is %d\n",current->ipc_data->name);
-    printf("state of recv process is %d\n",current->state);
-    printf("state sleep is %d\n",SLEEP);
   }
 }
 
@@ -100,7 +88,6 @@ dst->trapframe->a2=src->trapframe->a2;
 dst->trapframe->a3=src->trapframe->a3;
 dst->trapframe->a4=src->trapframe->a4;
 dst->trapframe->a5=src->trapframe->a5;
-//dst->trapframe->a6=src->trapframe->a6;
 }
 
 // ищет процесс по имени кому отправляем сообщение
