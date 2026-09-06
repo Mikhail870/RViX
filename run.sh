@@ -36,6 +36,15 @@ $CC $CFLAGS $USER_CFLAGS \
 $OBJCOPY -O binary user/prg3.elf user/prg3.bin
 xxd -i user/prg3.bin >user/prg3_data.h
 
+# Сборка сервреа VFS
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser -I. \
+  -o user/VFS.elf \
+  user/VFS.c user/lib.c user/start.c
+$OBJCOPY -O binary user/VFS.elf user/VFS.bin
+xxd -i user/VFS.bin >user/VFS_data.h
+
 # Сборка ядра
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
