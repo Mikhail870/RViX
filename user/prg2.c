@@ -1,6 +1,7 @@
 #include "lib.h"
 void main(void){
-printk(222222);
+putchar('2');
+putchar('\n');
 struct msg mess;
 while(1){
 mess=recv();
