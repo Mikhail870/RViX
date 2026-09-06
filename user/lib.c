@@ -76,7 +76,7 @@ ssize_t write(int fd, const void *buf, size_t count){
   }
   // придумать аадресацию к VFS
   // добавить в send номер write
-  //send(fd,buf,count,1,0,0,VFS);
+  send(fd,buf,count,1,0,0,VFS);
   return count;
 }
 
