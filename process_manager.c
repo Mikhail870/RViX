@@ -111,6 +111,15 @@ extern char trampoline[],uservec[],userret[];
     uvmunmap(npagetable, TRAMPOLINE, 1, 0);
     uvmfree(npagetable, 0);
   }
+  // если это севрер ввода вывода, то мапим регистры юарт
+  if (is_io_server==1){
+
+  
+  if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
+               PTE_R | PTE_W | PTE_U) < 0) {
+    uvmunmap(npagetable, TRAMPOLINE, 1, 0);
+    uvmfree(npagetable, 0);
+  }
   pc->pagetable=npagetable;
 
   // выделяем физическую страницу и мапим на 
