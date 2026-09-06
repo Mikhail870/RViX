@@ -113,11 +113,7 @@ extern char trampoline[],uservec[],userret[];
   }
   // если это севрер ввода вывода, то мапим регистры юарт
   if (is_io_server==1){
-
-  if((pc->io_page=(uint64*)kalloc())==0)
-    PANIC("page for uart dont allocation");
-  
-  if (mappages(npagetable, VUART, PGSIZE, (uint64)(pc->io_page),
+  if (mappages(npagetable, VUART, PGSIZE, UART0,
                PTE_R | PTE_W | PTE_U) < 0) {
     uvmunmap(npagetable, VUART, 1, 0);
     uvmfree(npagetable, 0);
