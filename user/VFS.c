@@ -8,7 +8,7 @@ void main(void){
   while (1) {
     ipc_send=recv();
     // проверка номера вызова
-    switch (ipc_send.a3){
+    switch (ipc_send.a5){
       case 1: 
         //проврека дескриптора
         switch (ipc_send.a0) {
