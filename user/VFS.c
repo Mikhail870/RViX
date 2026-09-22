@@ -17,8 +17,10 @@ void main(void){
         switch (ipc_send.a0) {
           case 1:
             // перенаправление в консоль
-            if (ipc_send.a4==1)
-              ipc_buf_cpy(terminal,9,ipc_send.a2);
+            if (ipc_send.a4==1){
+            ipc_buf_cpy(terminal,2,ipc_send.a2);
+            send(0,0,0,0,0,0,terminal);
+            }
             break;
           case 2:
             // поток ошибок
