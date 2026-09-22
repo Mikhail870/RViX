@@ -23,7 +23,11 @@ void IPC_call(void){ // возвращет структуру для сохра�
     case 1:
     recv();
     break;
+    case 2:
+    ipc_buf_cpy();
+    break;
     case 3:
+    // костыль от printk
     break;
     default:
     PANIC("UNKNOW IPC CALL");
