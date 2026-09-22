@@ -8,7 +8,7 @@ struct msg ipc_send;
 void main(void){
   while (1) {
     ipc_send=recv();
-    uint64 namesrc=ipc_send.a7;
+    uint64 namesrc=ipc_send.a2;
     // проверка номера вызова
     switch (ipc_send.a5){
       //write
@@ -18,7 +18,7 @@ void main(void){
           case 1:
             // перенаправление в консоль
             if (ipc_send.a4==1){
-            ipc_buf_cpy(terminal,2,ipc_send.a2);
+            ipc_buf_cpy(terminal,namesrc,ipc_send.a2);// обращение не по имени ошибка !!!
             send(0,0,0,0,0,0,terminal);
             }
             break;
