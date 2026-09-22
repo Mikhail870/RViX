@@ -74,7 +74,7 @@ void recv(void){
       PANIC("name source not found");
     }
     copy_reg(src,current);
-    current->trapframe->a7=name;
+    current->trapframe->a2=name;
     runable(src);
     src->ipc_data->is_wait_msg=0;
   } else {
