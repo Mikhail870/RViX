@@ -47,8 +47,7 @@ void main(void){
   register long a7 __asm__("a7")=2; // код ipc_buf_cpy()
 __asm__ __volatile__("ecall"
                          : "+r"(a0)
-                         : "r"(a1), "r"(a2), "r"(a3), "r"(a4),
-     "r"(a5), "r"(a6),"r"(a7)
+                         : "r"(a1), "r"(a2),"r"(a7)
                          : "memory");
 
   return (uint64)a0;
