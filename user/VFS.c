@@ -31,3 +31,26 @@ void main(void){
     }
   }
 }
+
+// анонимные вызовы для копирования памяти
+// копирует буфер IPC отправителя, в IPC буфер получателя
+// dst - имя процесса отправителя
+// src имя роцесса получаетля (сервреа)
+// size размер собщения
+  uint64 ipc_buf_cpy(uint64 dst, uint64 src, int size){
+  if (size>PGSIZE)
+    return -1;
+
+  register long a0 __asm__("a0")=dst;
+  register long a1 __asm__("a1")=src;
+  register long a2 __asm__("a2")=size;
+  register long a7 __asm__("a7")=2; // код ipc_buf_cpy()
+__asm__ __volatile__("ecall"
+                         : "+r"(a0)
+                         : "r"(a1), "r"(a2), "r"(a3), "r"(a4),
+     "r"(a5), "r"(a6),"r"(a7)
+                         : "memory");
+
+  return (uint64)a0;
+
+}
