@@ -2,20 +2,23 @@
 // принимает запросы от программ
 // управляет дескрипторами
 #include "lib.h"
+#include "VFS.h"
 
 struct msg ipc_send;
 void main(void){
   while (1) {
     ipc_send=recv();
+    uint64 namesrc=ipc_send.a7;
     // проверка номера вызова
     switch (ipc_send.a5){
+      //write
       case 1: 
         //проврека дескриптора
         switch (ipc_send.a0) {
-          //write
           case 1:
             // перенаправление в консоль
-            send(0,ipc_send.a1,0,0,0,0,terminal);
+            if (ipc_send.a4==1)
+              ipc_buf_cpy(terminal,9,ipc_send.a2);
             break;
           case 2:
             // поток ошибок
