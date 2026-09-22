@@ -1,7 +1,6 @@
 #include "lib.h"
 void main(void){
-putchar('2');
-struct msg mess;
+putchar('7');
 while(1){
 }
 }

@@ -2,7 +2,6 @@
 
 void main(void){
 putchar('3');
-putchar('3');
 //putchar('\n');
 while(1);
 }
