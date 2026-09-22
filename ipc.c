@@ -86,10 +86,14 @@ uint64 ipc_buf_cpy(){
 // извлекается имя получателя и отправителя
 // ищутся их структуры
 // коируется ipc_page отправителя, получалю
-  dst=current->trapframe->a0;
-  src=current->trapframe->a1;
-  size=current->trapframe-a2;
-
+  uint64 dst=current->trapframe->a0;
+  uint64 src=current->trapframe->a1;
+  uint64 size=current->trapframe->a2;
+  struct process *dstprc=find_name_process(dst);
+  struct process *srcprc=find_name_process(src);
+  if (dstprc==NULL || srcprc==NULL)
+    return -1;
+  memcpy(dstprc->ipc_page,srcprc->ipc_page,size);
 }
 
 
