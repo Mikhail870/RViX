@@ -100,7 +100,8 @@ ssize_t write(int fd, const void *buf, size_t count){
 
 void putchar(char ch){
   char* strmem=(char*)IPC_BUFF;
-  *strmem=ch;
+  strmem[0]=ch;
+  strmem[1]=0;
   write(1,(long*)IPC_BUFF,1);
 }
 
