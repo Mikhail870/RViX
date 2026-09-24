@@ -1,6 +1,8 @@
 #include "lib.h"
 void main(void){
-putchar('7');
+//puts("text");
+putchar('2');
+putchar('\n');
 while(1){
 }
 }
