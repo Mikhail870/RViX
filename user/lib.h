@@ -27,3 +27,4 @@ ssize_t write(int fd, const void *buf, size_t count);
 
 void putchar(char);
 void puts(const char *);
+void *memset(void *dst, int c, uint n);

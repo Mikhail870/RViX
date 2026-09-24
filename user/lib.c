@@ -117,3 +117,12 @@ void puts(const char *str){
   if (position>0)
     write(1,(long*)IPC_BUFF,position);
 }
+
+void* memset(void *dst, int c, uint n){
+  char *cdst = (char *) dst;
+  for(int i=0; i < n; i++){
+    cdst[i] = c;
+  }
+  return dst;
+}
+
