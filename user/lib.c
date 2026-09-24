@@ -102,7 +102,7 @@ void putchar(char ch){
   char* strmem=(char*)IPC_BUFF;
   strmem[0]=ch;
   strmem[1]=0;
-  write(1,(long*)IPC_BUFF,1);
+  write(1,(long*)IPC_BUFF,2);
 }
 
 void puts(const char *str){
@@ -113,6 +113,7 @@ void puts(const char *str){
       str++;
       position++;
   }
+  strmem[position]=0;
   if (position>0)
     write(1,(long*)IPC_BUFF,position);
 }
