@@ -35,7 +35,7 @@ extern char trampoline[], uservec[];
     w_sstatus(sstatus);
     break;
     default: 
-    printf("sstatus = %d\n",sstatus);
+    //printf("sstatus = %d\n",sstatus);
     PANIC("UNKNOW INTERUPTION");
   }
 }
@@ -49,7 +49,7 @@ uint64 usertrap(void){
   // сделать обработку прервыний и исключений через case
   // Добавить обработку системных вызовов !
   uint64 scause=r_scause() & 0xFF; 
-    printf("scause =%d\n",scause);
+    //printf("scause =%d\n",scause);
   switch (scause){
     case 2:
     PANIC("ILLEGAL INSTRUCTION IN U MODE");
