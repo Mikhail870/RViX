@@ -76,6 +76,7 @@ uint64 usertrap(void){
   }
   
   if(current->state==SLEEP){
+    set_timer(10000);// вызовет прерывания по тайемру в следующем процессе
     yield();
   }
     // Логика prepare_return() из xv6 (хардкод)
