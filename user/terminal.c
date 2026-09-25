@@ -17,5 +17,6 @@ void main(){
     while (*strmem!=0){
       *uart=*strmem++; 
     }
+    memset((char*)IPC_BUFF,0,PGSIZE);
   } 
 }
