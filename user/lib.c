@@ -99,7 +99,7 @@ ssize_t write(int fd, const void *buf, size_t count){
 // функции Си
 
 void putchar(char ch){
-    send(ch, 0, 0, 0, 0, 0, terminal); 
+    send(ch,0,0,0,0,0,terminal); 
 }
 
 void puts(const char *str){
