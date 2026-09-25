@@ -19,6 +19,7 @@ void main(void){
             // перенаправление в консоль
             if (ipc_send.a4==1){
             ipc_buf_cpy(terminal,1,ipc_send.a2);// обращение не по имени ошибка !!!
+            send(0,0,0,0,0,0,terminal);
             }
             break;
           case 2:
