@@ -98,7 +98,9 @@ uint64 ipc_buf_cpy(){
   struct process *srcprc=find_name_process(src);
   if (dstprc==NULL || srcprc==NULL)
     return -1;
+  memset(dstprc->ipc_page,0,4096);// очистка страницы получателя
   memcpy(dstprc->ipc_page,srcprc->ipc_page,size);
+  memset(srcprc->ipc_page,0,4096);// очистка страницы отправля
 }
 
 
