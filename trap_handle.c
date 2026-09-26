@@ -100,6 +100,6 @@ uint64 usertrap(void){
   // set s exception program counter to the saved user pc.
   w_sepc(current->trapframe->epc);
   uint64 satp= MAKE_SATP(current->pagetable);
-  set_timer(1000000);
+  set_timer(10000);
     return satp;
 }
