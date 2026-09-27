@@ -14,7 +14,7 @@ void main(){
     ipc_send=recv();
     char* strmem=(char*)IPC_BUFF;
     *uart=ipc_send.a0;
-    while (*strmem!=0){
+    while (*strmem!=0 || *strmem!='\0'){
       *uart=*strmem++; 
     }
     memset((char*)IPC_BUFF,0,PGSIZE);
