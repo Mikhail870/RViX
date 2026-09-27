@@ -50,6 +50,7 @@ void send(void){
   }
   if (dst->state==SLEEP){
     copy_reg(current,dst);
+    dst->trapframe->a3=current->ipc_data->name; // имя отрпвителя
     dst->ipc_data->is_wait_msg=0;
     runable(dst);
   } else {
@@ -74,7 +75,7 @@ void recv(void){
       PANIC("name source not found");
     }
     copy_reg(src,current);
-   // current->trapframe->a1=name;
+    current->trapframe->a3=src->ipc_data->name;
     runable(src);
     src->ipc_data->is_wait_msg=0;
   } else {
