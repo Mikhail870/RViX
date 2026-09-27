@@ -103,10 +103,6 @@ void putchar(char ch){
 }
 
 void puts(const char *str){
-  while(*str!='\0'){
-    putchar(*str++);
-  }
-  /*
   char* strmem=(char*)IPC_BUFF;
   int position=0;
   while(*str && position<(PGSIZE-1)){
@@ -116,7 +112,7 @@ void puts(const char *str){
   }
   strmem[position]=0;
   if (position>0)
-    write(1,(long*)IPC_BUFF,position);*/
+    write(1,(long*)IPC_BUFF,position);
 }
 
 void* memset(void *dst, int c, uint n){
