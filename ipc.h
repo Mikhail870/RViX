@@ -13,6 +13,7 @@ void IPC_call(void);
 void send(void);
 void recv(void);
 uint64 ipc_buf_cpy(void);
+uint64 buf2ipc_cpy(void);
 void copy_reg(struct process *src,struct process *dst);
 struct process *find_name_process(uint64 name);
 void sleep(struct process *prc);

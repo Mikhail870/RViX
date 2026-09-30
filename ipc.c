@@ -12,6 +12,7 @@
 #include "common.h"
 #include "process_manager.h" // для видимости current
 #include "ipc.h"
+#include "vm.h"
 
 
 void IPC_call(void){ // возвращет структуру для сохранения a0-a7
@@ -27,7 +28,7 @@ void IPC_call(void){ // возвращет структуру для сохра�
     ipc_buf_cpy();
     break;
     case 3:
-    // костыль от printk
+    buf2ipc_cpy();
     break;
     default:
     PANIC("UNKNOW IPC CALL");
@@ -105,6 +106,13 @@ uint64 ipc_buf_cpy(){
   memset(srcprc->ipc_page,0,4096);// очистка страницы отправля
 }
 
+
+// функция принимает ия получателя, виртуальный адрес буфера отправителя и размер сообщения
+// с помощью copyin копирует буфер отправителя в IPC буфер получателя
+// возвращает код ошибки
+uint64 buf2ipc_cpy(){
+
+}
 
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
