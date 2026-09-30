@@ -52,6 +52,7 @@ void send(void){
     copy_reg(current,dst);
     dst->trapframe->a3=current->ipc_data->name; // имя отрпвителя
     dst->ipc_data->is_wait_msg=0;
+    sleep(current);
     runable(dst);
   } else {
     add_que(dst,current->ipc_data->name);
