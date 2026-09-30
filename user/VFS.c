@@ -73,7 +73,7 @@ __asm__ __volatile__("ecall"
 // dst - имя процесса получателя
 // bfadr_src - виртуальный адрес буфера отправителя
 // size - размер собщения
-uint64 buf2ipc_cpy(uint64 dst,uint64 *bfadr_src,int size){
+uint64 buf2ipc_cpy(uint64 dst,uint64 bfadr_src,int size){
   if (size>PGSIZE)
     return -1;
 
