@@ -30,6 +30,8 @@ void IPC_call(void){ // возвращет структуру для сохра�
     break;
     case 3:
     buf2ipc_cpy();
+    case 4:
+    sleep_prc();
     break;
     default:
     PANIC("UNKNOW IPC CALL");
@@ -129,6 +131,14 @@ uint64 buf2ipc_cpy(){
   memcpy(dstprc->ipc_page,(void*)(pa0+(bfrard_src-va0)),size);
   memset(srcprc->ipc_page,0,4096);
 }
+
+uint64 sleep_prc(){
+ uint64 name=current->trapframe->a0;
+ struct process *prc=find_name_process(name);
+ sleep(prc);
+ 
+}
+
 
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
