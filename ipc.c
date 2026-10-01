@@ -12,6 +12,7 @@
 #include "common.h"
 #include "process_manager.h" // для видимости current
 #include "ipc.h"
+#include "riscv.h"
 #include "vm.h"
 
 
@@ -112,6 +113,21 @@ uint64 ipc_buf_cpy(){
 // возвращает код ошибки
 uint64 buf2ipc_cpy(){
 
+  uint64 dst=current->trapframe->a0;
+  uint64 bfrard_src=current->trapframe->a1;
+  uint64 size=current->trapframe->a2;
+  uint64 src=current->trapframe->a3;
+  struct process *srcprc=find_name_process(src);
+  struct process *dstprc=find_name_process(dst);
+  pagetable_t pgtablesrc=srcprc->pagetable;
+  uint64 va0=PGROUNDDOWN(bfrard_src);
+  uint64 pa0=walkaddr(pgtablesrc, va0);
+  if (pa0==0){
+    return 1;
+  }
+  memset(dstprc->ipc_page,0,4096);
+  memcpy(dstprc->ipc_page,(void*)(pa0+(bfrard_src-va0)),size);
+  memset(srcprc->ipc_page,0,4096);
 }
 
 // копирует регистры a0-a7 из src в dst
