@@ -39,7 +39,7 @@ void main(void){
       //read
       case 2:
         // отправител засыпает
-        // sleep(namesrc);
+         sleep(namesrc);
         // вызов сервера ввода
         // send(0,0,0,0,0,0,uinput);
         break;
