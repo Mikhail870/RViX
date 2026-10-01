@@ -54,6 +54,15 @@ $CC $CFLAGS $USER_CFLAGS \
 $OBJCOPY -O binary user/terminal.elf user/terminal.bin
 xxd -i user/terminal.bin >user/terminal_data.h
 
+# Сборка сервреа шелла
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser -I. \
+  -o user/shell.elf \
+  user/shell.c user/lib.c user/start.c
+$OBJCOPY -O binary user/shell.elf user/shell.bin
+xxd -i user/shell.bin >user/shell_data.h
+
 # Сборка ядра
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
