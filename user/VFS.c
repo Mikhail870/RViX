@@ -41,7 +41,7 @@ void main(void){
         // отправител засыпает
          sleep(namesrc);
         // вызов сервера ввода
-        // send(0,0,0,0,0,0,uinput);
+        // send(namesrc,ipc_send.a2,0,0,0,0,uinput);
         break;
     }
   }
