@@ -15,6 +15,7 @@
 #include "user/prg3_data.h"
 #include "user/VFS_data.h"
 #include "user/terminal_data.h"
+#include "user/shell_data.h"
 
 void  main() {
 printf("RViX booted !\n");
@@ -23,6 +24,8 @@ kinit(); // нарезка свободной памяти на стриницы
 kvminit(); // создание таблицы страниц ядра (требует изменения в vm.c !)
 kvminithart(); // включаем таблиццу страниц
 //intr_off(); 
+
+proc_born((uint64*)user_shell_bin,(uint64)user_shell_bin_len,12,0);// создание сервреа из бинарника
 proc_born((uint64*)user_terminal_bin,(uint64)user_terminal_bin_len,11,1);// создание сервреа из бинарника
 proc_born((uint64*)user_VFS_bin,(uint64)user_VFS_bin_len,10,0);// создание сервреа из бинарника
 proc_born((uint64*)user_prg3_bin,(uint64)user_prg3_bin_len,3,0);// создание процесса из бинарника
