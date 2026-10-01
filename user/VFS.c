@@ -36,8 +36,12 @@ void main(void){
             break;
         }
         break;
+      //read
       case 2:
-        // open
+        // отправител засыпает
+        // sleep(namesrc);
+        // вызов сервера ввода
+        // send(0,0,0,0,0,0,uinput);
         break;
     }
   }
@@ -92,3 +96,14 @@ __asm__ __volatile__("ecall"
 
 }
 
+//  усыпляет процесс name
+// делает вызов номер 4 
+uint64 sleep(uint64 name){
+  register long a0 __asm__("a0")=name;
+  register long a7 __asm__("a7")=4; // код sleep()
+__asm__ __volatile__("ecall"
+                         : "+r"(a0)
+                         : "r"(a7)
+                         : "memory");
+  return (uint64)a0;
+}
