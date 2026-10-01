@@ -30,8 +30,12 @@ void IPC_call(void){ // возвращет структуру для сохра�
     break;
     case 3:
     buf2ipc_cpy();
+    break;
     case 4:
     sleep_prc();
+    break;
+    case 5:
+    wakeup();
     break;
     default:
     PANIC("UNKNOW IPC CALL");
@@ -140,6 +144,13 @@ uint64 sleep_prc(){
  sleep(prc);
 }
 
+// функция принимает имя процесса
+// будит процесс
+uint64 wakeup(){
+ uint64 name=current->trapframe->a0;
+ struct process *prc=find_name_process(name);
+ runable(prc);
+}
 
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
