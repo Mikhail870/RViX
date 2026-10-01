@@ -13,7 +13,6 @@ void main(){
   while(1){
     ipc_send=recv();
     char* strmem=(char*)IPC_BUFF;
-    *uart=ipc_send.a0;
     while (*strmem!=0 || *strmem!='\0'){
       *uart=*strmem++; 
     }
