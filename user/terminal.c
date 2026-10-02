@@ -4,6 +4,7 @@
 // аппаратно завимсим из-за мапинга адресов !
 //
 #include "lib.h"
+#include "servers.h"
 
 struct msg ipc_send;
 void main(){
