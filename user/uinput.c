@@ -16,6 +16,7 @@ int main(){
     if (ReadReg(LSR) & LSR_RX_READY){
       sym=ReadReg(RHR);
       WriteReg(0,sym);
+      WriteReg(0,'\n');
       strmem[count++]=sym;
     }
     }
