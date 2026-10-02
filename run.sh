@@ -41,7 +41,7 @@ $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
   -Iuser -I. \
   -o user/VFS.elf \
-  user/VFS.c user/lib.c user/start.c
+  user/VFS.c user/lib.c user/servers.c user/start.c
 $OBJCOPY -O binary user/VFS.elf user/VFS.bin
 xxd -i user/VFS.bin >user/VFS_data.h
 
@@ -50,7 +50,7 @@ $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
   -Iuser -I. \
   -o user/terminal.elf \
-  user/terminal.c user/lib.c user/start.c
+  user/terminal.c user/lib.c user/servers.c user/start.c
 $OBJCOPY -O binary user/terminal.elf user/terminal.bin
 xxd -i user/terminal.bin >user/terminal_data.h
 
@@ -59,7 +59,7 @@ $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
   -Iuser -I. \
   -o user/shell.elf \
-  user/shell.c user/lib.c user/start.c
+  user/shell.c user/lib.c user/servers.c user/start.c
 $OBJCOPY -O binary user/shell.elf user/shell.bin
 xxd -i user/shell.bin >user/shell_data.h
 
