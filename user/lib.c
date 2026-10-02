@@ -108,10 +108,16 @@ ssize_t read(int fd, const void *buf, size_t count){
 // сервер ввода ждет нажатия клавиш и энтер
 // копирует данные в буфер вызывающего read
 // будит вызывающего
-
-  send(fd,(long)buf,count,0,0,2,VFS);
+if(count<PGSIZE){
+    if (buf==IPC_BUFF){
+  send(fd,(long)buf,count,0,1,2,VFS);
+  } else {
+  send(fd,(long)buf,count,0,2,2,VFS);
+  } 
+} else {
+  send(fd,(long)buf,count,0,3,2,VFS);
+  }
   // логика возвращаемых значений
-
 }
 
 // функции Си
