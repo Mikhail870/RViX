@@ -43,10 +43,18 @@ void main(void){
         break;
       //read
       case 2:
+        switch(param){
+          case 1:
+          //передача по IPC буферу
         // отправител засыпает
          sleep(namesrc);
         // вызов сервера ввода
         // send(namesrc,buf,size,0,0,0,uinput);
+          case 2:
+          // передача в буфер процесса
+          case 3:
+          // дарение страниц процессу
+        }
         break;
     }
   }
