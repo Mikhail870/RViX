@@ -4,7 +4,6 @@
 #define PGSIZE 4096
 #define VFS 10
 #define terminal 11
-#define UART 0x3fffffc000
 
 struct msg {
     long a0;
