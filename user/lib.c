@@ -142,6 +142,14 @@ void puts(const char *str){
     write(1,(long*)IPC_BUFF,position);
 }
 
+char* gets(char* buff){
+
+}
+
+
+
+
+
 void* memset(void *dst, int c, uint n){
   char *cdst = (char *) dst;
   for(int i=0; i < n; i++){
