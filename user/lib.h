@@ -30,4 +30,5 @@ void putchar(char);
 void puts(const char *);
 int getchar(void);
 char *gets(char*);
+int strcmp(const char *str1, const char *str2);
 void *memset(void *dst, int c, uint n);
