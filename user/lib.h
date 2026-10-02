@@ -4,6 +4,7 @@
 #define PGSIZE 4096
 #define VFS 10
 #define terminal 11
+#define uinput 13
 
 struct msg {
     long a0;
