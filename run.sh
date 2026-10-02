@@ -54,6 +54,15 @@ $CC $CFLAGS $USER_CFLAGS \
 $OBJCOPY -O binary user/terminal.elf user/terminal.bin
 xxd -i user/terminal.bin >user/terminal_data.h
 
+# Сборка сервреа ввода
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser -I. \
+  -o user/uinput.elf \
+  user/uinput.c user/lib.c user/servers.c user/start.c
+$OBJCOPY -O binary user/uinput.elf user/uinput.bin
+xxd -i user/uinput.bin >user/uinput_data.h
+
 # Сборка сервреа шелла
 $CC $CFLAGS $USER_CFLAGS \
   -Wl,-Tuser/user.ld \
