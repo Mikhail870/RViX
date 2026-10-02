@@ -16,6 +16,7 @@
 #include "user/VFS_data.h"
 #include "user/terminal_data.h"
 #include "user/shell_data.h"
+#include "user/uinput_data.h"
 
 void  main() {
 printf("RViX booted !\n");
@@ -25,7 +26,7 @@ kvminit(); // создание таблицы страниц ядра (треб�
 kvminithart(); // включаем таблиццу страниц
 //intr_off(); 
 
-proc_born((uint64*)user_shell_bin,(uint64)user_shell_bin_len,13,1);// создание сервреа из бинарника
+proc_born((uint64*)user_uinput_bin,(uint64)user_uinput_bin_len,13,1);// создание сервреа из бинарника
 proc_born((uint64*)user_shell_bin,(uint64)user_shell_bin_len,12,0);// создание сервреа из бинарника
 proc_born((uint64*)user_terminal_bin,(uint64)user_terminal_bin_len,11,1);// создание сервреа из бинарника
 proc_born((uint64*)user_VFS_bin,(uint64)user_VFS_bin_len,10,0);// создание сервреа из бинарника
