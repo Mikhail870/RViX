@@ -142,8 +142,18 @@ void puts(const char *str){
     write(1,(long*)IPC_BUFF,position);
 }
 
+int getchar(){
+  char *chmem=(char*)IPC_BUFF;
+  read(0,chmem,1);
+  return *chmem;
+}
+// принимает буфер
+// пишет в него байты данных
+// отдает указатель на буфер
 char* gets(char* buff){
-
+  read(0,buff,4096);
+  while(*buff++!='\r')
+  return buff;
 }
 
 
