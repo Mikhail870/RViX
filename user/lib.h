@@ -28,4 +28,6 @@ ssize_t read(int fd, const void *buf, size_t count);
 
 void putchar(char);
 void puts(const char *);
+int getchar(void);
+char *gets(char*);
 void *memset(void *dst, int c, uint n);
