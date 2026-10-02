@@ -2,7 +2,7 @@
 #include "servers.h"
 
 struct msg ipc_send; 
-char* buff=(char*)IPC_BUFF;
+char* strmem=(char*)IPC_BUFF;
 int main(){
   while (1){
     ipc_send=recv();
