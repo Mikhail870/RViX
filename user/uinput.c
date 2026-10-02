@@ -16,12 +16,12 @@ int main(){
     if (ReadReg(LSR) & LSR_RX_READY){
       sym=ReadReg(RHR);
       WriteReg(0,sym);
-      WriteReg(0,'\n');
       strmem[count++]=sym;
     }
     }
     if (count<size)
       strmem[count++]='\0';
+      WriteReg(0,'\n');
     ipc_buf_cpy(name_reader,uinput,size);
     wakeup(name_reader);
     // логика чтения из UART
