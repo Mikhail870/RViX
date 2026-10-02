@@ -2,11 +2,18 @@
 
 int main(){
 char* strmem=(char*)IPC_BUFF;
-puts("test shell \n");
-puts("coming soon keyboard input are enabled !\n");
+puts(" \n");
+puts(" \n");
+puts("RViX shell v.0\n");
 puts(strmem);
   while(1) {
 puts(">");
 strmem=gets(strmem);
+if(strcmp("uname\r",strmem)==0){
+      puts("RViX microkernel V.0\n");
+    } else {
+      puts("unknow command\n");
+    }
   }
 }
+
