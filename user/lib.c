@@ -151,8 +151,7 @@ int getchar(){
 // пишет в него байты данных
 // отдает указатель на буфер
 char* gets(char* buff){
-  read(0,buff,4096);
-  while(*buff++!='\r')
+  read(0,buff,PGSIZE-1);
   return buff;
 }
 
