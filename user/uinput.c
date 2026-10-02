@@ -1,4 +1,5 @@
 #include "lib.h"
+#include "servers.h"
 
 struct msg ipc_send; 
 char* buff=(char*)IPC_BUFF;
@@ -12,17 +13,8 @@ int main(){
     // копируем читающему процессу
     // если нажата энтер копируем буфер 
     // и будим процесс
-    // ipc_buf_cpy(name_reader,uinput,size)
+    ipc_buf_cpy(name_reader,uinput,size)
     wakeup(name_reader)
   }
 }
 
-uint64 wakeup(uint64 name){
-  register long a0 __asm__("a0")=name;
-  register long a7 __asm__("a7")=5; // код wakeup
-__asm__ __volatile__("ecall"
-                         : "+r"(a0)
-                         : "r"(a7)
-                         : "memory");
-  return (uint64)a0;
-}
