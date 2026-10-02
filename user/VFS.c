@@ -8,23 +8,28 @@ struct msg ipc_send;
 void main(void){
   while (1) {
     ipc_send=recv();
+    uint64 descriptor=ipc_send.a0;
+    uint64 buf=ipc_send.a1;
+    uint64 size=ipc_send.a2;
     uint64 namesrc=ipc_send.a3;
+    uint64 param=ipc_send.a4;
+    uint64 syscallnum=ipc_send.a5;
     // проверка номера вызова
-    switch (ipc_send.a5){
+    switch (syscallnum){
       //write
       case 1: 
         //проврека дескриптора
-        switch (ipc_send.a0) {
+        switch (descriptor) {
           case 1:
             // перенаправление в консоль
             // проврека параметра буфера a4
             // если 1 то коирование из IPC буфера в IPC буфрер терминала
             // если 2 то коирование через copyin в IPC буфер терминала
-            if (ipc_send.a4==1){
-            ipc_buf_cpy(terminal,namesrc,ipc_send.a2);// обращение не по имени ошибка !!!
+            if (param==1){
+            ipc_buf_cpy(terminal,namesrc,size);// обращение не по имени ошибка !!!
             send(0,0,0,0,0,0,terminal);
             } else {
-              buf2ipc_cpy(terminal,namesrc,ipc_send.a1,ipc_send.a2);
+              buf2ipc_cpy(terminal,namesrc,buf,size);
               send(0,0,0,0,0,0,terminal);
             }
             break;
@@ -41,7 +46,7 @@ void main(void){
         // отправител засыпает
          sleep(namesrc);
         // вызов сервера ввода
-        // send(namesrc,ipc_send.a1,ipc_send.a2,0,0,0,uinput);
+        // send(namesrc,buf,size,0,0,0,uinput);
         break;
     }
   }
