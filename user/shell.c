@@ -9,7 +9,9 @@ puts(strmem);
   while(1) {
 puts(">");
 strmem=gets(strmem);
-if(strcmp("uname\r",strmem)==0){
+if(strcmp("\r",strmem)==0){
+      continue;
+    } else if(strcmp("uname\r",strmem)==0){
       puts("RViX microkernel V.0\n");
     } else {
       puts("unknow command\n");
