@@ -12,5 +12,6 @@ typedef uint64 pde_t;
 typedef uint64 pte_t;
 typedef uint64 size_t;
 typedef long ssize_t;
+typedef int pid_t;
 #define NULL ((void*)0)
 
