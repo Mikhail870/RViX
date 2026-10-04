@@ -15,3 +15,12 @@ boot:
         call main
 spin:
         j spin
+# костыль для вшивания в ядро образа диска
+        .section .rodata
+.global _disk_tar_start
+.global _disk_tar_end
+.align 16
+
+_disk_tar_start:
+    .incbin "user/disk.tar" 
+_disk_tar_end:
