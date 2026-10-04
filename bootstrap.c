@@ -97,10 +97,10 @@ extern char _disk_tar_start[];
 
 
 const struct servers servers[]={
-    {"VFS.bin",10,0},
-    {"terminal.bin",11,1},
-    {"uinput.bin",13,1},
-    {"shell.bin",12,0},
+    {"./VFS.bin",10,0},
+    {"./terminal.bin",11,1},
+    {"./uinput.bin",13,1},
+    {"./shell.bin",12,0},
     {0,0,0}
   };
 
