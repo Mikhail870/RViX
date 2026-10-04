@@ -6,13 +6,6 @@
 // извлекает исполнеямый код серверов из tar диска
 // отвечает за запуск сервреов при старте
 
-const char servers[]={
-  "VFS.bin",
-  "terminal.bin",
-  "uinput.bin",
-  "shell.bin",
-  0
-};
 
 
 struct tar_header {
@@ -89,3 +82,28 @@ struct tar_file find_binary(unsigned char *archive_start, const char *filename) 
     return result;
 }
 
+
+
+// функция инициализирует сервера
+void init_servers(){
+extern char _disk_tar_start[];
+
+const char servers[]={
+  "VFS.bin",
+  "terminal.bin",
+  "uinput.bin",
+  "shell.bin",
+  0
+};
+
+for (int i = 0; servers[i] != 0; i++) {
+        const char *service_name = &servers[i];
+        struct tar_file prog = find_binary(_disk_tar_start, service_name);
+        if (prog.data != 0) {
+
+            // launch_user_process(service_name, prog.data, prog.size);
+        } else {
+    PANIC("server not found");
+        }
+    }
+}
