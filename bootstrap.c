@@ -1,5 +1,7 @@
+#include "types.h"
 #include "common.h"
 #include "bootstrap.h"
+#include "process_manager.h"
 
 
 #define TAR_BLOCK_SIZE 512
@@ -34,6 +36,11 @@ struct tar_file {
     unsigned int size;
 };
 
+struct servers {
+  const char *namebin;
+  uint64 nameid;
+  uint64 param;
+};
 
 // функция принимает укзатель на начало бинаного файла и его размер
 // назначает заданное имя (цифра) соответсвующее названию
@@ -88,20 +95,20 @@ struct tar_file find_binary(unsigned char *archive_start, const char *filename) 
 void init_servers(){
 extern char _disk_tar_start[];
 
-const char servers[]={
-  "VFS.bin",
-  "terminal.bin",
-  "uinput.bin",
-  "shell.bin",
-  0
-};
 
-for (int i = 0; servers[i] != 0; i++) {
-        const char *service_name = &servers[i];
+const struct servers servers[]={
+    {"VFS.bin",10,0},
+    {"terminal.bin",11,1},
+    {"uinput.bin",13,1},
+    {"shell.bin",12,0},
+    {0,0,0}
+  };
+
+for (int i = 0; servers[i].namebin != 0; i++) {
+        const char *service_name = servers[i].namebin;
         struct tar_file prog = find_binary(_disk_tar_start, service_name);
         if (prog.data != 0) {
-
-            // launch_user_process(service_name, prog.data, prog.size);
+        proc_born((uint64*)prog.data,(uint64)prog.size,servers[i].nameid,servers[i].param);
         } else {
     PANIC("server not found");
         }
