@@ -76,7 +76,7 @@ xxd -i user/shell.bin >user/shell_data.h
 $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
   PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S \
-  ipc.c
+  ipc.c bootstrap.c
 
 # Подготовка tar диска с бинарными файлами disk.tar
 mkdir -p disk
