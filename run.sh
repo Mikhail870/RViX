@@ -65,17 +65,19 @@ $CC $CFLAGS $USER_CFLAGS \
   user/shell.c user/lib.c user/servers.c user/start.c
 $OBJCOPY -O binary user/shell.elf user/shell.bin
 
-# Сборка ядра
-$CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
-  main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
-  PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S \
-  ipc.c bootstrap.c
-
 # Подготовка tar диска с бинарными файлами disk.tar
 mkdir -p disk
 cp user/*.bin disk/
 (cd disk && tar cf ../user/disk.tar --format=ustar ./*)
 rm -rf disk
+rm -f user/*.bin
+rm -f user/*.elf
+
+# Сборка ядра
+$CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
+  main.c common.c HAL.c kalloc.c vm.c timer.c entry.S trap_handle.c \
+  PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S \
+  ipc.c bootstrap.c
 
 # Запуск QEMU
 $QEMU -machine virt -bios default -nographic \
