@@ -6,6 +6,15 @@
 // извлекает исполнеямый код серверов из tar диска
 // отвечает за запуск сервреов при старте
 
+const char servers[]={
+  "VFS.bin",
+  "terminal.bin",
+  "uinput.bin",
+  "shell.bin",
+  0
+};
+
+
 struct tar_header {
     char name[100];
     char mode[8];
