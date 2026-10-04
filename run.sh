@@ -78,6 +78,12 @@ $CC $CFLAGS -Wl,-Tkernel.ld -Wl,-Map=kernel.map -o kernel.elf \
   PLIC.c process_manager.c trampoline.S kernelvec.S switch_context.S \
   ipc.c
 
+# Подготовка tar диска с бинарными файлами disk.tar
+mkdir -p disk
+cp user/*.bin disk/
+(cd disk && tar cf ../user/disk.tar --format=ustar ./*)
+rm -rf disk
+
 # Запуск QEMU
 $QEMU -machine virt -bios default -nographic \
   -serial mon:stdio --no-reboot \
