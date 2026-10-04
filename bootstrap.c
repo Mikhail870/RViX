@@ -25,7 +25,7 @@ struct tar_header {
 struct tar_file {
     unsigned char *data;
     unsigned int size;
-}
+};
 
 
 // функция принимает имя сервера
@@ -35,3 +35,15 @@ struct tar_file {
 // функция принимает укзатель на начало бинаного файла и его размер
 // назначает заданное имя (цифра) соответсвующее названию
 // передает параметры proc_born()
+
+// функция преобразует восьмеричное число в строке в десятичное
+int oct2int(char *oct, int len) {
+    int dec = 0;
+    for (int i = 0; i < len; i++) {
+        if (oct[i] < '0' || oct[i] > '7')
+            break;
+
+        dec = dec * 8 + (oct[i] - '0');
+    }
+    return dec;
+}
