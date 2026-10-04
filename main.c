@@ -9,14 +9,7 @@
 #include "PLIC.h"
 #include "process_manager.h"
 #include "trap_handle.h"
-
-#include "user/prg1_data.h"
-#include "user/prg2_data.h"
-#include "user/prg3_data.h"
-#include "user/VFS_data.h"
-#include "user/terminal_data.h"
-#include "user/shell_data.h"
-#include "user/uinput_data.h"
+#include "bootstrap.h"
 
 void  main() {
 printf("RViX booted !\n");
@@ -26,13 +19,8 @@ kvminit(); // создание таблицы страниц ядра (треб�
 kvminithart(); // включаем таблиццу страниц
 //intr_off(); 
 
-proc_born((uint64*)user_uinput_bin,(uint64)user_uinput_bin_len,13,1);// создание сервреа из бинарника
-proc_born((uint64*)user_shell_bin,(uint64)user_shell_bin_len,12,0);// создание сервреа из бинарника
-proc_born((uint64*)user_terminal_bin,(uint64)user_terminal_bin_len,11,1);// создание сервреа из бинарника
-proc_born((uint64*)user_VFS_bin,(uint64)user_VFS_bin_len,10,0);// создание сервреа из бинарника
-proc_born((uint64*)user_prg3_bin,(uint64)user_prg3_bin_len,3,0);// создание процесса из бинарника
-proc_born((uint64*)user_prg2_bin,(uint64)user_prg2_bin_len,2,0);// создание процесса из бинарника
-proc_born((uint64*)user_prg1_bin,(uint64)user_prg1_bin_len,1,0);// создание процесса из бинарника
+init_servers(); // инициализация серверов 
+
 w_sie(SIE_STIE);
 intr_on();
 //set_timer(10000);
