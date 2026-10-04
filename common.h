@@ -18,3 +18,4 @@ void *memset(void *dst,int c,uint n);
 void* memcpy(void* dst, const void *src, uint n);
 void* memmove(void *vdst, const void *vsrc, uint n);
 void panic(char *s);
+int strcmp(const char *str1, const char *str2);
