@@ -155,7 +155,6 @@ extern char trampoline[],uservec[],userret[];
   // прыжок в userret
   pc->context.ra=(uint64)prepare_uret;
   pc->state=RUNABBLE;
-  printf("prosess PID %d OK\n",pc->pid);
 }
 
 
