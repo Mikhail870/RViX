@@ -76,7 +76,6 @@ extern char trampoline[],uservec[],userret[];
   }
   if(!pc)
     PANIC("NOT FREE SLOTS FOR PROCESS");
-  pc->pid=i+1; // процесс с PID 0 всегда 1. init_process(0) имеет PID 0 вручную
 
 // выделяем страницу под trapframe
   if((pc->trapframe=(struct trapframe*)kalloc())==0){
@@ -164,19 +163,18 @@ extern char trampoline[],uservec[],userret[];
 struct process *init_process(int param){
   int prm=param; // зарезеривровано !
   struct process *idle_prc=&proc[0];
-  idle_prc->pid=-1;
   idle_prc->state=RUN;
   return idle_prc;
  }
 
-// Реализация планировщика, выбираем процессов готовый к работе и PID>0
+// Реализация планировщика, выбираем процессов готовый к работе
 void sheduller(void){
 static int idx=0;
 next=NULL;
 for(int i=0; i< MAX_PROS; i++){
     int id=(idx+i+1) % MAX_PROS;
     struct process *p=&proc[id];
-    if (p->state==RUNABBLE && p->pid > 0){
+    if (p->state==RUNABBLE){
       next=p;
       idx=id;
       break;
