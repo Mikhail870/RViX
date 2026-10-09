@@ -81,7 +81,6 @@ struct trapframe {
 
 // структура процесса
  struct process {
-  int pid; // номер процессами
   int state; // состояние процесса
   uint64 *sp; // указатель стека процесса
   //uint64 kstack[PAGE/8]; // ядерный стек процесса
