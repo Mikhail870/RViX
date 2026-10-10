@@ -7,6 +7,7 @@
 // отвечает на создание новых процессов (fork+exec)
 struct PCB {
   int pid;
+  int name; // ядерный id
   int killed;
   int xstate;
   // добавить массив файлов  обращением по дескриптору o!
@@ -19,11 +20,16 @@ struct PCB ptable[MAX_PROC]={0};
 // заполняет PCB прооцессов
 // если что то пошло не так возвращает -1, иначе 0
 //
-// вызывает ядро, пробегает по структуре ядра
 int init_servers(){
-for(int i=0;i<MAX_PROC;i++){
+int servers[]={VFS,terminal,shell,uinput};
+int size=sizeof(servers)/sizeof(servers[0]);
+
+for(int i=0;i<size;i++){
     if(ptable[i].pid==0)
-      ptable[i].pid=i;
-    
+      ptable[i].name=servers[i];
+      ptable[i].pid=i+1;
+  } else {
+    return -1;
   }
+  return 0;
 }
