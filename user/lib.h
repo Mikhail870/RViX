@@ -6,7 +6,7 @@
 #define terminal 11
 #define shell 12
 #define uinput 13
-#define UPM 13
+#define UPM 14
 
 struct msg {
     long a0;
