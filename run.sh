@@ -65,6 +65,14 @@ $CC $CFLAGS $USER_CFLAGS \
   user/shell.c user/lib.c user/servers.c user/start.c
 $OBJCOPY -O binary user/shell.elf user/shell.bin
 
+# Сборка сервреа UVM
+$CC $CFLAGS $USER_CFLAGS \
+  -Wl,-Tuser/user.ld \
+  -Iuser -I. \
+  -o user/UPM.elf \
+  user/UPM.c user/lib.c user/servers.c user/start.c
+$OBJCOPY -O binary user/UPM.elf user/UPM.bin
+
 # Подготовка tar диска с бинарными файлами disk.tar
 mkdir -p disk
 cp user/*.bin disk/
