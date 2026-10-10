@@ -101,6 +101,7 @@ const struct servers servers[]={
     {"./terminal.bin",11,1},
     {"./uinput.bin",13,1},
     {"./shell.bin",12,0},
+    {"./UPM.bin",14,0},
     {0,0,0}
   };
 
