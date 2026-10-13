@@ -75,11 +75,11 @@ __asm__ __volatile__("ecall"
 }
 
 
-// коппирует таблицу страниц
+// коппирует таблицу страниц возвращает адрес таблицы страниц
+// name - родителя
 // часть функций перенести в сервер памяти !!!
 // номер вызова 6
 uint64 copy_page_table(uint64 name){
-  // name родителя
   register long a0 __asm__("a0")=name;
   register long a7 __asm__("a7")=6; // код copy_page_table
 __asm__ __volatile__("ecall"
