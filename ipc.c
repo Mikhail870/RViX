@@ -37,6 +37,9 @@ void IPC_call(void){ // возвращет структуру для сохра�
     case 5:
     wakeup();
     break;
+    case 6:
+    copy_page_table();
+    break;
     default:
     PANIC("UNKNOW IPC CALL");
   }
@@ -150,6 +153,16 @@ uint64 wakeup(){
  uint64 name=current->trapframe->a0;
  struct process *prc=find_name_process(name);
  runable(prc);
+}
+
+// функция принимает имя процесса
+// копирует его таьлицу страниц
+// подготавливает процесс к запуску
+// возвращает корент таблицы страниц
+uint64 copy_page_table(){
+// выделить страниу под корень
+// замапить код+стек трапфрейм трамполин ipc 
+// обнулить контекст и записать в ra адрес uret
 }
 
 // копирует регистры a0-a7 из src в dst
