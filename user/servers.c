@@ -62,9 +62,26 @@ __asm__ __volatile__("ecall"
 }
 
 
+//  пробуждает процесс name
+// делает вызов номер 5 
 uint64 wakeup(uint64 name){
   register long a0 __asm__("a0")=name;
   register long a7 __asm__("a7")=5; // код wakeup
+__asm__ __volatile__("ecall"
+                         : "+r"(a0)
+                         : "r"(a7)
+                         : "memory");
+  return (uint64)a0;
+}
+
+
+// коппирует таблицу страниц
+// часть функций перенести в сервер памяти !!!
+// номер вызова 6
+uint64 copy_page_table(uint64 name){
+  // name родителя
+  register long a0 __asm__("a0")=name;
+  register long a7 __asm__("a7")=6; // код copy_page_table
 __asm__ __volatile__("ecall"
                          : "+r"(a0)
                          : "r"(a7)
