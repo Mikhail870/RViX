@@ -79,12 +79,13 @@ __asm__ __volatile__("ecall"
 // name - родителя
 // часть функций перенести в сервер памяти !!!
 // номер вызова 6
-uint64 copy_page_table(uint64 name){
-  register long a0 __asm__("a0")=name;
+uint64 copy_page_table(uint64 pname,uint64 cname){
+  register long a0 __asm__("a0")=pname;
+  register long a1 __asm__("a1")=cname;
   register long a7 __asm__("a7")=6; // код copy_page_table
 __asm__ __volatile__("ecall"
                          : "+r"(a0)
-                         : "r"(a7)
+                         : "r"(a7),"r"(a1)
                          : "memory");
   return (uint64)a0;
 }
