@@ -58,7 +58,7 @@ extern char trampoline[],uservec[],userret[];
 
 }
 // функция возвращает указатель на слот свободного процесса
-struct process find_free_prc(){
+struct process *find_free_prc(){
   struct process *pc = NULL;
   int i;
   for (i=0;i<MAX_PROS;i++) {
@@ -68,6 +68,7 @@ struct process find_free_prc(){
       break;
     }
   }
+  return pc;
 }
 
 // Функция, создающая процесс
@@ -76,16 +77,8 @@ struct process find_free_prc(){
 // иначе вернет код ошибки 0
 
  void proc_born(uint64 *binprc,uint64 size, uint64 name,int is_io_server){
-
-  struct process *pc = NULL;
-  int i;
-  for (i=0;i<MAX_PROS;i++) {
-    if (proc[i].state==UNUSED){
-      proc[i].state=RUN;// на случай если тикнет таймер и процесс не запустится, стек еще не готов
-      pc=&proc[i];
-      break;
-    }
-  }
+ // поиск свободного слота подпроцесс 
+  struct process *pc=find_free_prc();
   if(!pc)
     PANIC("NOT FREE SLOTS FOR PROCESS");
 
