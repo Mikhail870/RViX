@@ -100,3 +100,4 @@ __asm__ __volatile__("ecall"
                          : "r"(a7)
                          : "memory");
   return (uint64)a0;
+}
