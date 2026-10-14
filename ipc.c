@@ -202,10 +202,9 @@ uint64 copy_page_table(){
 // возвращает при успехе 0
 uint64 add_TCB(){
   uint64 name=current->trapframe->a0;
-  struct process np=find_free_prc();
-  struct process *npa=&np;
-  npa->ipc_data->name=name;
-  sleep(npa);
+  struct process *np=find_free_prc();
+  np->ipc_data->name=name;
+  sleep(np);
 }
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
