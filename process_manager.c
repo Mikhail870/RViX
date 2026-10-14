@@ -68,9 +68,6 @@ struct process find_free_prc(){
       break;
     }
   }
-  if(!pc)
-    PANIC("NOT FREE SLOTS FOR PROCESS");
-return pc;
 }
 
 // Функция, создающая процесс
