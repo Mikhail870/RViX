@@ -14,6 +14,10 @@
 #include "ipc.h"
 #include "riscv.h"
 #include "vm.h"
+#include "memlayout.h" // костыль для копирования таблиы страниц
+
+extern char trampoline[]; // trampoline.S // костыль для копирования таблиы страниц
+
 
 
 void IPC_call(void){ // возвращет структуру для сохранения a0-a7
@@ -39,6 +43,9 @@ void IPC_call(void){ // возвращет структуру для сохра�
     break;
     case 6:
     copy_page_table();
+    break;
+    case 7:
+    add_TCB();
     break;
     default:
     PANIC("UNKNOW IPC CALL");
@@ -163,8 +170,43 @@ uint64 copy_page_table(){
 // выделить страниу под корень
 // замапить код+стек трапфрейм трамполин ipc 
 // обнулить контекст и записать в ra адрес uret
+// вернуть а a0 адрес таблицы страниц
+  /*
+  uint64 pname=current->trapframe->a0;
+  struct process *pp=find_name_process(pname);
+  // создание таблицы страниц
+  pagetable_t *cpagetable = uvmcreate();
+  if (cp == 0)
+    current->trapframe->a0=0;
+   // страница для trapframe
+  if ((cp->trapframe = (struct trapframe *)kalloc()) == 0) {
+    return 0;
+  }
+  // мапинг трамплина
+  if (mappages(cp, TRAMPOLINE, PGSIZE, (uint64)trampoline,
+               PTE_R | PTE_X) < 0) {
+    uvmfree(cp, 0);
+    return 0;
+  }
+  // мапинг трапфрейма
+  if (mappages(cp, TRAPFRAME, PGSIZE, (uint64)(pp->trapframe),
+               PTE_R | PTE_W) < 0) {
+    uvmunmap(cp, TRAMPOLINE, 1, 0);
+    uvmfree(cp, 0);
+    return 0;}
+*/
 }
 
+// добавляет новый поток в TCB ядра
+// принимает имя потока
+// возвращает при успехе 0
+uint64 add_TCB(){
+  uint64 name=current->trapframe->a0;
+  struct process np=find_free_prc();
+  struct process *npa=&np;
+  npa->ipc_data->name=name;
+  sleep(npa);
+}
 // копирует регистры a0-a7 из src в dst
 void copy_reg(struct process *src, struct process *dst){
 dst->trapframe->a0=src->trapframe->a0;

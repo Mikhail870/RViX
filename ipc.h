@@ -18,6 +18,7 @@ uint64 sleep_prc(void);
 uint64 wakeup(void);
 void copy_reg(struct process *src,struct process *dst);
 uint64 copy_page_table(void);
+uint64 add_TCB(void);
 struct process *find_name_process(uint64 name);
 void sleep(struct process *prc);
 void runable(struct process* prc);
