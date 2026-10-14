@@ -171,30 +171,18 @@ uint64 copy_page_table(){
 // замапить код+стек трапфрейм трамполин ipc 
 // обнулить контекст и записать в ra адрес uret
 // вернуть а a0 адрес таблицы страниц
-  /*
-  uint64 pname=current->trapframe->a0;
-  struct process *pp=find_name_process(pname);
+struct process *pp=find_name_process(current->trapframe->a0);
+struct process *cp=find_name_process(current->trapframe->a1);
   // создание таблицы страниц
   pagetable_t *cpagetable = uvmcreate();
-  if (cp == 0)
-    current->trapframe->a0=0;
-   // страница для trapframe
-  if ((cp->trapframe = (struct trapframe *)kalloc()) == 0) {
-    return 0;
-  }
-  // мапинг трамплина
-  if (mappages(cp, TRAMPOLINE, PGSIZE, (uint64)trampoline,
-               PTE_R | PTE_X) < 0) {
-    uvmfree(cp, 0);
-    return 0;
-  }
-  // мапинг трапфрейма
-  if (mappages(cp, TRAPFRAME, PGSIZE, (uint64)(pp->trapframe),
-               PTE_R | PTE_W) < 0) {
-    uvmunmap(cp, TRAMPOLINE, 1, 0);
-    uvmfree(cp, 0);
-    return 0;}
-*/
+  // механищм копирования таблицы страниц
+  //
+  //
+  memset(&cp->context, 0, sizeof(cp->context));
+  cp->context.ra = (uint64)prepare_uret;
+  cp->context.sp = cp->kstack + PGSIZE;
+
+
 }
 
 // добавляет новый поток в TCB ядра
