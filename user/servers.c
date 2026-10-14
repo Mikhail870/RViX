@@ -88,3 +88,15 @@ __asm__ __volatile__("ecall"
                          : "memory");
   return (uint64)a0;
 }
+
+// добавляет поток в TCB, примает имя процесса, который нужно создать
+// добавленный процесс всегда sleep
+// при успехе вернет 0
+uint64 add_TCB(uint64 name){
+  register long a0 __asm__("a0")=name;
+  register long a7 __asm__("a7")=7; // код add_TCB
+__asm__ __volatile__("ecall"
+                         : "+r"(a0)
+                         : "r"(a7)
+                         : "memory");
+  return (uint64)a0;
