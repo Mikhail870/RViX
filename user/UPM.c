@@ -12,6 +12,8 @@ struct PCB {
   int xstate;
   // добавить массив файлов  обращением по дескриптору o!
 };
+static uint64 nextpid=0;
+static uint64 nextname=0;
 
 int init_servers(void);
 int add_PCB(void);
