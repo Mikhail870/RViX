@@ -176,13 +176,29 @@ struct process *cp=find_name_process(current->trapframe->a1);
   // создание таблицы страниц
   pagetable_t *cpagetable = uvmcreate();
   // механищм копирования таблицы страниц
-  //
-  //
+  if (uvmcopy(pp->pagetable, cpagetable, PGSIZE) < 0) {
+    return 0; 
+}
+// Мапим Trampoline (в самый верх адресного пространства)
+if (mappages(cpagetable, TRAMPOLINE, PGSIZE, (uint64)trampoline, PTE_R | PTE_X) < 0) {
+    // ошибка...
+}
+// Мапим Trapframe конкретно этого дочернего процесса cp
+if (mappages(cpagetable, TRAPFRAME, PGSIZE, (uint64)(cp->trapframe), PTE_R | PTE_W) < 0) {
+    // ошибка...
+}
+  // Копируем trapframe из родителя в дочерний
+*cp->trapframe = *pp->trapframe;
+// Главное отличие fork: дочерний процесс возвращает 0!
+// В RISC-V регистр a0 отвечает за возвращаемое значение
+cp->trapframe->a0 = 0; 
+cp->pagetable = cpagetable;
+
+
   memset(&cp->context, 0, sizeof(cp->context));
   cp->context.ra = (uint64)prepare_uret;
   cp->context.sp = cp->kstack + PGSIZE;
-
-
+  current->trapframe->a0=(uint64)cpagetable;
 }
 
 // добавляет новый поток в TCB ядра
