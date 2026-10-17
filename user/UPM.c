@@ -17,7 +17,7 @@ static uint64 nextname=0;
 
 int init_servers(void);
 uint64 add_PCB(void);
-
+int fork(uint64);
 int main(){
 init_servers();
 }
@@ -53,22 +53,32 @@ for(int i=0;i<size;i++){
 // инициализирует их для новых процессов
 // возвращает ядерное имя нового процесса (id)
 uint64 add_PCB(){
+  for(int i=0;i<MAX_PROC;i++){
+    if(ptable[i].pid==0){
+      ptable[i].pid=nextpid;
+      ptable[i].name=nextname;
+      nextpid++;
+      nextname++;
+      return ptable[i].name;
+    } 
+    }
+  return 0;
+  }
 
-}
 // обработка вызова fork()
 // создает точную копию потока вызвавшего процесса
 // прописывает в TCB в ядре и PCB в UPM
 // возвращает PID родителю и 0 потомку
 // name - имя процесса родителя
-int fork(uint64 name){
+int fork(uint64 pname){
   // создает запись о процессе в PCB 
   // возвращает имя процесса (id)
   // регистриуеи процесс в TCB
   // копирует страницы от родителя потомку
   // будит процесс
-  // uint64 cname ;
-  // add_TCB(cname); // имя потомка в TCB
- // copy_page_table(uint64 pname,uint64 cname);
-  // wakeup(cname);
+   uint64 cname=add_PCB();
+   add_TCB(cname); // имя потомка в TCB
+   copy_page_table(pname, cname);
+   wakeup(cname);
   
 }
