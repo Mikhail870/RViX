@@ -16,7 +16,7 @@ static uint64 nextpid=0;
 static uint64 nextname=0;
 
 int init_servers(void);
-int add_PCB(void);
+uint64 add_PCB(void);
 
 int main(){
 init_servers();
@@ -33,7 +33,7 @@ struct PCB ptable[MAX_PROC]={0};
 // если что то пошло не так возвращает -1, иначе 0
 //
 int init_servers(){
-int servers[]={VFS,terminal,shell,uinput};
+int servers[]={VFS,terminal,shell,uinput,UPM};// имена серверов строго от меньшего к большему !
 int size=sizeof(servers)/sizeof(servers[0]);
 
 for(int i=0;i<size;i++){
