@@ -14,7 +14,7 @@ struct PCB {
 };
 
 int init_servers(void);
-
+int add_PCB(void);
 
 int main(){
 init_servers();
@@ -45,18 +45,26 @@ for(int i=0;i<size;i++){
   return 0;
 }
 
+// ищет пустые слоты в PCB
+// инициализирует их для новых процессов
+// возвращает ядерное имя нового процесса (id)
+int add_PCB(){
+
+}
 // обработка вызова fork()
 // создает точную копию потока вызвавшего процесса
 // прописывает в TCB в ядре и PCB в UPM
 // возвращает PID родителю и 0 потомку
+// name - имя процесса родителя
 int fork(uint64 name){
   // создает запись о процессе в PCB 
   // возвращает имя процесса (id)
   // регистриуеи процесс в TCB
   // копирует страницы от родителя потомку
   // будит процесс
-  // uint64 name = add_PCB();
+  // uint64 cname ;
   // add_TCB(cname); // имя потомка в TCB
-  copy_page_table(uint64 pname,uint64 cname);
+ // copy_page_table(uint64 pname,uint64 cname);
+  // wakeup(cname);
   
 }
