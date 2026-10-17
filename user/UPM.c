@@ -40,6 +40,8 @@ for(int i=0;i<size;i++){
     if(ptable[i].pid==0){
       ptable[i].name=servers[i];
       ptable[i].pid=i+1;
+      nextpid=i+2;
+      nextname=servers[i]+1;
   } else {
     return -1;
   }
@@ -50,7 +52,7 @@ for(int i=0;i<size;i++){
 // ищет пустые слоты в PCB
 // инициализирует их для новых процессов
 // возвращает ядерное имя нового процесса (id)
-int add_PCB(){
+uint64 add_PCB(){
 
 }
 // обработка вызова fork()
