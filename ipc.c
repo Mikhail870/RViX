@@ -180,7 +180,7 @@ struct process *cp=find_name_process(current->trapframe->a1);
     // тут добавиь освобождние процессами
   }
   // страница под IPC буфер (ipc_data выделяется в add_TCB)
-  if((pc->ipc_page=(uint64*)kalloc())==0){
+  if((cp->ipc_page=(uint64*)kalloc())==0){
     // тут добавиь освобождние процессами
   }
   // механищм копирования таблицы страниц
@@ -196,7 +196,7 @@ if (mappages(cpagetable, TRAPFRAME, PGSIZE, (uint64)(cp->trapframe), PTE_R | PTE
     // ошибка...
 }
   // маппинг буфера IPC на виртуальную память
-  if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
+  if (mappages(cpagetable, IPC, PGSIZE, (uint64)(cp->ipc_page),
                PTE_R | PTE_W | PTE_U) < 0) {
     // обработка ошибки
   }
@@ -210,7 +210,10 @@ cp->pagetable = cpagetable;
 
   memset(&cp->context, 0, sizeof(cp->context));
   cp->context.ra = (uint64)prepare_uret;
-  cp->context.sp = cp->kstack + PGSIZE;
+  uint64 *kstck;
+  if ((kstck=(uint64*)kalloc())==0)
+    PANIC("kernel stack dont create");
+  cp->kstack=(uint64)kstck;
   current->trapframe->a0=(uint64)cpagetable;
 }
 
