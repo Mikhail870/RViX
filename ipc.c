@@ -175,6 +175,14 @@ struct process *pp=find_name_process(current->trapframe->a0);
 struct process *cp=find_name_process(current->trapframe->a1);
   // создание таблицы страниц
   pagetable_t *cpagetable = uvmcreate();
+  // страница под trapframe
+  if((cp->trapframe=(struct trapframe*)kalloc())==0){
+    // тут добавиь освобождние процессами
+  }
+  // страница под IPC буфер (ipc_data выделяется в add_TCB)
+  if((pc->ipc_page=(uint64*)kalloc())==0){
+    // тут добавиь освобождние процессами
+  }
   // механищм копирования таблицы страниц
   if (uvmcopy(pp->pagetable, cpagetable, PGSIZE) < 0) {
     return 0; 
@@ -187,6 +195,11 @@ if (mappages(cpagetable, TRAMPOLINE, PGSIZE, (uint64)trampoline, PTE_R | PTE_X) 
 if (mappages(cpagetable, TRAPFRAME, PGSIZE, (uint64)(cp->trapframe), PTE_R | PTE_W) < 0) {
     // ошибка...
 }
+  // маппинг буфера IPC на виртуальную память
+  if (mappages(npagetable, IPC, PGSIZE, (uint64)(pc->ipc_page),
+               PTE_R | PTE_W | PTE_U) < 0) {
+    // обработка ошибки
+  }
   // Копируем trapframe из родителя в дочерний
 *cp->trapframe = *pp->trapframe;
 // Главное отличие fork: дочерний процесс возвращает 0!
@@ -207,6 +220,9 @@ cp->pagetable = cpagetable;
 uint64 add_TCB(){
   uint64 name=current->trapframe->a0;
   struct process *np=find_free_prc();
+  np->ipc_data=(struct ipc_data*)kalloc();
+  if(np->ipc_data== NULL)
+    printf("ipc_data- is null\n");
   np->ipc_data->name=name;
   sleep(np);
 }
