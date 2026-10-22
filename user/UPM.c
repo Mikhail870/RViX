@@ -20,6 +20,24 @@ uint64 add_PCB(void);
 int fork(uint64);
 int main(){
 init_servers();
+
+  while (1) {
+    struct msg mess=recv();
+    uint64 num_call=mess.a5
+      switch (num_call) {
+      // fork()
+      case 3:
+      // вызвать fork()
+       
+      // забрать имя копии
+      // записать в ppid копии имя родителя
+      // родителю по имени вернуть pid копирует
+      // копии по имени вернуть o 
+      break;
+      case default:
+      break;
+      }
+  }
 }
 
 
@@ -80,5 +98,8 @@ int fork(uint64 pname){
    add_TCB(cname); // имя потомка в TCB
    copy_page_table(pname, cname);
    wakeup(cname);
+  // вернкуть pid 0 потомку
+  // вернуть pid потомка родителю
   
+
 }
