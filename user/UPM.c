@@ -17,7 +17,7 @@ static uint64 nextname=0;
 
 int init_servers(void);
 uint64 add_PCB(void);
-int pfork(uint64);
+void pfork(uint64,uint64*);
 
 int main(){
 init_servers();
@@ -28,7 +28,7 @@ init_servers();
       switch (num_call) {
       // fork()
       case 3:
-      // вызвать fork()
+      // вызвать pfork()
        
       // забрать имя копии
       // записать в ppid копии имя родителя
@@ -89,7 +89,8 @@ uint64 add_PCB(){
 // прописывает в TCB в ядре и PCB в UPM
 // возвращает PID родителю и 0 потомку
 // name - имя процесса родителя
-int pfork(uint64 pname){
+// cpid - pid потомка
+void pfork(uint64 pname,uint64 *cpid){
   // создает запись о процессе в PCB 
   // возвращает имя процесса (id)
   // регистриуеи процесс в TCB
