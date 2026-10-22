@@ -126,6 +126,16 @@ pid_t getpid(){
 // написать после создания сервреа процессов
 }
 
+// вызов fork имеет номер 3
+int fork(){
+  // вызов форк
+  send(0,0,0,0,0,3,UPM);
+  // ожидание ответа от UPM
+  struct msg mess=recv();
+  // вернет PID
+return (int)mess.a0;
+}
+
 // функции Си
 
 void putchar(char ch){
