@@ -17,13 +17,14 @@ static uint64 nextname=0;
 
 int init_servers(void);
 uint64 add_PCB(void);
-int fork(uint64);
+int pfork(uint64);
+
 int main(){
 init_servers();
 
   while (1) {
     struct msg mess=recv();
-    uint64 num_call=mess.a5
+    uint64 num_call=mess.a5;
       switch (num_call) {
       // fork()
       case 3:
@@ -34,7 +35,7 @@ init_servers();
       // родителю по имени вернуть pid копирует
       // копии по имени вернуть o 
       break;
-      case default:
+      default:
       break;
       }
   }
@@ -88,7 +89,7 @@ uint64 add_PCB(){
 // прописывает в TCB в ядре и PCB в UPM
 // возвращает PID родителю и 0 потомку
 // name - имя процесса родителя
-int fork(uint64 pname){
+int pfork(uint64 pname){
   // создает запись о процессе в PCB 
   // возвращает имя процесса (id)
   // регистриуеи процесс в TCB
