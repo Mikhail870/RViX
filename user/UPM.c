@@ -104,3 +104,14 @@ int pfork(uint64 pname){
   
 
 }
+
+// возыращает PID процессапо его имени
+// name - имя процесса, PID которого ищется
+int find_PID(uint64 name)_{
+  for(int i=0;i<MAX_PROC;i++){
+    if(ptable[i].name==name){
+      return ptable[i].pid;} else {
+      return -1; // pid не найден
+    }
+  }
+}
