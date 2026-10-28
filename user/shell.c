@@ -13,7 +13,11 @@ if(strcmp("\r",strmem)==0){
       continue;
     } else if(strcmp("uname\r",strmem)==0){
       puts("RViX microkernel V.0\n");
-    } else {
+    } else if(strcmp("test\r",strmem)==0){
+      int pid=fork();
+
+    }
+    else {
       puts("unknow command\n");
     }
   }
