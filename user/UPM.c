@@ -18,6 +18,7 @@ static uint64 nextname=0;
 int init_servers(void);
 uint64 add_PCB(void);
 uint64 pfork(uint64);
+int find_PID(uint64);
 
 int main(){
 init_servers();
@@ -30,9 +31,9 @@ init_servers();
       // fork()
       case 3:
       // вызвать pfork()
-      // вызвать fork()
-      uint64 cn=pfork(caller_name); // копия памяти того, кто вызвал форк 
+      uint64 cn=pfork(caller_name); // копия памяти того, кто вызвал форк, добавляет новый процесс в PCB и TCB
       // забрать имя копии
+      int cp=find_PID(cn); // имя дочернего процесса принимает, pid возвращает
       // записать в ppid копии имя родителя
       // родителю по имени вернуть pid копирует
       // копии по имени вернуть o 
