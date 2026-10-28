@@ -27,6 +27,7 @@ struct msg recv(void);
 void printk(long x);
 ssize_t write(int fd, const void *buf, size_t count);
 ssize_t read(int fd, const void *buf, size_t count);
+int fork(void);
 
 void putchar(char);
 void puts(const char *);
