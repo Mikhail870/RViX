@@ -17,7 +17,7 @@ static uint64 nextname=0;
 
 int init_servers(void);
 uint64 add_PCB(void);
-void pfork(uint64,uint64*);
+uint64 pfork(uint64);
 
 int main(){
 init_servers();
@@ -92,7 +92,7 @@ uint64 add_PCB(){
 // возвращает PID родителю и 0 потомку
 // name - имя процесса родителя
 // cpid - pid потомка
-void pfork(uint64 pname,uint64 *cpid){
+uint64 pfork(uint64 pname){
   // создает запись о процессе в PCB 
   // возвращает имя процесса (id)
   // регистриуеи процесс в TCB
@@ -104,13 +104,13 @@ void pfork(uint64 pname,uint64 *cpid){
    wakeup(cname);
   // вернкуть pid 0 потомку
   // вернуть pid потомка родителю
-  
+ return cname; 
 
 }
 
 // возыращает PID процессапо его имени
 // name - имя процесса, PID которого ищется
-int find_PID(uint64 name)_{
+int find_PID(uint64 name){
   for(int i=0;i<MAX_PROC;i++){
     if(ptable[i].name==name){
       return ptable[i].pid;} else {
