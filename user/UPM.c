@@ -25,11 +25,12 @@ init_servers();
   while (1) {
     struct msg mess=recv();
     uint64 num_call=mess.a5;
+    uint64 caller_name=mess.a3
       switch (num_call) {
       // fork()
       case 3:
       // вызвать fork()
-       
+      uint64 cn=pfork(caller_name); // копия памяти того, кто вызвал форк 
       // забрать имя копии
       // записать в ppid копии имя родителя
       // родителю по имени вернуть pid копирует
