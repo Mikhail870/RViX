@@ -25,11 +25,13 @@ init_servers();
   while (1) {
     struct msg mess=recv();
     uint64 num_call=mess.a5;
+    uint64 caller_name=mess.a3;
       switch (num_call) {
       // fork()
       case 3:
       // вызвать pfork()
-       
+      // вызвать fork()
+      uint64 cn=pfork(caller_name); // копия памяти того, кто вызвал форк 
       // забрать имя копии
       // записать в ppid копии имя родителя
       // родителю по имени вернуть pid копирует
@@ -104,4 +106,15 @@ void pfork(uint64 pname,uint64 *cpid){
   // вернуть pid потомка родителю
   
 
+}
+
+// возыращает PID процессапо его имени
+// name - имя процесса, PID которого ищется
+int find_PID(uint64 name)_{
+  for(int i=0;i<MAX_PROC;i++){
+    if(ptable[i].name==name){
+      return ptable[i].pid;} else {
+      return -1; // pid не найден
+    }
+  }
 }
