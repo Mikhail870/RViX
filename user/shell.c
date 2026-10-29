@@ -15,7 +15,8 @@ if(strcmp("\r",strmem)==0){
       puts("RViX microkernel V.0\n");
     } else if(strcmp("test\r",strmem)==0){
       int pid=fork();
-
+      if(pid!=0)
+        puts("its parent\n");
     }
     else {
       puts("unknow command\n");
