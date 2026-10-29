@@ -37,7 +37,7 @@ init_servers();
       // записать в ppid копии имя родителя
       // родителю по имени вернуть pid копирует
       send(cp,0,0,0,0,0,caller_name);
-      send(0,0,0,0,0,0,cn);
+      //send(0,0,0,0,0,0,cn);
 
       // копии по имени вернуть o 
       break;
@@ -105,7 +105,7 @@ uint64 pfork(uint64 pname){
    uint64 cname=add_PCB();
    add_TCB(cname); // имя потомка в TCB
    copy_page_table(pname, cname);
-   wakeup(cname);
+   //sleep(cname);
   // вернкуть pid 0 потомку
   // вернуть pid потомка родителю
  return cname; 
